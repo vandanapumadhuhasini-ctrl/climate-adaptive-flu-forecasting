@@ -25,6 +25,8 @@ vy, vi, ss = js("results/veracity_audit.json"), js("results/variety_inventory.js
 bs, tu, rg = js("results/benchmark_summary.json"), js("results/tuning_summary.json"), js("results/rigour/summary.json")
 pr = js("results/rigour/prepare_summary.json")
 pub = js("results/hdfs_publish_manifest.json") if ok("results/hdfs_publish_manifest.json") else None
+n_runs_v2 = sum(1 for l in open(f"{P}/results/rigour/runs.jsonl") if l.strip())
+n_runs_v3 = sum(1 for l in open(f"{P}/results/v3/runs.jsonl") if l.strip()) if ok("results/v3/runs.jsonl") else 0
 mr1, mr2 = mr["jobs"]
 c1 = mr1["counters"]
 apps = {a["job"]: a for a in ev["apps"]}
@@ -118,7 +120,8 @@ rows = [
     ("Scala", f"{n_scala} Scala files (ETL, audits, MLlib, streaming, tuning)", "spark-shell via scripts/run_scala.ps1",
      "scala/; results/spark_event_log_summary.json", f"{n_scala} Scala programs; {ev['applications']} Spark applications", n_scala > 0),
     ("Python", f"{n_py} Python files (PyTorch Geometric, pandas benchmark, analysis, dashboard)", "pytorch + dashboard containers",
-     "python/; dashboard/; results/rigour/runs.jsonl", f"80 GNN runs + baselines + all analyses", n_py > 0),
+     "python/; dashboard/; results/rigour/runs.jsonl; results/v3/runs.jsonl",
+     f"{n_runs_v2} neural runs (v2) + {n_runs_v3} (v3) + baselines + all analyses", n_py > 0),
     ("Spark ML",
      "MLlib Pipeline(VectorAssembler, GBTRegressor 50 iters, depth 5) on the HDFS feature table (scala/BaselineGBTv2.scala)",
      f"BaselineGBTv2 {app('BaselineGBTv2')}",
@@ -140,9 +143,13 @@ rows = [
      f"{ss['processing']['non_empty_batches']} micro-batches, {ss['processing']['state_day_element_groups_written']:,} aggregates written to HDFS",
      all(ss["checks"].values())),
     ("Analytical models",
-     "ClimaFlu-GNN (PyG) + 7 ablations x 10 seeds; Spark GBT; Ridge; Persistence; pre-registered protocol",
-     "80 neural runs + 4 deterministic baselines", "docs/RESEARCH_PROTOCOL.md; results/rigour/summary.json; docs/RIGOUR_RESULTS.md",
-     f"GNN-K8 RMSE {gnn['rmse_mean']:.4f} +/- {gnn['rmse_sd']:.4f} vs GBT {gbt['rmse_mean']:.4f}; claims C1-C3 not supported (reported)",
+     "ClimaFlu-GNN (PyG) + 7 ablations x 10 seeds (v2); lag-aware climate, horizons 1-4 weeks (v3, amendment A1); Spark GBT; "
+     "Ridge; Persistence; pre-registered protocol",
+     f"{n_runs_v2} neural runs (v2) + {n_runs_v3} (v3) + deterministic baselines",
+     "docs/RESEARCH_PROTOCOL.md; results/rigour/summary.json; docs/RIGOUR_RESULTS.md; results/v3/summary.json; docs/V3_RESULTS.md",
+     f"v2: GNN-K8 RMSE {gnn['rmse_mean']:.4f} +/- {gnn['rmse_sd']:.4f} vs GBT {gbt['rmse_mean']:.4f}, claims C1-C3 not supported; "
+     + (f"v3: {sum(v['holds'] for v in js('results/v3/summary.json')['claims'].values())}/4 claims supported "
+        f"(N4: beats Spark GBT at a 3-week horizon)" if ok("results/v3/summary.json") else "v3 not run"),
      ok("docs/RESEARCH_PROTOCOL.md", "results/rigour/summary.json")),
     ("Performance tuning",
      "partitions {8,24,96,384} x persistence {none, MEMORY_AND_DISK}, AQE off, 3 repeats + Spark defaults (AQE)",

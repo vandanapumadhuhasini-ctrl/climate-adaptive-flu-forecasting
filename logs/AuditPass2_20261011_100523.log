@@ -1,0 +1,46 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/11 04:35:31 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Spark context Web UI available at http://1d530106f37b:4040
+Spark context available as 'sc' (master = local[*], app id = local-1791693332918).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.1
+      /_/
+         
+Using Scala version 2.12.18 (OpenJDK 64-Bit Server VM, Java 11.0.22)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> // Entering paste mode (ctrl-D to finish)
+
+
+// Exiting paste mode, now interpreting.
+
+[Stage 0:>                                                          (0 + 2) / 2]                                                                                AUDIT2 | PASS | MR1 SHA from HDFS part files                       | claimed a5c81104c454           | measured a5c81104c454
+AUDIT2 | PASS | MR2 SHA from HDFS part files                       | claimed eb02de0659da           | measured eb02de0659da
+AUDIT2 | PASS | v2 GNN-K8 RMSE mean (HDFS)                         | claimed 0.9236                 | measured 0.9236
+AUDIT2 | PASS | v2 GNN-K8 RMSE sd (HDFS)                           | claimed 0.0159                 | measured 0.0159
+AUDIT2 | PASS | v2 Spark GBT-lags RMSE (HDFS)                      | claimed 0.9401                 | measured 0.9401
+AUDIT2 | PASS | v3 h=3 GNN-lagK8 mean RMSE (HDFS)                  | claimed 1.2507                 | measured 1.2507
+AUDIT2 | PASS | v3 h=3 GBT-lags RMSE (HDFS)                        | claimed 1.2891                 | measured 1.2891
+AUDIT2 | PASS | v3 h=3 seeds beating GBT (HDFS)                    | claimed 9                      | measured 9
+AUDIT2 | PASS | v3 h=3 test rows in HDFS feature table             | claimed 7591                   | measured 7591
+AUDIT2 | PASS | benchmark 26y Spark median (HDFS)                  | claimed 90.1                   | measured 90.129
+AUDIT2 | PASS | benchmark speed-up (HDFS)                          | claimed 18.0 (17.96)           | measured 17.96
+AUDIT2 | PASS | streaming median latency (HDFS)                    | claimed 4.7                    | measured 4.70
+AUDIT2 | PASS | streaming files matched to batches (HDFS)          | claimed 60                     | measured 60
+java.nio.file.AccessDeniedException: /opt/results/audit/pass2.json
+  at java.base/sun.nio.fs.UnixException.translateToIOException(Unknown Source)
+  at java.base/sun.nio.fs.UnixException.rethrowAsIOException(Unknown Source)
+  at java.base/sun.nio.fs.UnixException.rethrowAsIOException(Unknown Source)
+  at java.base/sun.nio.fs.UnixFileSystemProvider.newByteChannel(Unknown Source)
+  at java.base/java.nio.file.spi.FileSystemProvider.newOutputStream(Unknown Source)
+  at java.base/java.nio.file.Files.newOutputStream(Unknown Source)
+  at java.base/java.nio.file.Files.write(Unknown Source)
+  ... 47 elided
+
+scala> :quit

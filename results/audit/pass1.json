@@ -1,0 +1,397 @@
+{
+  "checks": [
+    {
+      "area": "Volume",
+      "check": "raw data in HDFS >= 25 GB",
+      "claimed": ">= 25 GB (README: 34.6 GB)",
+      "measured": 34.59,
+      "pass": true
+    },
+    {
+      "area": "Volume",
+      "check": "cleaned weather rows",
+      "claimed": 303631696,
+      "measured": 303631696,
+      "pass": true
+    },
+    {
+      "area": "MapReduce",
+      "check": "record accounting (log counters)",
+      "claimed": 968905773,
+      "measured": 968905773,
+      "pass": true
+    },
+    {
+      "area": "MapReduce",
+      "check": "raw records (README 968.9 M)",
+      "claimed": 968905773,
+      "measured": 968905773,
+      "pass": true
+    },
+    {
+      "area": "MapReduce",
+      "check": "kept rows = weather_cleaned rows",
+      "claimed": 303631696,
+      "measured": 303631696,
+      "pass": true
+    },
+    {
+      "area": "Consistency",
+      "check": "MR1 output SHA (recomputed from MR text output)",
+      "claimed": "a5c81104c454",
+      "measured": "a5c81104c454",
+      "pass": true
+    },
+    {
+      "area": "Consistency",
+      "check": "MR2 output SHA = typed Dataset SHA",
+      "claimed": "eb02de0659da",
+      "measured": "eb02de0659da",
+      "pass": true
+    },
+    {
+      "area": "Benchmark",
+      "check": "Spark 26 years median (README 90.1 s)",
+      "claimed": 90.1,
+      "measured": 90.129,
+      "pass": true
+    },
+    {
+      "area": "Benchmark",
+      "check": "pandas-chunked 26 years (README 1,619 s)",
+      "claimed": 1619,
+      "measured": 1619.0,
+      "pass": true
+    },
+    {
+      "area": "Benchmark",
+      "check": "speed-up (README 18.0x)",
+      "claimed": 18.0,
+      "measured": 17.96,
+      "pass": true
+    },
+    {
+      "area": "Benchmark",
+      "check": "identical result SHA across engines, every size",
+      "claimed": "1 SHA per size",
+      "measured": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1,
+        "15": 1,
+        "20": 1,
+        "26": 1
+      },
+      "pass": true
+    },
+    {
+      "area": "Benchmark",
+      "check": "26-year benchmark SHA = MapReduce MR1 SHA",
+      "claimed": "a5c81104c454",
+      "measured": "a5c81104c454",
+      "pass": true
+    },
+    {
+      "area": "Benchmark",
+      "check": "in-memory pandas OOM at 1 year under 4 GB",
+      "claimed": "all oom_killed",
+      "measured": [
+        "oom_killed",
+        "oom_killed",
+        "oom_killed"
+      ],
+      "pass": true
+    },
+    {
+      "area": "Streaming",
+      "check": "median latency (README 4.7 s)",
+      "claimed": 4.7,
+      "measured": 4.7,
+      "pass": true
+    },
+    {
+      "area": "Streaming",
+      "check": "throughput (README 38.1k rows/s)",
+      "claimed": 38.1,
+      "measured": 38.11,
+      "pass": true
+    },
+    {
+      "area": "Streaming",
+      "check": "arrival rate (README 15.3k rows/s)",
+      "claimed": 15.3,
+      "measured": 15.34,
+      "pass": true
+    },
+    {
+      "area": "Streaming",
+      "check": "each file exactly once, rows = source",
+      "claimed": "60 files once, 5,972,783 rows",
+      "measured": [
+        60,
+        1,
+        5972783
+      ],
+      "pass": true
+    },
+    {
+      "area": "Tuning",
+      "check": "Spark defaults AQE (README 285 s)",
+      "claimed": 285.2,
+      "measured": 285.205,
+      "pass": true
+    },
+    {
+      "area": "Tuning",
+      "check": "AQE beats every grid configuration",
+      "claimed": "< best grid",
+      "measured": "best grid p384-none 325.794",
+      "pass": true
+    },
+    {
+      "area": "Tuning",
+      "check": "p24 + caching failed (OOM)",
+      "claimed": "failed",
+      "measured": [
+        "failed"
+      ],
+      "pass": true
+    },
+    {
+      "area": "Forecast v2",
+      "check": "GNN-K8 RMSE mean \u00b1 sd (0.9236 \u00b1 0.0159)",
+      "claimed": "0.9236 \u00b1 0.0159",
+      "measured": "0.9236 \u00b1 0.0159",
+      "pass": true
+    },
+    {
+      "area": "Forecast v2",
+      "check": "Spark GBT-lags RMSE (0.9401)",
+      "claimed": 0.9401,
+      "measured": 0.9401,
+      "pass": true
+    },
+    {
+      "area": "Forecast v2",
+      "check": "MLP-noGraph RMSE (0.9181)",
+      "claimed": 0.9181,
+      "measured": 0.9181,
+      "pass": true
+    },
+    {
+      "area": "Forecast v2",
+      "check": "DM p GNN vs GBT (0.0582, not significant)",
+      "claimed": 0.0582,
+      "measured": 0.0584,
+      "pass": true
+    },
+    {
+      "area": "Forecast v3",
+      "check": "h=3 GNN-lagK8 mean RMSE (1.2507)",
+      "claimed": 1.2507,
+      "measured": 1.2507,
+      "pass": true
+    },
+    {
+      "area": "Forecast v3",
+      "check": "h=3 Spark GBT-lags RMSE (1.2891)",
+      "claimed": 1.2891,
+      "measured": 1.2891,
+      "pass": true
+    },
+    {
+      "area": "Forecast v3",
+      "check": "h=3 Holm-adjusted DM p (0.0169 < 0.05)",
+      "claimed": 0.0169,
+      "measured": 0.0167,
+      "pass": true
+    },
+    {
+      "area": "Forecast v3",
+      "check": "h=3 seeds beating GBT (9/10, rule needs >= 8)",
+      "claimed": 9,
+      "measured": 9,
+      "pass": true
+    },
+    {
+      "area": "Forecast v3",
+      "check": "h=4 fails seed rule (7/10)",
+      "claimed": 7,
+      "measured": 7,
+      "pass": true
+    },
+    {
+      "area": "Forecast v3",
+      "check": "GNN-lagK8 identical to GNN-K8 (lead 0)",
+      "claimed": true,
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "Forecast v3",
+      "check": "10 seeds per horizon",
+      "claimed": 10,
+      "measured": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "pass": true
+    },
+    {
+      "area": "Forecast v3",
+      "check": "lag scan chose lead 0 everywhere",
+      "claimed": "all 0",
+      "measured": {
+        "h1": {
+          "TMAX": 0,
+          "TMIN": 0,
+          "PRCP": 0,
+          "DIURNAL_RANGE": 0
+        },
+        "h2": {
+          "TMAX": 0,
+          "TMIN": 0,
+          "PRCP": 0,
+          "DIURNAL_RANGE": 0
+        },
+        "h3": {
+          "TMAX": 0,
+          "TMIN": 0,
+          "PRCP": 0,
+          "DIURNAL_RANGE": 0
+        },
+        "h4": {
+          "TMAX": 0,
+          "TMIN": 0,
+          "PRCP": 0,
+          "DIURNAL_RANGE": 0
+        }
+      },
+      "pass": true
+    },
+    {
+      "area": "Forecast v3",
+      "check": "Spark h=1 features identical to v2",
+      "claimed": true,
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "Veracity",
+      "check": "WEIGHTED_ILI missing (99.85 %)",
+      "claimed": 0.9985,
+      "measured": 0.9985,
+      "pass": true
+    },
+    {
+      "area": "Veracity",
+      "check": "NY+NYC weeks raw / merged (827 / 782)",
+      "claimed": "827/782",
+      "measured": "827/782",
+      "pass": true
+    },
+    {
+      "area": "Docs",
+      "check": "README states '34.6 GB'",
+      "claimed": "34.6 GB",
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "Docs",
+      "check": "README states '968.9 M'",
+      "claimed": "968.9 M",
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "Docs",
+      "check": "README states '303.6 M'",
+      "claimed": "303.6 M",
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "Docs",
+      "check": "README states '90.1 s'",
+      "claimed": "90.1 s",
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "Docs",
+      "check": "README states '1,619 s'",
+      "claimed": "1,619 s",
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "Docs",
+      "check": "README states '18.0\u00d7'",
+      "claimed": "18.0\u00d7",
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "Docs",
+      "check": "README states '285 s'",
+      "claimed": "285 s",
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "Docs",
+      "check": "README states '5.97 M'",
+      "claimed": "5.97 M",
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "Docs",
+      "check": "README states '38.1 k'",
+      "claimed": "38.1 k",
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "Docs",
+      "check": "README states '15.3 k'",
+      "claimed": "15.3 k",
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "Docs",
+      "check": "README states '4.7 s'",
+      "claimed": "4.7 s",
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "Docs",
+      "check": "README states 'p = 0.017'",
+      "claimed": "p = 0.017",
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "Docs",
+      "check": "README states '21 / 21'",
+      "claimed": "21 / 21",
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "Docs",
+      "check": "compliance matrix rows VERIFIED",
+      "claimed": 21,
+      "measured": 21,
+      "pass": true
+    }
+  ],
+  "passed": 49,
+  "total": 49
+}

@@ -37,3 +37,16 @@ Outputs: `docs/COURSE_COMPLIANCE_MATRIX.md` (21/21 VERIFIED on 2026-10-11), `doc
 | Streaming | see PROJECT_GUIDE.md "streaming v2" | results/streaming_summary.json |
 | GNN rigour pass | prepare_v2 → baselines_v2 → BaselineGBTv2 → run_all → evaluate_v2 | results/rigour/summary.json |
 | Dashboard screenshots | `.\scripts\capture_dashboard.ps1` | docs/screenshots/dashboard_*.png |
+
+## 6. Added after 2026-10-11 (v3, HDFS publishing, audit)
+| Stage | Command | Output |
+|---|---|---|
+| v3 features on HDFS (lag scan, horizons 1–4) | `.\scripts\run_scala.ps1 LagAwareFeaturesV3 -DriverMemory 3g` | HDFS `processed/v3_features/h1..h4`, results/v3/lag_scan.json |
+| v3 models | `docker exec -w /workspace/rigour pytorch python run_all_v3.py --workers 6` + `.\scripts\run_scala.ps1 BaselineGBTv3 -DriverMemory 3g` | results/v3/runs.jsonl, predictions |
+| v3 evaluation | `docker run --rm -v "C:/Project/flu-hadoop-project:/proj" climaflu-pytorch:1.0 python /proj/python/rigour/evaluate_v3.py` | docs/V3_RESULTS.md, results/v3/summary.json |
+| Publish everything to HDFS | `.\scripts\run_scala.ps1 PublishResultsToHdfs -DriverMemory 3g` | HDFS `/flu_project/results/`, results/hdfs_publish_manifest.json |
+| Audit pass 1 (Python, local files) | `docker run --rm -v "C:/Project/flu-hadoop-project:/proj" climaflu-pytorch:1.0 python /proj/python/audit_project.py` | results/audit/pass1.json |
+| Audit pass 2 (Spark, HDFS copies) | `.\scripts\run_scala.ps1 AuditPass2 -DriverMemory 3g` | results/audit/pass2.json |
+
+Order after any new result: evaluate → `verify_project.ps1` → `spark_event_summary.py` → `build_compliance_matrix.py` →
+PublishResultsToHdfs → both audit passes → commit and push.

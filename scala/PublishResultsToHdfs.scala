@@ -18,7 +18,9 @@ def sha256(p: java.nio.file.Path): String = {
 }
 val files = Files.walk(local).iterator().asScala.filter(p => Files.isRegularFile(p))
   .filterNot(_.getFileName.toString == "hdfs_publish_manifest.json")
-  .filterNot(_.getFileName.toString.endsWith(".inprogress"))   // event logs still being written (e.g. this very job)
+  // skip only event logs still being written (e.g. this very job); keep stale .inprogress logs of crashed runs (evidence)
+  .filterNot(p => p.getFileName.toString.endsWith(".inprogress") &&
+             System.currentTimeMillis() - Files.getLastModifiedTime(p).toMillis < 10 * 60 * 1000)
   .toList.sortBy(_.toString)   // toList: eager, so the timer below is real
 val t0 = System.currentTimeMillis()
 val entries = files.map { p =>

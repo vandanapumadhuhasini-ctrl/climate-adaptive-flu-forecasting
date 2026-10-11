@@ -1,7 +1,7 @@
 {
-  "applications": 31,
-  "total_tasks": 86820,
-  "total_input_GB": 443.31,
+  "applications": 34,
+  "total_tasks": 86992,
+  "total_input_GB": 443.32,
   "apps": [
     {
       "app_id": "local-1791573656925",
@@ -405,6 +405,45 @@
       "end_ms": 1791690012990,
       "duration_s": 144.3,
       "job": "PublishResultsToHdfs"
+    },
+    {
+      "app_id": "local-1791690343063",
+      "jobs": 0,
+      "stages": 0,
+      "tasks": 0,
+      "failed_tasks": 0,
+      "shuffle_write_bytes": 0,
+      "input_bytes": 0,
+      "start_ms": 1791690342133,
+      "end_ms": 1791690552587,
+      "duration_s": 210.5,
+      "job": "PublishResultsToHdfs"
+    },
+    {
+      "app_id": "local-1791693332918",
+      "jobs": 80,
+      "stages": 80,
+      "tasks": 86,
+      "failed_tasks": 0,
+      "shuffle_write_bytes": 1838,
+      "input_bytes": 2861845,
+      "start_ms": 1791693331767,
+      "end_ms": 1791693350182,
+      "duration_s": 18.4,
+      "job": "AuditPass2"
+    },
+    {
+      "app_id": "local-1791693370929",
+      "jobs": 80,
+      "stages": 80,
+      "tasks": 86,
+      "failed_tasks": 0,
+      "shuffle_write_bytes": 1838,
+      "input_bytes": 2861845,
+      "start_ms": 1791693370108,
+      "end_ms": 1791693387717,
+      "duration_s": 17.6,
+      "job": "AuditPass2"
     }
   ]
 }
