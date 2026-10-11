@@ -1,0 +1,24 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/11 02:39:43 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Spark context Web UI available at http://1d530106f37b:4040
+Spark context available as 'sc' (master = local[*], app id = local-1791686384858).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.1
+      /_/
+         
+Using Scala version 2.12.18 (OpenJDK 64-Bit Server VM, Java 11.0.22)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> // Entering paste mode (ctrl-D to finish)
+
+
+// Exiting paste mode, now interpreting.
+
+[Stage 0:>                                                          (0 + 1) / 1]                                                                                [Stage 71:>                                                       (0 + 24) / 32][Stage 71:=>                                                      (1 + 24) / 32][Stage 71:=================>                                     (10 + 22) / 32][Stage 71:=============================>                         (17 + 15) / 32][Stage 71:=====================================>                 (22 + 10) / 32][Stage 71:===========================================>            (25 + 7) / 32][Stage 71:===============================================>        (27 + 5) / 32]                                                                                VERACITY | ILINet state rows=44808 weighted missing=44739 (0.9985) NY+NYC dup weeks=827 | modeling rows=40408 anyNull=735 dupKeys=0 tmax<tmin=0
+VERACITY | wrote veracity_audit.json, variety_inventory.json, spark_dataframe_plan.txt

@@ -1,0 +1,23 @@
+# ---- data (lives in HDFS; far too large for git) ----
+datasets/
+exports/
+.spark-local/
+
+# ---- large / regenerable run artefacts (also published to HDFS /flu_project/results) ----
+results/spark-events/
+results/v3/features/
+mapreduce/build/
+mapreduce/output/
+models/**/*.pt
+
+# ---- editor / build tooling ----
+.bsp/
+.metals/
+.scala-build/
+.vscode/
+**/__pycache__/
+*.pyc
+
+# ---- OS ----
+Thumbs.db
+desktop.ini

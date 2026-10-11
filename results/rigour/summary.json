@@ -1,0 +1,356 @@
+{
+  "test_rows": 7691,
+  "test_weeks": 156,
+  "models": {
+    "GNN-K8": {
+      "seeds": 10,
+      "rmse_mean": 0.9236041228614829,
+      "mae_mean": 0.4782898258406248,
+      "r2_mean": 0.7833144345047836,
+      "rmse_sd": 0.015900807582066225,
+      "mae_sd": 0.005177407462669634,
+      "r2_sd": 0.00750440587685631,
+      "ensemble": {
+        "rmse": 0.9168937511191511,
+        "mae": 0.46965354310097013,
+        "r2": 0.7865085691523607
+      },
+      "best_epoch_median": 27.0
+    },
+    "GNN-K4": {
+      "seeds": 10,
+      "rmse_mean": 0.9194909833361329,
+      "mae_mean": 0.47995761522911795,
+      "r2_mean": 0.7852403196878461,
+      "rmse_sd": 0.01579874331221795,
+      "mae_sd": 0.0055703947713414,
+      "r2_sd": 0.007457090311950566,
+      "ensemble": {
+        "rmse": 0.9124191437223437,
+        "mae": 0.4702900994324865,
+        "r2": 0.7885872382230672
+      },
+      "best_epoch_median": 35.5
+    },
+    "GNN-K16": {
+      "seeds": 10,
+      "rmse_mean": 0.9382842710946495,
+      "mae_mean": 0.48193396071739425,
+      "r2_mean": 0.7763737759595293,
+      "rmse_sd": 0.01584391273250366,
+      "mae_sd": 0.00782547137172404,
+      "r2_sd": 0.007534568904061199,
+      "ensemble": {
+        "rmse": 0.9320610605230302,
+        "mae": 0.4736449171676946,
+        "r2": 0.7793869742597354
+      },
+      "best_epoch_median": 16.0
+    },
+    "GNN-static": {
+      "seeds": 10,
+      "rmse_mean": 0.925610921754239,
+      "mae_mean": 0.4816455154420197,
+      "r2_mean": 0.7823768619122708,
+      "rmse_sd": 0.015222648196128681,
+      "mae_sd": 0.005488867291223857,
+      "r2_sd": 0.007236227132250927,
+      "ensemble": {
+        "rmse": 0.9185273699474681,
+        "mae": 0.47226814877530754,
+        "r2": 0.7857471410922068
+      },
+      "best_epoch_median": 34.0
+    },
+    "GNN-geo": {
+      "seeds": 10,
+      "rmse_mean": 0.9237333445659418,
+      "mae_mean": 0.4778602588072264,
+      "r2_mean": 0.7832584083204919,
+      "rmse_sd": 0.01525552427577359,
+      "mae_sd": 0.005503455546045066,
+      "r2_sd": 0.007199492456801999,
+      "ensemble": {
+        "rmse": 0.9167037223797891,
+        "mae": 0.46899354827331696,
+        "r2": 0.7865970533488084
+      },
+      "best_epoch_median": 32.5
+    },
+    "GNN-random": {
+      "seeds": 10,
+      "rmse_mean": 0.9510812118794545,
+      "mae_mean": 0.4865098798532541,
+      "r2_mean": 0.7702252941975907,
+      "rmse_sd": 0.016981643910063175,
+      "mae_sd": 0.009985493546454755,
+      "r2_sd": 0.00826505193292995,
+      "ensemble": {
+        "rmse": 0.9418870017033092,
+        "mae": 0.4761768955882887,
+        "r2": 0.7747109782475191
+      },
+      "best_epoch_median": 9.0
+    },
+    "MLP-noGraph": {
+      "seeds": 10,
+      "rmse_mean": 0.9180568096047967,
+      "mae_mean": 0.4792995611159353,
+      "r2_mean": 0.7859388100765367,
+      "rmse_sd": 0.01102838439930306,
+      "mae_sd": 0.005299357915548565,
+      "r2_sd": 0.00516433274891251,
+      "ensemble": {
+        "rmse": 0.9125443373805413,
+        "mae": 0.4718620365039805,
+        "r2": 0.7885292180619754
+      },
+      "best_epoch_median": 42.0
+    },
+    "MLP-lagsOnly": {
+      "seeds": 10,
+      "rmse_mean": 0.9309399689439534,
+      "mae_mean": 0.4877860383331679,
+      "r2_mean": 0.7798591263614427,
+      "rmse_sd": 0.015963062368296903,
+      "mae_sd": 0.008217848426514,
+      "r2_sd": 0.007607016607928532,
+      "ensemble": {
+        "rmse": 0.9251399044957159,
+        "mae": 0.48237236346190016,
+        "r2": 0.7826511983279896
+      },
+      "best_epoch_median": 49.5
+    },
+    "GBT-lags": {
+      "seeds": 1,
+      "rmse_mean": 0.940100187278114,
+      "mae_mean": 0.5005129705319274,
+      "r2_mean": 0.7755649402261975
+    },
+    "GBT-all": {
+      "seeds": 1,
+      "rmse_mean": 0.9421661198223086,
+      "mae_mean": 0.4992517543998934,
+      "r2_mean": 0.7745774344888534
+    },
+    "Ridge": {
+      "seeds": 1,
+      "rmse_mean": 0.9919309022088522,
+      "mae_mean": 0.5157538849011328,
+      "r2_mean": 0.7501350941115463
+    },
+    "Persistence": {
+      "seeds": 1,
+      "rmse_mean": 1.0376581816532602,
+      "mae_mean": 0.5521431898381822,
+      "r2_mean": 0.7265669218291934
+    }
+  },
+  "comparisons_vs_main": [
+    {
+      "a": "GNN-K8",
+      "b": "GNN-K4",
+      "mean_rmse_a": 0.9236,
+      "mean_rmse_b": 0.9195,
+      "ensemble_rmse_a": 0.9169,
+      "rmse_b_ensemble_or_single": 0.9124,
+      "dm_stat": 1.401,
+      "dm_p": 0.1633,
+      "boot_ci_rmse_diff": [
+        -0.0018,
+        0.0081
+      ],
+      "seeds_a_better": "4/10",
+      "verdict": "no significant difference"
+    },
+    {
+      "a": "GNN-K8",
+      "b": "GNN-K16",
+      "mean_rmse_a": 0.9236,
+      "mean_rmse_b": 0.9383,
+      "ensemble_rmse_a": 0.9169,
+      "rmse_b_ensemble_or_single": 0.9321,
+      "dm_stat": -2.044,
+      "dm_p": 0.0426,
+      "boot_ci_rmse_diff": [
+        -0.0227,
+        -0.0013
+      ],
+      "seeds_a_better": "10/10",
+      "verdict": "better"
+    },
+    {
+      "a": "GNN-K8",
+      "b": "GNN-static",
+      "mean_rmse_a": 0.9236,
+      "mean_rmse_b": 0.9256,
+      "ensemble_rmse_a": 0.9169,
+      "rmse_b_ensemble_or_single": 0.9185,
+      "dm_stat": -0.28,
+      "dm_p": 0.7799,
+      "boot_ci_rmse_diff": [
+        -0.012,
+        0.0062
+      ],
+      "seeds_a_better": "8/10",
+      "verdict": "no significant difference"
+    },
+    {
+      "a": "GNN-K8",
+      "b": "GNN-geo",
+      "mean_rmse_a": 0.9236,
+      "mean_rmse_b": 0.9237,
+      "ensemble_rmse_a": 0.9169,
+      "rmse_b_ensemble_or_single": 0.9167,
+      "dm_stat": 0.109,
+      "dm_p": 0.9132,
+      "boot_ci_rmse_diff": [
+        -0.0105,
+        0.0092
+      ],
+      "seeds_a_better": "6/10",
+      "verdict": "no significant difference"
+    },
+    {
+      "a": "GNN-K8",
+      "b": "GNN-random",
+      "mean_rmse_a": 0.9236,
+      "mean_rmse_b": 0.9511,
+      "ensemble_rmse_a": 0.9169,
+      "rmse_b_ensemble_or_single": 0.9419,
+      "dm_stat": -1.934,
+      "dm_p": 0.0549,
+      "boot_ci_rmse_diff": [
+        -0.036,
+        0.0004
+      ],
+      "seeds_a_better": "9/10",
+      "verdict": "no significant difference"
+    },
+    {
+      "a": "GNN-K8",
+      "b": "MLP-noGraph",
+      "mean_rmse_a": 0.9236,
+      "mean_rmse_b": 0.9181,
+      "ensemble_rmse_a": 0.9169,
+      "rmse_b_ensemble_or_single": 0.9125,
+      "dm_stat": 0.91,
+      "dm_p": 0.3642,
+      "boot_ci_rmse_diff": [
+        -0.0071,
+        0.0099
+      ],
+      "seeds_a_better": "4/10",
+      "verdict": "no significant difference"
+    },
+    {
+      "a": "GNN-K8",
+      "b": "MLP-lagsOnly",
+      "mean_rmse_a": 0.9236,
+      "mean_rmse_b": 0.9309,
+      "ensemble_rmse_a": 0.9169,
+      "rmse_b_ensemble_or_single": 0.9251,
+      "dm_stat": -1.453,
+      "dm_p": 0.1484,
+      "boot_ci_rmse_diff": [
+        -0.0211,
+        0.0048
+      ],
+      "seeds_a_better": "6/10",
+      "verdict": "no significant difference"
+    },
+    {
+      "a": "GNN-K8",
+      "b": "GBT-lags",
+      "mean_rmse_a": 0.9236,
+      "mean_rmse_b": 0.9401,
+      "ensemble_rmse_a": 0.9169,
+      "rmse_b_ensemble_or_single": 0.9401,
+      "dm_stat": -1.908,
+      "dm_p": 0.0582,
+      "boot_ci_rmse_diff": [
+        -0.0486,
+        0.0037
+      ],
+      "seeds_a_better": "8/10",
+      "verdict": "no significant difference"
+    },
+    {
+      "a": "GNN-K8",
+      "b": "GBT-all",
+      "mean_rmse_a": 0.9236,
+      "mean_rmse_b": 0.9422,
+      "ensemble_rmse_a": 0.9169,
+      "rmse_b_ensemble_or_single": 0.9422,
+      "dm_stat": -1.565,
+      "dm_p": 0.1195,
+      "boot_ci_rmse_diff": [
+        -0.0609,
+        0.006
+      ],
+      "seeds_a_better": "9/10",
+      "verdict": "no significant difference"
+    },
+    {
+      "a": "GNN-K8",
+      "b": "Ridge",
+      "mean_rmse_a": 0.9236,
+      "mean_rmse_b": 0.9919,
+      "ensemble_rmse_a": 0.9169,
+      "rmse_b_ensemble_or_single": 0.9919,
+      "dm_stat": -3.027,
+      "dm_p": 0.0029,
+      "boot_ci_rmse_diff": [
+        -0.1082,
+        -0.0415
+      ],
+      "seeds_a_better": "10/10",
+      "verdict": "better"
+    },
+    {
+      "a": "GNN-K8",
+      "b": "Persistence",
+      "mean_rmse_a": 0.9236,
+      "mean_rmse_b": 1.0377,
+      "ensemble_rmse_a": 0.9169,
+      "rmse_b_ensemble_or_single": 1.0377,
+      "dm_stat": -2.645,
+      "dm_p": 0.009,
+      "boot_ci_rmse_diff": [
+        -0.2055,
+        -0.0394
+      ],
+      "seeds_a_better": "10/10",
+      "verdict": "better"
+    }
+  ],
+  "claims": {
+    "C1 accuracy: beats Spark GBT": {
+      "holds": false,
+      "against": {
+        "GBT-lags": "no significant difference",
+        "GBT-all": "no significant difference"
+      }
+    },
+    "C2 graph: beats no-graph and random graph": {
+      "holds": false,
+      "against": {
+        "MLP-noGraph": "no significant difference",
+        "GNN-random": "no significant difference"
+      }
+    },
+    "C3 dynamic: beats static and geographic graphs": {
+      "holds": false,
+      "against": {
+        "GNN-static": "no significant difference",
+        "GNN-geo": "no significant difference"
+      }
+    }
+  },
+  "determinism_check": {
+    "trial_test_rmse": 0.91605,
+    "rerun_test_rmse": 0.91621,
+    "identical": false
+  }
+}

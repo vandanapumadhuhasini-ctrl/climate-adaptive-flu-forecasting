@@ -1,0 +1,1 @@
+{"model": "GNN-lagK8", "horizon": 1, "seed": 1, "best_epoch": 45, "val_rmse_best": 1.03981, "test_rmse": 0.90677, "test_mae": 0.46911, "test_r2": 0.79119, "n_test_rows": 7691, "seconds": 44.5}

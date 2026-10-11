@@ -1,0 +1,148 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/11 01:46:09 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Spark context Web UI available at http://1d530106f37b:4040
+Spark context available as 'sc' (master = local[*], app id = local-1791683170346).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.1
+      /_/
+         
+Using Scala version 2.12.18 (OpenJDK 64-Bit Server VM, Java 11.0.22)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> // Entering paste mode (ctrl-D to finish)
+
+
+// Exiting paste mode, now interpreting.
+
+[Stage 0:>                                                          (0 + 1) / 1]                                                                                26/10/11 01:46:17 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+STREAM | started 3ab29661-bf8a-48a9-91cd-a3e6289fe5ac; waiting for the feed
+[Stage 1:>                                                          (0 + 1) / 1]                                                                                [Stage 3:>                                                          (0 + 2) / 2]                                                                                26/10/11 01:46:51 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+26/10/11 01:46:51 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 95.00% for 24 writers
+26/10/11 01:46:51 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+[Stage 11:====>                                                 (16 + 25) / 200][Stage 11:==============>                                       (52 + 24) / 200][Stage 11:=========================>                            (94 + 25) / 200][Stage 11:====================================>                (138 + 25) / 200][Stage 11:====================================================> (194 + 6) / 200]                                                                                STREAM | batch 0 files=1 rows_in=97579 kept=35549 groups=151 8491 ms
+26/10/11 01:46:54 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 5000 milliseconds, but spent 9352 milliseconds
+[Stage 24:===========================>                         (104 + 24) / 200][Stage 24:========================================>            (152 + 25) / 200]                                                                                STREAM | batch 1 files=2 rows_in=202246 kept=71428 groups=302 3762 ms
+26/10/11 01:47:06 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+26/10/11 01:47:06 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 95.00% for 24 writers
+26/10/11 01:47:06 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+[Stage 37:======================>                               (85 + 24) / 200][Stage 37:========================================>            (152 + 24) / 200][Stage 37:====================================================> (196 + 4) / 200]                                                                                STREAM | batch 2 files=1 rows_in=100291 kept=35431 groups=151 3179 ms
+[Stage 50:=========================================>           (158 + 28) / 200][Stage 50:===============================================>     (178 + 22) / 200]                                                                                STREAM | batch 3 files=1 rows_in=99714 kept=35101 groups=151 2876 ms
+[Stage 63:=============================================>       (171 + 26) / 200]                                                                                STREAM | batch 4 files=1 rows_in=101634 kept=35310 groups=151 2470 ms
+[Stage 76:====================================================> (196 + 4) / 200][Stage 76:=====================================================>(197 + 3) / 200]                                                                                STREAM | batch 5 files=1 rows_in=101505 kept=35621 groups=151 2752 ms
+[Stage 89:=====================================================>(199 + 1) / 200]                                                                                STREAM | batch 6 files=1 rows_in=102696 kept=35743 groups=151 2372 ms
+[Stage 102:===================================================> (195 + 5) / 200]                                                                                STREAM | batch 7 files=1 rows_in=101653 kept=35480 groups=151 2631 ms
+[Stage 115:===============================================>    (183 + 17) / 200][Stage 115:===================================================> (196 + 4) / 200]                                                                                STREAM | batch 8 files=1 rows_in=101338 kept=35508 groups=151 2718 ms
+STREAM | batch 9 files=1 rows_in=99723 kept=34822 groups=151 2251 ms
+[Stage 141:===================================================> (193 + 7) / 200][Stage 141:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 10 files=1 rows_in=100284 kept=34971 groups=151 2454 ms
+[Stage 154:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 11 files=1 rows_in=101984 kept=35413 groups=151 2505 ms
+[Stage 167:====================================================>(197 + 3) / 200]                                                                                STREAM | batch 12 files=1 rows_in=101315 kept=35731 groups=151 2662 ms
+[Stage 180:=============================================>      (176 + 24) / 200]                                                                                STREAM | batch 13 files=1 rows_in=101605 kept=35693 groups=151 2416 ms
+[Stage 193:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 14 files=1 rows_in=101395 kept=35724 groups=151 2447 ms
+[Stage 206:====================================================>(198 + 2) / 200]                                                                                STREAM | batch 15 files=1 rows_in=101482 kept=35480 groups=151 2260 ms
+[Stage 219:====================================================>(198 + 2) / 200]                                                                                STREAM | batch 16 files=1 rows_in=98358 kept=35139 groups=151 2445 ms
+[Stage 232:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 17 files=1 rows_in=98176 kept=35092 groups=151 2318 ms
+[Stage 245:====================================================>(198 + 2) / 200]                                                                                STREAM | batch 18 files=1 rows_in=100847 kept=35039 groups=151 2495 ms
+[Stage 258:====================================================>(198 + 2) / 200][Stage 258:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 19 files=1 rows_in=101017 kept=35075 groups=151 2501 ms
+STREAM | batch 20 files=1 rows_in=100866 kept=35115 groups=151 2160 ms
+26/10/11 01:49:01 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+26/10/11 01:49:01 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 95.00% for 24 writers
+26/10/11 01:49:01 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+[Stage 284:===========================================>        (166 + 26) / 200]                                                                                STREAM | batch 21 files=1 rows_in=100409 kept=35361 groups=151 2524 ms
+26/10/11 01:49:06 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+26/10/11 01:49:06 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 95.00% for 24 writers
+26/10/11 01:49:06 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+26/10/11 01:49:06 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 95.00% for 24 writers
+[Stage 297:===================================>                (136 + 24) / 200]26/10/11 01:49:06 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+26/10/11 01:49:06 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+26/10/11 01:49:06 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 95.00% for 24 writers
+26/10/11 01:49:06 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+[Stage 297:============================================>       (173 + 24) / 200]                                                                                STREAM | batch 22 files=1 rows_in=101086 kept=35252 groups=151 2526 ms
+[Stage 310:==================================================>  (192 + 8) / 200][Stage 310:====================================================>(197 + 3) / 200]                                                                                STREAM | batch 23 files=1 rows_in=100256 kept=34897 groups=151 2601 ms
+[Stage 323:====================================================>(197 + 3) / 200][Stage 323:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 24 files=1 rows_in=99219 kept=35136 groups=151 2610 ms
+[Stage 336:===================================================> (194 + 6) / 200][Stage 336:===================================================> (196 + 4) / 200]                                                                                STREAM | batch 25 files=1 rows_in=100080 kept=35454 groups=151 2459 ms
+26/10/11 01:49:31 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+26/10/11 01:49:31 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 95.00% for 24 writers
+26/10/11 01:49:31 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+[Stage 349:==========================================>         (165 + 24) / 200][Stage 349:====================================================>(198 + 2) / 200]                                                                                STREAM | batch 26 files=1 rows_in=99791 kept=35684 groups=151 2799 ms
+[Stage 362:====================================================>(197 + 3) / 200][Stage 362:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 27 files=1 rows_in=100967 kept=35805 groups=151 2518 ms
+STREAM | batch 28 files=1 rows_in=100354 kept=36109 groups=151 2101 ms
+[Stage 388:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 29 files=1 rows_in=97614 kept=35960 groups=151 2308 ms
+[Stage 401:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 30 files=1 rows_in=95807 kept=35615 groups=151 2744 ms
+[Stage 414:=============================================>      (176 + 24) / 200][Stage 414:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 31 files=1 rows_in=98735 kept=35145 groups=151 2947 ms
+STREAM | batch 32 files=1 rows_in=101827 kept=35471 groups=151 2213 ms
+[Stage 440:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 33 files=1 rows_in=100677 kept=35650 groups=151 2102 ms
+[Stage 453:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 34 files=1 rows_in=100905 kept=35690 groups=151 2200 ms
+[Stage 466:====================================================>(197 + 3) / 200]                                                                                STREAM | batch 35 files=1 rows_in=98505 kept=35846 groups=151 2450 ms
+[Stage 479:===================================================> (196 + 4) / 200]                                                                                STREAM | batch 36 files=1 rows_in=98824 kept=35666 groups=151 2319 ms
+STREAM | batch 37 files=1 rows_in=98339 kept=35115 groups=151 2062 ms
+[Stage 495:>                                                        (0 + 1) / 1]                                                                                26/10/11 01:50:43 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+26/10/11 01:50:43 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 95.00% for 24 writers
+26/10/11 01:50:43 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+[Stage 505:=============================>                      (112 + 24) / 200][Stage 505:============================================>       (172 + 24) / 200][Stage 505:====================================================>(198 + 2) / 200]                                                                                STREAM | batch 38 files=1 rows_in=97448 kept=34938 groups=151 4618 ms
+26/10/11 01:50:45 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 5000 milliseconds, but spent 5208 milliseconds
+[Stage 518:==========================================>         (162 + 26) / 200][Stage 518:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 39 files=1 rows_in=100210 kept=35383 groups=151 3358 ms
+[Stage 531:===========================================>        (168 + 24) / 200][Stage 531:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 40 files=1 rows_in=97128 kept=35886 groups=151 3396 ms
+[Stage 544:===========================================>        (168 + 24) / 200][Stage 544:====================================================>(198 + 2) / 200]                                                                                STREAM | batch 41 files=1 rows_in=99264 kept=36010 groups=151 3570 ms
+[Stage 557:====================================================>(198 + 2) / 200]                                                                                STREAM | batch 42 files=1 rows_in=97752 kept=35673 groups=151 2287 ms
+[Stage 570:====================================================>(197 + 3) / 200]                                                                                STREAM | batch 43 files=1 rows_in=98233 kept=35441 groups=151 2319 ms
+[Stage 583:=========================================>          (159 + 25) / 200][Stage 583:====================================================>(198 + 2) / 200]                                                                                STREAM | batch 44 files=1 rows_in=97130 kept=35101 groups=151 2266 ms
+[Stage 596:===================================================> (196 + 4) / 200]                                                                                STREAM | batch 45 files=1 rows_in=96462 kept=35039 groups=151 2348 ms
+[Stage 609:==============================================>     (179 + 21) / 200]                                                                                STREAM | batch 46 files=1 rows_in=98321 kept=34691 groups=151 2232 ms
+[Stage 622:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 47 files=1 rows_in=100252 kept=34889 groups=151 2484 ms
+[Stage 635:============================================>       (172 + 24) / 200][Stage 635:====================================================>(198 + 2) / 200]                                                                                STREAM | batch 48 files=1 rows_in=99299 kept=35098 groups=151 2511 ms
+[Stage 648:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 49 files=1 rows_in=97075 kept=35047 groups=151 2215 ms
+[Stage 661:===============================================>    (181 + 19) / 200][Stage 661:====================================================>(197 + 3) / 200]                                                                                STREAM | batch 50 files=1 rows_in=99343 kept=34923 groups=151 2395 ms
+26/10/11 01:52:21 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+26/10/11 01:52:21 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 95.00% for 24 writers
+[Stage 674:==========================>                         (103 + 24) / 200]26/10/11 01:52:21 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+[Stage 674:=============================================>      (174 + 24) / 200][Stage 674:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 51 files=1 rows_in=97929 kept=34782 groups=151 2719 ms
+[Stage 687:====================================================>(197 + 3) / 200][Stage 687:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 52 files=1 rows_in=97458 kept=35051 groups=151 2371 ms
+[Stage 700:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 53 files=1 rows_in=100103 kept=35258 groups=151 2188 ms
+26/10/11 01:52:41 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+26/10/11 01:52:41 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 95.00% for 24 writers
+26/10/11 01:52:41 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+[Stage 713:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 54 files=1 rows_in=99125 kept=35618 groups=151 2404 ms
+26/10/11 01:52:51 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+26/10/11 01:52:51 WARN MemoryManager: Total allocation exceeds 95.00% (3,060,164,160 bytes) of heap memory
+Scaling row group sizes to 99.13% for 23 writers
+[Stage 726:===================================================> (196 + 4) / 200]                                                                                STREAM | batch 55 files=1 rows_in=99250 kept=35566 groups=151 2462 ms
+STREAM | batch 56 files=1 rows_in=98993 kept=35533 groups=151 2312 ms
+[Stage 752:====================================================>(198 + 2) / 200]                                                                                STREAM | batch 57 files=1 rows_in=93431 kept=35253 groups=151 2306 ms
+[Stage 765:====================================================>(199 + 1) / 200]                                                                                STREAM | batch 58 files=1 rows_in=99474 kept=35148 groups=151 2305 ms
+[Stage 769:=====>                                               (21 + 24) / 198][Stage 769:======>                                              (24 + 24) / 198][Stage 769:============>                                        (48 + 24) / 198][Stage 769:==================>                                  (69 + 24) / 198][Stage 769:===================>                                 (72 + 24) / 198][Stage 769:========================>                            (91 + 24) / 198][Stage 769:=========================>                           (96 + 24) / 198][Stage 769:=========================>                           (97 + 24) / 198][Stage 769:===============================>                    (120 + 24) / 198][Stage 769:==================================>                 (131 + 24) / 198][Stage 769:===================================>                (136 + 24) / 198][Stage 769:======================================>             (145 + 24) / 198][Stage 769:=======================================>            (151 + 24) / 198][Stage 769:============================================>       (168 + 24) / 198][Stage 769:============================================>       (169 + 24) / 198][Stage 769:===================================================> (194 + 4) / 198]                                                                                [Stage 772:>                                                     (2 + 24) / 198][Stage 772:======>                                              (24 + 24) / 198][Stage 772:=======>                                             (28 + 24) / 198][Stage 772:============>                                        (48 + 24) / 198][Stage 772:==================>                                  (68 + 24) / 198][Stage 772:===================>                                 (72 + 24) / 198][Stage 772:=========================>                           (95 + 24) / 198][Stage 772:=========================>                           (96 + 24) / 198][Stage 772:==========================>                         (101 + 24) / 198][Stage 772:===============================>                    (120 + 24) / 198][Stage 772:====================================>               (138 + 24) / 198][Stage 772:=====================================>              (144 + 24) / 198][Stage 772:=======================================>            (150 + 24) / 198][Stage 772:===========================================>        (167 + 24) / 198][Stage 772:============================================>       (168 + 24) / 198][Stage 772:================================================>   (183 + 15) / 198]                                                                                STREAM | stopped; output groups=9060 observations=2122649

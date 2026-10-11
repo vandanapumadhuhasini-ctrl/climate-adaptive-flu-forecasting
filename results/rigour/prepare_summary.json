@@ -1,0 +1,26 @@
+{
+  "rows_with_climate_and_ili": 39673,
+  "rows_with_exact_lags_and_target": 39365,
+  "states": 50,
+  "years": [
+    2010,
+    2025
+  ],
+  "split_rows": {
+    "select_train_le2021": 29080,
+    "select_val_2022": 2594,
+    "final_train_le2022": 31674,
+    "test_ge2023": 7691
+  },
+  "test_weeks": 156,
+  "v1_rows_whose_lag1_or_target_changes_under_exact_calendar_rule": 208,
+  "graph_builder_check": {
+    "spark_edges": 317384,
+    "python_edges": 317384,
+    "matched_edges": 317384,
+    "agreement": 1.0,
+    "sigma_python": 1.8596,
+    "max_abs_similarity_diff_on_matched": 7.649436639667329e-14,
+    "passes_99pct_rule": true
+  }
+}

@@ -1,0 +1,1 @@
+{"model": "GNN-random", "seed": 7, "best_epoch": 9, "val_rmse_best": 1.08546, "epochs_run_select": 39, "test_rmse": 0.94674, "test_mae": 0.48241, "test_r2": 0.77238, "n_test_rows": 7691, "n_params": 1265, "seconds": 35.2}

@@ -1,0 +1,1 @@
+{"model": "GNN-static", "seed": 9, "best_epoch": 35, "val_rmse_best": 1.0433, "epochs_run_select": 65, "test_rmse": 0.91746, "test_mae": 0.48075, "test_r2": 0.78625, "n_test_rows": 7691, "n_params": 1265, "seconds": 34.0}

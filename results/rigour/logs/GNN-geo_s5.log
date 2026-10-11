@@ -1,0 +1,1 @@
+{"model": "GNN-geo", "seed": 5, "best_epoch": 36, "val_rmse_best": 1.04865, "epochs_run_select": 66, "test_rmse": 0.9219, "test_mae": 0.48091, "test_r2": 0.78417, "n_test_rows": 7691, "n_params": 1265, "seconds": 37.1}

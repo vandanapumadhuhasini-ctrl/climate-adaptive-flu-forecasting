@@ -1,0 +1,1 @@
+{"model": "GNN-K16", "seed": 1, "best_epoch": 45, "val_rmse_best": 1.06349, "epochs_run_select": 75, "test_rmse": 0.91221, "test_mae": 0.46965, "test_r2": 0.78868, "n_test_rows": 7691, "n_params": 1265, "seconds": 48.0}

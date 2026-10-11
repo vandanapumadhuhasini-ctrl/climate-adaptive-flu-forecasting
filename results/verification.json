@@ -1,0 +1,225 @@
+{
+    "snapshot_utc":  "2026-10-11T03:43:31.4099637Z",
+    "finished_utc":  "2026-10-11T03:43:57.3561229Z",
+    "hdfs_raw_weather":  {
+                             "dirs":  1,
+                             "files":  27,
+                             "logical_bytes":  34581544202,
+                             "yearly_csv_files":  26
+                         },
+    "hdfs_overview_screenshot":  "docs/screenshots/hdfs_overview_final.png",
+    "dashboard_http":  200,
+    "evidence_files":  [
+                           {
+                               "path":  "results/cluster_verification.json",
+                               "exists":  true,
+                               "bytes":  4719,
+                               "modified_utc":  "2026-10-11T03:43:48.6925652Z"
+                           },
+                           {
+                               "path":  "results/cluster_smoke_test.json",
+                               "exists":  true,
+                               "bytes":  636,
+                               "modified_utc":  "2026-10-09T19:21:07.0224631Z"
+                           },
+                           {
+                               "path":  "results/mapreduce_jobs.json",
+                               "exists":  true,
+                               "bytes":  3951,
+                               "modified_utc":  "2026-10-10T02:51:26.8542167Z"
+                           },
+                           {
+                               "path":  "results/cross_engine_consistency.json",
+                               "exists":  true,
+                               "bytes":  1181,
+                               "modified_utc":  "2026-10-10T02:47:51.9523444Z"
+                           },
+                           {
+                               "path":  "results/spark_api_evidence.txt",
+                               "exists":  true,
+                               "bytes":  7630,
+                               "modified_utc":  "2026-10-10T02:47:51.9560795Z"
+                           },
+                           {
+                               "path":  "results/spark_dataframe_plan.txt",
+                               "exists":  true,
+                               "bytes":  4626,
+                               "modified_utc":  "2026-10-11T02:40:52.8940374Z"
+                           },
+                           {
+                               "path":  "results/spark_event_log_summary.json",
+                               "exists":  true,
+                               "bytes":  10337,
+                               "modified_utc":  "2026-10-11T03:43:30.9578137Z"
+                           },
+                           {
+                               "path":  "results/veracity_audit.json",
+                               "exists":  true,
+                               "bytes":  1579,
+                               "modified_utc":  "2026-10-11T02:40:51.5643113Z"
+                           },
+                           {
+                               "path":  "results/variety_inventory.json",
+                               "exists":  true,
+                               "bytes":  1018,
+                               "modified_utc":  "2026-10-11T02:40:51.7463890Z"
+                           },
+                           {
+                               "path":  "results/streaming_summary.json",
+                               "exists":  true,
+                               "bytes":  886,
+                               "modified_utc":  "2026-10-11T01:54:28.6118825Z"
+                           },
+                           {
+                               "path":  "results/benchmark_summary.json",
+                               "exists":  true,
+                               "bytes":  20954,
+                               "modified_utc":  "2026-10-10T02:49:14.9379379Z"
+                           },
+                           {
+                               "path":  "results/benchmark/kernel_oom_log.txt",
+                               "exists":  true,
+                               "bytes":  7140,
+                               "modified_utc":  "2026-10-10T02:48:11.3422570Z"
+                           },
+                           {
+                               "path":  "results/tuning_summary.json",
+                               "exists":  true,
+                               "bytes":  6359,
+                               "modified_utc":  "2026-10-10T20:12:26.4625092Z"
+                           },
+                           {
+                               "path":  "results/rigour/summary.json",
+                               "exists":  true,
+                               "bytes":  9132,
+                               "modified_utc":  "2026-10-11T01:15:46.9591338Z"
+                           },
+                           {
+                               "path":  "results/rigour/prepare_summary.json",
+                               "exists":  true,
+                               "bytes":  635,
+                               "modified_utc":  "2026-10-11T01:01:51.4445725Z"
+                           },
+                           {
+                               "path":  "results/v3/summary.json",
+                               "exists":  true,
+                               "bytes":  13675,
+                               "modified_utc":  "2026-10-11T03:34:39.1279356Z"
+                           },
+                           {
+                               "path":  "results/v3/lag_scan.json",
+                               "exists":  true,
+                               "bytes":  4989,
+                               "modified_utc":  "2026-10-11T03:09:52.2761960Z"
+                           },
+                           {
+                               "path":  "results/hdfs_publish_manifest.json",
+                               "exists":  true,
+                               "bytes":  139133,
+                               "modified_utc":  "2026-10-11T03:40:12.9200167Z"
+                           },
+                           {
+                               "path":  "docs/V3_RESULTS.md",
+                               "exists":  true,
+                               "bytes":  4958,
+                               "modified_utc":  "2026-10-11T03:34:39.4812231Z"
+                           },
+                           {
+                               "path":  "docs/BASE_PAPER.md",
+                               "exists":  true,
+                               "bytes":  9568,
+                               "modified_utc":  "2026-10-11T03:40:42.4981936Z"
+                           },
+                           {
+                               "path":  "docs/BENCHMARK_PROTOCOL.md",
+                               "exists":  true,
+                               "bytes":  6277,
+                               "modified_utc":  "2026-10-10T02:49:28.4196709Z"
+                           },
+                           {
+                               "path":  "docs/RESEARCH_PROTOCOL.md",
+                               "exists":  true,
+                               "bytes":  10897,
+                               "modified_utc":  "2026-10-11T03:10:44.3181221Z"
+                           },
+                           {
+                               "path":  "docs/RIGOUR_RESULTS.md",
+                               "exists":  true,
+                               "bytes":  3948,
+                               "modified_utc":  "2026-10-11T01:15:46.9641342Z"
+                           },
+                           {
+                               "path":  "docs/TUNING_RESULTS.md",
+                               "exists":  true,
+                               "bytes":  3280,
+                               "modified_utc":  "2026-10-10T20:12:26.4655026Z"
+                           },
+                           {
+                               "path":  "docs/HADOOP_SPARK_API_EVIDENCE.md",
+                               "exists":  true,
+                               "bytes":  11040,
+                               "modified_utc":  "2026-10-10T02:51:45.3024063Z"
+                           },
+                           {
+                               "path":  "docs/screenshots/hdfs_overview_final.png",
+                               "exists":  true,
+                               "bytes":  62190,
+                               "modified_utc":  "2026-10-11T03:43:50.2800994Z"
+                           },
+                           {
+                               "path":  "docs/screenshots/hdfs_datanodes.png",
+                               "exists":  true,
+                               "bytes":  54683,
+                               "modified_utc":  "2026-10-09T19:22:28.5153959Z"
+                           },
+                           {
+                               "path":  "docs/screenshots/yarn_nodes.png",
+                               "exists":  true,
+                               "bytes":  82681,
+                               "modified_utc":  "2026-10-09T19:27:14.1440974Z"
+                           },
+                           {
+                               "path":  "docs/screenshots/yarn_timeline.png",
+                               "exists":  true,
+                               "bytes":  76023,
+                               "modified_utc":  "2026-10-11T02:04:05.1652291Z"
+                           },
+                           {
+                               "path":  "docs/screenshots/yarn_timeline_mr1.png",
+                               "exists":  true,
+                               "bytes":  81886,
+                               "modified_utc":  "2026-10-11T02:04:08.6709336Z"
+                           },
+                           {
+                               "path":  "docs/screenshots/spark_ui.png",
+                               "exists":  true,
+                               "bytes":  84650,
+                               "modified_utc":  "2026-10-09T19:26:27.2738657Z"
+                           },
+                           {
+                               "path":  "docs/screenshots/spark_sql.png",
+                               "exists":  true,
+                               "bytes":  62537,
+                               "modified_utc":  "2026-10-09T19:26:31.6042065Z"
+                           },
+                           {
+                               "path":  "docs/screenshots/dashboard_overview.png",
+                               "exists":  true,
+                               "bytes":  153959,
+                               "modified_utc":  "2026-10-11T02:13:35.0098593Z"
+                           },
+                           {
+                               "path":  "docs/screenshots/dashboard_forecast.png",
+                               "exists":  true,
+                               "bytes":  229257,
+                               "modified_utc":  "2026-10-11T02:15:06.3611296Z"
+                           },
+                           {
+                               "path":  "docs/screenshots/dashboard_streaming.png",
+                               "exists":  true,
+                               "bytes":  109047,
+                               "modified_utc":  "2026-10-11T02:14:51.1539005Z"
+                           }
+                       ],
+    "evidence_missing":  0
+}

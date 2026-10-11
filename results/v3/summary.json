@@ -1,0 +1,485 @@
+{
+  "lag_scan": {
+    "h1": {
+      "TMAX": 0,
+      "TMIN": 0,
+      "PRCP": 0,
+      "DIURNAL_RANGE": 0
+    },
+    "h2": {
+      "TMAX": 0,
+      "TMIN": 0,
+      "PRCP": 0,
+      "DIURNAL_RANGE": 0
+    },
+    "h3": {
+      "TMAX": 0,
+      "TMIN": 0,
+      "PRCP": 0,
+      "DIURNAL_RANGE": 0
+    },
+    "h4": {
+      "TMAX": 0,
+      "TMIN": 0,
+      "PRCP": 0,
+      "DIURNAL_RANGE": 0
+    }
+  },
+  "per_horizon": {
+    "1": {
+      "test_rows": 7691,
+      "models": {
+        "GNN-lagK8": {
+          "seeds": 10,
+          "rmse_mean": 0.9236041228614829,
+          "rmse_sd": 0.015900807582066225,
+          "ensemble_rmse": 0.9168937511191511,
+          "mae_mean": 0.4782898258406248
+        },
+        "GNN-K8": {
+          "seeds": 10,
+          "rmse_mean": 0.9236041228614829,
+          "rmse_sd": 0.015900807582066225,
+          "ensemble_rmse": 0.9168937511191511,
+          "mae_mean": 0.4782898258406248
+        },
+        "MLP-lagNoGraph": {
+          "seeds": 10,
+          "rmse_mean": 0.9180568096047967,
+          "rmse_sd": 0.01102838439930306,
+          "ensemble_rmse": 0.9125443373805413,
+          "mae_mean": 0.4792995611159353
+        },
+        "MLP-lagsOnly": {
+          "seeds": 10,
+          "rmse_mean": 0.9309399689439534,
+          "rmse_sd": 0.015963062368296903,
+          "ensemble_rmse": 0.9251399044957159,
+          "mae_mean": 0.4877860383331679
+        },
+        "GBT-lags": {
+          "seeds": 1,
+          "rmse_mean": 0.9376963963752906,
+          "rmse_sd": 0.0,
+          "mae_mean": 0.5023826337422906
+        },
+        "GBT-lagclimate": {
+          "seeds": 1,
+          "rmse_mean": 0.9310899842705245,
+          "rmse_sd": 0.0,
+          "mae_mean": 0.4977917227448543
+        },
+        "Persistence": {
+          "seeds": 1,
+          "rmse_mean": 1.0376581816532602,
+          "rmse_sd": 0.0,
+          "mae_mean": 0.5521431898381822
+        }
+      },
+      "GNN_lagK8_equals_GNN_K8": true
+    },
+    "2": {
+      "test_rows": 7641,
+      "models": {
+        "GNN-lagK8": {
+          "seeds": 10,
+          "rmse_mean": 1.1450811529525915,
+          "rmse_sd": 0.025646888969572186,
+          "ensemble_rmse": 1.1355246382816604,
+          "mae_mean": 0.6082485398589191
+        },
+        "GNN-K8": {
+          "seeds": 10,
+          "rmse_mean": 1.1450811529525915,
+          "rmse_sd": 0.025646888969572186,
+          "ensemble_rmse": 1.1355246382816604,
+          "mae_mean": 0.6082485398589191
+        },
+        "MLP-lagNoGraph": {
+          "seeds": 10,
+          "rmse_mean": 1.149822124176689,
+          "rmse_sd": 0.02880205391554369,
+          "ensemble_rmse": 1.1407823031143656,
+          "mae_mean": 0.6104511961526045
+        },
+        "MLP-lagsOnly": {
+          "seeds": 10,
+          "rmse_mean": 1.1511580628933455,
+          "rmse_sd": 0.010875057840631027,
+          "ensemble_rmse": 1.1456223047706056,
+          "mae_mean": 0.6229685356744438
+        },
+        "GBT-lags": {
+          "seeds": 1,
+          "rmse_mean": 1.1542353797255465,
+          "rmse_sd": 0.0,
+          "mae_mean": 0.6355498413376991
+        },
+        "GBT-lagclimate": {
+          "seeds": 1,
+          "rmse_mean": 1.140353394325945,
+          "rmse_sd": 0.0,
+          "mae_mean": 0.6252155319369317
+        },
+        "Persistence": {
+          "seeds": 1,
+          "rmse_mean": 1.303401459511405,
+          "rmse_sd": 0.0,
+          "mae_mean": 0.7175426847649767
+        }
+      },
+      "GNN_lagK8_equals_GNN_K8": true
+    },
+    "3": {
+      "test_rows": 7591,
+      "models": {
+        "GNN-lagK8": {
+          "seeds": 10,
+          "rmse_mean": 1.2507144931441623,
+          "rmse_sd": 0.021581390253225523,
+          "ensemble_rmse": 1.2408933307089751,
+          "mae_mean": 0.6878402050308696
+        },
+        "GNN-K8": {
+          "seeds": 10,
+          "rmse_mean": 1.2507144931441623,
+          "rmse_sd": 0.021581390253225523,
+          "ensemble_rmse": 1.2408933307089751,
+          "mae_mean": 0.6878402050308696
+        },
+        "MLP-lagNoGraph": {
+          "seeds": 10,
+          "rmse_mean": 1.2651286397967205,
+          "rmse_sd": 0.009772608513980865,
+          "ensemble_rmse": 1.2577869829388841,
+          "mae_mean": 0.6965064318778267
+        },
+        "MLP-lagsOnly": {
+          "seeds": 10,
+          "rmse_mean": 1.2925566934632473,
+          "rmse_sd": 0.011833944324249912,
+          "ensemble_rmse": 1.287676798943437,
+          "mae_mean": 0.7183960226382979
+        },
+        "GBT-lags": {
+          "seeds": 1,
+          "rmse_mean": 1.2890842161733387,
+          "rmse_sd": 0.0,
+          "mae_mean": 0.724447833965823
+        },
+        "GBT-lagclimate": {
+          "seeds": 1,
+          "rmse_mean": 1.2805934004585149,
+          "rmse_sd": 0.0,
+          "mae_mean": 0.7139818777642285
+        },
+        "Persistence": {
+          "seeds": 1,
+          "rmse_mean": 1.4794371395923647,
+          "rmse_sd": 0.0,
+          "mae_mean": 0.8477556567502909
+        }
+      },
+      "GNN_lagK8_equals_GNN_K8": true
+    },
+    "4": {
+      "test_rows": 7541,
+      "models": {
+        "GNN-lagK8": {
+          "seeds": 10,
+          "rmse_mean": 1.353632614087537,
+          "rmse_sd": 0.036655800900097346,
+          "ensemble_rmse": 1.3406052310580643,
+          "mae_mean": 0.7711400264782869
+        },
+        "GNN-K8": {
+          "seeds": 10,
+          "rmse_mean": 1.353632614087537,
+          "rmse_sd": 0.036655800900097346,
+          "ensemble_rmse": 1.3406052310580643,
+          "mae_mean": 0.7711400264782869
+        },
+        "MLP-lagNoGraph": {
+          "seeds": 10,
+          "rmse_mean": 1.3753290394884943,
+          "rmse_sd": 0.02736921695671369,
+          "ensemble_rmse": 1.3679543165713797,
+          "mae_mean": 0.7784372265168418
+        },
+        "MLP-lagsOnly": {
+          "seeds": 10,
+          "rmse_mean": 1.3838100159637101,
+          "rmse_sd": 0.015742832517838926,
+          "ensemble_rmse": 1.3797274714253933,
+          "mae_mean": 0.7922529276750215
+        },
+        "GBT-lags": {
+          "seeds": 1,
+          "rmse_mean": 1.3817480272294784,
+          "rmse_sd": 0.0,
+          "mae_mean": 0.8084023656770941
+        },
+        "GBT-lagclimate": {
+          "seeds": 1,
+          "rmse_mean": 1.3840827658841055,
+          "rmse_sd": 0.0,
+          "mae_mean": 0.798399710956563
+        },
+        "Persistence": {
+          "seeds": 1,
+          "rmse_mean": 1.6324449507449317,
+          "rmse_sd": 0.0,
+          "mae_mean": 0.9639060855470712
+        }
+      },
+      "GNN_lagK8_equals_GNN_K8": true
+    }
+  },
+  "claims": {
+    "N1 lag-aware beats same-week": {
+      "holds": false,
+      "by_horizon": [
+        {
+          "horizon": 1,
+          "vs": "GNN-K8",
+          "mean_rmse_main": 0.9236041228614829,
+          "mean_rmse_other": 0.9236041228614829,
+          "dm_stat": 0.0,
+          "dm_p": 1.0,
+          "boot_ci": [
+            0.0,
+            0.0
+          ],
+          "wins": 0,
+          "dm_p_holm": 1.0,
+          "verdict": "no significant difference"
+        },
+        {
+          "horizon": 2,
+          "vs": "GNN-K8",
+          "mean_rmse_main": 1.1450811529525915,
+          "mean_rmse_other": 1.1450811529525915,
+          "dm_stat": 0.0,
+          "dm_p": 1.0,
+          "boot_ci": [
+            0.0,
+            0.0
+          ],
+          "wins": 0,
+          "dm_p_holm": 1.0,
+          "verdict": "no significant difference"
+        },
+        {
+          "horizon": 3,
+          "vs": "GNN-K8",
+          "mean_rmse_main": 1.2507144931441623,
+          "mean_rmse_other": 1.2507144931441623,
+          "dm_stat": 0.0,
+          "dm_p": 1.0,
+          "boot_ci": [
+            0.0,
+            0.0
+          ],
+          "wins": 0,
+          "dm_p_holm": 1.0,
+          "verdict": "no significant difference"
+        },
+        {
+          "horizon": 4,
+          "vs": "GNN-K8",
+          "mean_rmse_main": 1.353632614087537,
+          "mean_rmse_other": 1.353632614087537,
+          "dm_stat": 0.0,
+          "dm_p": 1.0,
+          "boot_ci": [
+            0.0,
+            0.0
+          ],
+          "wins": 0,
+          "dm_p_holm": 1.0,
+          "verdict": "no significant difference"
+        }
+      ]
+    },
+    "N2 climate helps at longer horizons": {
+      "holds": false,
+      "by_horizon": [
+        {
+          "horizon": 2,
+          "vs": "MLP-lagsOnly",
+          "mean_rmse_main": 1.1450811529525915,
+          "mean_rmse_other": 1.1511580628933455,
+          "dm_stat": -1.2432431083569715,
+          "dm_p": 0.21566765902428092,
+          "boot_ci": [
+            -0.0291262032041888,
+            0.006340431738738786
+          ],
+          "wins": 6,
+          "dm_p_holm": 0.21566765902428092,
+          "verdict": "no significant difference"
+        },
+        {
+          "horizon": 3,
+          "vs": "MLP-lagsOnly",
+          "mean_rmse_main": 1.2507144931441623,
+          "mean_rmse_other": 1.2925566934632473,
+          "dm_stat": -2.2246218383216,
+          "dm_p": 0.027570276368724726,
+          "boot_ci": [
+            -0.07058845459447798,
+            -0.010389439637148244
+          ],
+          "wins": 10,
+          "dm_p_holm": 0.07949202292704977,
+          "verdict": "no significant difference"
+        },
+        {
+          "horizon": 4,
+          "vs": "MLP-lagsOnly",
+          "mean_rmse_main": 1.353632614087537,
+          "mean_rmse_other": 1.3838100159637101,
+          "dm_stat": -2.2406649501695863,
+          "dm_p": 0.026497340975683254,
+          "boot_ci": [
+            -0.06271985625812206,
+            -0.008870969747773376
+          ],
+          "wins": 8,
+          "dm_p_holm": 0.07949202292704977,
+          "verdict": "no significant difference"
+        }
+      ]
+    },
+    "N3 graph helps given lag-aware climate": {
+      "holds": false,
+      "by_horizon": [
+        {
+          "horizon": 1,
+          "vs": "MLP-lagNoGraph",
+          "mean_rmse_main": 0.9236041228614829,
+          "mean_rmse_other": 0.9180568096047967,
+          "dm_stat": 0.9101402991053548,
+          "dm_p": 0.3641616695532074,
+          "boot_ci": [
+            -0.007069757680149169,
+            0.00994979717325863
+          ],
+          "wins": 4,
+          "dm_p_holm": 0.7283233391064148,
+          "verdict": "no significant difference"
+        },
+        {
+          "horizon": 2,
+          "vs": "MLP-lagNoGraph",
+          "mean_rmse_main": 1.1450811529525915,
+          "mean_rmse_other": 1.149822124176689,
+          "dm_stat": -0.750368724913462,
+          "dm_p": 0.4541775857001211,
+          "boot_ci": [
+            -0.01999443084096398,
+            0.00873206507819839
+          ],
+          "wins": 8,
+          "dm_p_holm": 0.7283233391064148,
+          "verdict": "no significant difference"
+        },
+        {
+          "horizon": 3,
+          "vs": "MLP-lagNoGraph",
+          "mean_rmse_main": 1.2507144931441623,
+          "mean_rmse_other": 1.2651286397967205,
+          "dm_stat": -1.8042103531210936,
+          "dm_p": 0.0731653353245203,
+          "boot_ci": [
+            -0.026672685589413547,
+            0.0003142177015213934
+          ],
+          "wins": 8,
+          "dm_p_holm": 0.2194960059735609,
+          "verdict": "no significant difference"
+        },
+        {
+          "horizon": 4,
+          "vs": "MLP-lagNoGraph",
+          "mean_rmse_main": 1.353632614087537,
+          "mean_rmse_other": 1.3753290394884943,
+          "dm_stat": -2.2069171123482967,
+          "dm_p": 0.028819272870092075,
+          "boot_ci": [
+            -0.04412997104170655,
+            -0.007373846126955911
+          ],
+          "wins": 8,
+          "dm_p_holm": 0.1152770914803683,
+          "verdict": "no significant difference"
+        }
+      ]
+    },
+    "N4 beats Spark GBT": {
+      "holds": true,
+      "by_horizon": [
+        {
+          "horizon": 1,
+          "vs": "GBT-lags",
+          "mean_rmse_main": 0.9236041228614829,
+          "mean_rmse_other": 0.9376963963752906,
+          "dm_stat": -1.6326561796421242,
+          "dm_p": 0.10457117096337433,
+          "boot_ci": [
+            -0.049604566730001916,
+            0.007760111758390411
+          ],
+          "wins": 8,
+          "dm_p_holm": 0.20914234192674866,
+          "verdict": "no significant difference"
+        },
+        {
+          "horizon": 2,
+          "vs": "GBT-lags",
+          "mean_rmse_main": 1.1450811529525915,
+          "mean_rmse_other": 1.1542353797255465,
+          "dm_stat": -1.5271743288901927,
+          "dm_p": 0.1287689298222816,
+          "boot_ci": [
+            -0.05191675081283507,
+            0.00829125246467125
+          ],
+          "wins": 6,
+          "dm_p_holm": 0.20914234192674866,
+          "verdict": "no significant difference"
+        },
+        {
+          "horizon": 3,
+          "vs": "GBT-lags",
+          "mean_rmse_main": 1.2507144931441623,
+          "mean_rmse_other": 1.2890842161733387,
+          "dm_stat": -2.8460185977470878,
+          "dm_p": 0.005034348783788793,
+          "boot_ci": [
+            -0.073029299878048,
+            -0.014837294296260172
+          ],
+          "wins": 9,
+          "dm_p_holm": 0.016874613754166615,
+          "verdict": "better"
+        },
+        {
+          "horizon": 4,
+          "vs": "GBT-lags",
+          "mean_rmse_main": 1.353632614087537,
+          "mean_rmse_other": 1.3817480272294784,
+          "dm_stat": -2.9051798171496936,
+          "dm_p": 0.004218653438541654,
+          "boot_ci": [
+            -0.06985695485246224,
+            -0.013774589473443195
+          ],
+          "wins": 7,
+          "dm_p_holm": 0.016874613754166615,
+          "verdict": "no significant difference"
+        }
+      ]
+    }
+  }
+}

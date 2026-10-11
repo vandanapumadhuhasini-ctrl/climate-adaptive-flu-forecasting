@@ -1,0 +1,254 @@
+{
+  "measured_repeats": 25,
+  "best_grid_config": {
+    "status": "ok",
+    "label": "p384-none",
+    "partitions": 384,
+    "persist": "none",
+    "aqe": false,
+    "repeats": 3,
+    "total_median_s": 325.79,
+    "total_min_s": 325.57,
+    "total_max_s": 341.14,
+    "materialize_median_s": 0.0,
+    "q1_median_s": 135.84,
+    "q2_median_s": 156.03,
+    "q3_median_s": 36.85,
+    "tasks_median": 1248,
+    "shuffle_write_GB": 3.2,
+    "shuffle_read_GB": 3.2,
+    "disk_spill_GB": 3.18,
+    "base_rows": -1,
+    "app_ids": [
+      "local-1791654371006"
+    ],
+    "max_tmp_after_cleanup_MB": 0.5
+  },
+  "persistence_speedup_by_partitions": {
+    "8": 0.37,
+    "96": 0.48,
+    "384": 0.46
+  },
+  "caching_break_even": {
+    "8": {
+      "query_saving_s": -52.3,
+      "materialize_s": 728.46,
+      "break_even_queries": null
+    },
+    "96": {
+      "query_saving_s": 14.9,
+      "materialize_s": 423.11,
+      "break_even_queries": 28.4
+    },
+    "384": {
+      "query_saving_s": 24.3,
+      "materialize_s": 446.48,
+      "break_even_queries": 18.4
+    }
+  },
+  "rows": [
+    {
+      "status": "ok",
+      "label": "p8-memory_and_disk",
+      "partitions": 8,
+      "persist": "memory_and_disk",
+      "aqe": false,
+      "repeats": 3,
+      "total_median_s": 1396.78,
+      "total_min_s": 1358.64,
+      "total_max_s": 1416.97,
+      "materialize_median_s": 728.46,
+      "q1_median_s": 217.61,
+      "q2_median_s": 235.72,
+      "q3_median_s": 214.12,
+      "tasks_median": 69,
+      "shuffle_write_GB": 3.77,
+      "shuffle_read_GB": 3.77,
+      "disk_spill_GB": 0.0,
+      "base_rows": 303631696,
+      "app_ids": [
+        "local-1791608008432"
+      ],
+      "max_tmp_after_cleanup_MB": 0.5
+    },
+    {
+      "status": "ok",
+      "label": "p8-none",
+      "partitions": 8,
+      "persist": "none",
+      "aqe": false,
+      "repeats": 3,
+      "total_median_s": 510.43,
+      "total_min_s": 449.23,
+      "total_max_s": 591.63,
+      "materialize_median_s": 0.0,
+      "q1_median_s": 220.32,
+      "q2_median_s": 236.09,
+      "q3_median_s": 54.02,
+      "tasks_median": 120,
+      "shuffle_write_GB": 4.33,
+      "shuffle_read_GB": 4.33,
+      "disk_spill_GB": 0.0,
+      "base_rows": -1,
+      "app_ids": [
+        "local-1791605921289"
+      ],
+      "max_tmp_after_cleanup_MB": 0.5
+    },
+    {
+      "label": "p24-memory_and_disk",
+      "partitions": 24,
+      "persist": "memory_and_disk",
+      "aqe": false,
+      "repeats": 0,
+      "status": "failed",
+      "failed_at_repeat": 0,
+      "error_class": "org.apache.spark.memory.SparkOutOfMemoryError",
+      "error": "[UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438."
+    },
+    {
+      "status": "ok",
+      "label": "p24-none",
+      "partitions": 24,
+      "persist": "none",
+      "aqe": false,
+      "repeats": 3,
+      "total_median_s": 362.71,
+      "total_min_s": 362.18,
+      "total_max_s": 379.92,
+      "materialize_median_s": 0.0,
+      "q1_median_s": 161.81,
+      "q2_median_s": 168.29,
+      "q3_median_s": 37.92,
+      "tasks_median": 168,
+      "shuffle_write_GB": 3.92,
+      "shuffle_read_GB": 3.92,
+      "disk_spill_GB": 0.0,
+      "base_rows": -1,
+      "app_ids": [
+        "local-1791613674583"
+      ],
+      "max_tmp_after_cleanup_MB": 0.5
+    },
+    {
+      "status": "ok",
+      "label": "p96-memory_and_disk",
+      "partitions": 96,
+      "persist": "memory_and_disk",
+      "aqe": false,
+      "repeats": 3,
+      "total_median_s": 724.13,
+      "total_min_s": 700.54,
+      "total_max_s": 763.17,
+      "materialize_median_s": 423.11,
+      "q1_median_s": 99.71,
+      "q2_median_s": 105.93,
+      "q3_median_s": 97.83,
+      "tasks_median": 421,
+      "shuffle_write_GB": 3.6,
+      "shuffle_read_GB": 3.6,
+      "disk_spill_GB": 0.0,
+      "base_rows": 303631696,
+      "app_ids": [
+        "local-1791657129774"
+      ],
+      "max_tmp_after_cleanup_MB": 0.5
+    },
+    {
+      "status": "ok",
+      "label": "p96-none",
+      "partitions": 96,
+      "persist": "none",
+      "aqe": false,
+      "repeats": 3,
+      "total_median_s": 346.32,
+      "total_min_s": 343.32,
+      "total_max_s": 371.0,
+      "materialize_median_s": 0.0,
+      "q1_median_s": 154.05,
+      "q2_median_s": 153.83,
+      "q3_median_s": 40.24,
+      "tasks_median": 384,
+      "shuffle_write_GB": 3.43,
+      "shuffle_read_GB": 3.43,
+      "disk_spill_GB": 0.0,
+      "base_rows": -1,
+      "app_ids": [
+        "local-1791616010330"
+      ],
+      "max_tmp_after_cleanup_MB": 0.5
+    },
+    {
+      "status": "ok",
+      "label": "p384-memory_and_disk",
+      "partitions": 384,
+      "persist": "memory_and_disk",
+      "aqe": false,
+      "repeats": 3,
+      "total_median_s": 701.52,
+      "total_min_s": 688.29,
+      "total_max_s": 726.37,
+      "materialize_median_s": 446.48,
+      "q1_median_s": 88.25,
+      "q2_median_s": 88.76,
+      "q3_median_s": 78.78,
+      "tasks_median": 1573,
+      "shuffle_write_GB": 3.57,
+      "shuffle_read_GB": 3.57,
+      "disk_spill_GB": 3.57,
+      "base_rows": 303631696,
+      "app_ids": [
+        "local-1791660122278"
+      ],
+      "max_tmp_after_cleanup_MB": 0.5
+    },
+    {
+      "status": "ok",
+      "label": "p384-none",
+      "partitions": 384,
+      "persist": "none",
+      "aqe": false,
+      "repeats": 3,
+      "total_median_s": 325.79,
+      "total_min_s": 325.57,
+      "total_max_s": 341.14,
+      "materialize_median_s": 0.0,
+      "q1_median_s": 135.84,
+      "q2_median_s": 156.03,
+      "q3_median_s": 36.85,
+      "tasks_median": 1248,
+      "shuffle_write_GB": 3.2,
+      "shuffle_read_GB": 3.2,
+      "disk_spill_GB": 3.18,
+      "base_rows": -1,
+      "app_ids": [
+        "local-1791654371006"
+      ],
+      "max_tmp_after_cleanup_MB": 0.5
+    },
+    {
+      "status": "ok",
+      "label": "spark-defaults-aqe-p200-none",
+      "partitions": 200,
+      "persist": "none",
+      "aqe": true,
+      "repeats": 3,
+      "total_median_s": 285.2,
+      "total_min_s": 266.37,
+      "total_max_s": 316.64,
+      "materialize_median_s": 0.0,
+      "q1_median_s": 132.03,
+      "q2_median_s": 118.01,
+      "q3_median_s": 37.93,
+      "tasks_median": 696,
+      "shuffle_write_GB": 3.23,
+      "shuffle_read_GB": 3.23,
+      "disk_spill_GB": 0.0,
+      "base_rows": -1,
+      "app_ids": [
+        "local-1791655817995"
+      ],
+      "max_tmp_after_cleanup_MB": 0.5
+    }
+  ]
+}

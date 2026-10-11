@@ -1,0 +1,105 @@
+{
+    "generated_at":  "2026-10-11T03:43:42.1390659Z",
+    "containers":  [
+                       {
+                           "name":  "flu-dashboard",
+                           "state":  "running",
+                           "status":  "Up 2 hours"
+                       },
+                       {
+                           "name":  "flu-datanode1",
+                           "state":  "running",
+                           "status":  "Up 24 hours (healthy)"
+                       },
+                       {
+                           "name":  "flu-datanode2",
+                           "state":  "running",
+                           "status":  "Up 24 hours (healthy)"
+                       },
+                       {
+                           "name":  "flu-datanode3",
+                           "state":  "running",
+                           "status":  "Up 24 hours (healthy)"
+                       },
+                       {
+                           "name":  "flu-historyserver",
+                           "state":  "running",
+                           "status":  "Up 24 hours (healthy)"
+                       },
+                       {
+                           "name":  "flu-namenode",
+                           "state":  "running",
+                           "status":  "Up 24 hours (healthy)"
+                       },
+                       {
+                           "name":  "flu-nodemanager",
+                           "state":  "running",
+                           "status":  "Up 24 hours (healthy)"
+                       },
+                       {
+                           "name":  "flu-resourcemanager",
+                           "state":  "running",
+                           "status":  "Up 24 hours (healthy)"
+                       },
+                       {
+                           "name":  "pytorch",
+                           "state":  "running",
+                           "status":  "Up 24 hours"
+                       },
+                       {
+                           "name":  "spark",
+                           "state":  "running",
+                           "status":  "Up 23 hours"
+                       }
+                   ],
+    "hdfs":  {
+                 "safemode":  "Safe mode is OFF",
+                 "live_datanodes":  3,
+                 "dead_datanodes":  0,
+                 "dfs_used":  "78017136667 (72.66 GB)",
+                 "under_replicated":  0,
+                 "corrupt_replicas":  0,
+                 "missing_blocks":  0,
+                 "fsck_status":  "HEALTHY",
+                 "fsck_total_files":  8349,
+                 "fsck_total_blocks":  "8545",
+                 "fsck_avg_replication":  "2.9441779",
+                 "sizes":  {
+                               "/flu_project/raw":  {
+                                                        "logical_bytes":  34586251521,
+                                                        "with_replicas_bytes":  69172503042
+                                                    },
+                               "/flu_project":  {
+                                                    "logical_bytes":  37264862133,
+                                                    "with_replicas_bytes":  77208138896
+                                                },
+                               "/flu_project/processed":  {
+                                                              "logical_bytes":  999015881,
+                                                              "with_replicas_bytes":  2997047643
+                                                          }
+                           },
+                 "raw_logical_GB":  34.59,
+                 "volume_requirement_25GB_met":  true
+             },
+    "yarn":  {
+                 "active_nodes":  1,
+                 "total_mb":  4096,
+                 "total_vcores":  4,
+                 "apps_completed":  0,
+                 "apps_failed":  0
+             },
+    "web_ui_http_status":  {
+                               "namenode_9870":  200,
+                               "datanode1_9864":  200,
+                               "datanode2_9865":  200,
+                               "datanode3_9866":  200,
+                               "yarn_rm_8088":  200,
+                               "yarn_timeline_8188":  200,
+                               "spark_ui_4040":  "down (only while a Spark job runs)"
+                           },
+    "versions":  {
+                     "hadoop":  "3.2.1",
+                     "spark":  "3.5.1",
+                     "pytorch":  "2.4.1+cpu 2.6.1"
+                 }
+}

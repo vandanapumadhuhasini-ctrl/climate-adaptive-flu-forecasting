@@ -1,0 +1,36 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/11 03:08:00 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Spark context Web UI available at http://1d530106f37b:4040
+Spark context available as 'sc' (master = local[*], app id = local-1791688081756).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.1
+      /_/
+         
+Using Scala version 2.12.18 (OpenJDK 64-Bit Server VM, Java 11.0.22)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> // Entering paste mode (ctrl-D to finish)
+
+
+// Exiting paste mode, now interpreting.
+
+[Stage 0:>                                                          (0 + 1) / 1]                                                                                [Stage 1:>                                                          (0 + 1) / 1][Stage 2:>                                                          (0 + 1) / 1]                                                                                26/10/11 03:08:14 WARN SparkStringUtils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+[Stage 9:>    (0 + 4) / 4][Stage 10:>   (0 + 4) / 4][Stage 11:>   (0 + 4) / 4][Stage 9:>    (0 + 4) / 4][Stage 10:>   (0 + 4) / 4][Stage 11:=>  (1 + 3) / 4]                                                                                [Stage 38:>                                                         (0 + 1) / 1]26/10/11 03:08:20 WARN Instrumentation: [d594da32] regParam is zero, which might cause numerical instability and overfitting.
+[Stage 39:>                                                         (0 + 1) / 1]                                                                                26/10/11 03:08:21 WARN InstanceBuilder: Failed to load implementation from:dev.ludovic.netlib.lapack.JNILAPACK
+26/10/11 03:08:21 WARN Instrumentation: [d594da32] Cholesky solver failed due to singular covariance matrix. Retrying with Quasi-Newton solver.
+[Stage 41:>                                                         (0 + 1) / 1]                                                                                V3 | h=1 ILI-lag OLS R2=0.7715 | chosen leads: TMAX=0 TMIN=0 PRCP=0 DIURNAL_RANGE=0
+26/10/11 03:08:42 WARN Instrumentation: [6b0e8529] regParam is zero, which might cause numerical instability and overfitting.
+V3 | h=2 ILI-lag OLS R2=0.6596 | chosen leads: TMAX=0 TMIN=0 PRCP=0 DIURNAL_RANGE=0
+26/10/11 03:08:59 WARN Instrumentation: [e9a03c97] regParam is zero, which might cause numerical instability and overfitting.
+26/10/11 03:08:59 WARN Instrumentation: [e9a03c97] Cholesky solver failed due to singular covariance matrix. Retrying with Quasi-Newton solver.
+V3 | h=3 ILI-lag OLS R2=0.5602 | chosen leads: TMAX=0 TMIN=0 PRCP=0 DIURNAL_RANGE=0
+26/10/11 03:09:16 WARN Instrumentation: [1ea494ce] regParam is zero, which might cause numerical instability and overfitting.
+V3 | h=4 ILI-lag OLS R2=0.4691 | chosen leads: TMAX=0 TMIN=0 PRCP=0 DIURNAL_RANGE=0
+[Stage 534:>                                                        (0 + 3) / 3]                                                                                [Stage 536:>                                                        (0 + 1) / 1]                                                                                [Stage 549:>                                                        (0 + 1) / 1]                                                                                [Stage 562:>                                                        (0 + 1) / 1]                                                                                [Stage 575:>                                                        (0 + 1) / 1]                                                                                V3 | v2 consistency h=1: v2 rows=39365 spark rows=39365 only-v2=0 only-spark=0 max|diff|=0.0
+V3 | wrote results/v3/lag_scan.json and HDFS processed/v3_features/h1..h4

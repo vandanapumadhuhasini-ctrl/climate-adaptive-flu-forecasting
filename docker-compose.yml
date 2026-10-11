@@ -1,0 +1,293 @@
+services:
+
+  # =========================================================
+  # HADOOP NAMENODE
+  # =========================================================
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    platform: linux/amd64
+    container_name: flu-namenode
+    hostname: namenode
+    env_file: ./hadoop.env
+    restart: unless-stopped
+
+    ports:
+      - "9870:9870"
+      - "9000:9000"
+
+    environment:
+      - CLUSTER_NAME=flu-hadoop-cluster
+      # YARN/MapReduce client settings come from hadoop.env (MapReduce jobs are submitted from this container)
+
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+
+      - HDFS_CONF_dfs_replication=2
+      - HDFS_CONF_dfs_namenode_name_dir=file:///hadoop/dfs/name
+
+    volumes:
+      - namenode_data:/hadoop/dfs/name
+      - ./datasets/weather_raw:/mnt/weather_raw:ro
+      - ./exports:/export
+      - ./mapreduce:/opt/mapreduce
+
+    networks:
+      - flu_network
+
+
+  # =========================================================
+  # HADOOP DATANODE 1
+  # =========================================================
+  datanode1:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    platform: linux/amd64
+    container_name: flu-datanode1
+    hostname: datanode1
+    restart: unless-stopped
+
+    depends_on:
+      - namenode
+
+    ports:
+      - "9864:9864"
+
+    environment:
+      - SERVICE_PRECONDITION=namenode:9870
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      - HDFS_CONF_dfs_replication=2
+      - HDFS_CONF_dfs_datanode_data_dir=file:///hadoop/dfs/data
+
+    volumes:
+      - datanode1_data:/hadoop/dfs/data
+
+    networks:
+      - flu_network
+
+
+  # =========================================================
+  # HADOOP DATANODE 2
+  # =========================================================
+  datanode2:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    platform: linux/amd64
+    container_name: flu-datanode2
+    hostname: datanode2
+    restart: unless-stopped
+
+    depends_on:
+      - namenode
+
+    ports:
+      - "9865:9864"
+
+    environment:
+      - SERVICE_PRECONDITION=namenode:9870
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      - HDFS_CONF_dfs_replication=2
+      - HDFS_CONF_dfs_datanode_data_dir=file:///hadoop/dfs/data
+
+    volumes:
+      - datanode2_data:/hadoop/dfs/data
+
+    networks:
+      - flu_network
+
+
+  # =========================================================
+  # HADOOP DATANODE 3
+  # =========================================================
+  datanode3:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    platform: linux/amd64
+    container_name: flu-datanode3
+    hostname: datanode3
+    restart: unless-stopped
+
+    depends_on:
+      - namenode
+
+    ports:
+      - "9866:9864"
+
+    environment:
+      - SERVICE_PRECONDITION=namenode:9870
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      - HDFS_CONF_dfs_replication=2
+      - HDFS_CONF_dfs_datanode_data_dir=file:///hadoop/dfs/data
+
+    volumes:
+      - datanode3_data:/hadoop/dfs/data
+
+    networks:
+      - flu_network
+
+
+  # =========================================================
+  # YARN RESOURCE MANAGER
+  # =========================================================
+  resourcemanager:
+    image: bde2020/hadoop-resourcemanager:2.0.0-hadoop3.2.1-java8
+    platform: linux/amd64
+    container_name: flu-resourcemanager
+    hostname: resourcemanager
+    restart: unless-stopped
+
+    depends_on:
+      - namenode
+
+    ports:
+      - "8088:8088"
+
+    env_file: ./hadoop.env   # YARN + MapReduce settings (see the encoding note inside)
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      - SERVICE_PRECONDITION=namenode:9870
+
+    networks:
+      - flu_network
+
+
+  # =========================================================
+  # YARN NODE MANAGER
+  # =========================================================
+  nodemanager:
+    image: bde2020/hadoop-nodemanager:2.0.0-hadoop3.2.1-java8
+    platform: linux/amd64
+    container_name: flu-nodemanager
+    hostname: nodemanager
+    restart: unless-stopped
+
+    depends_on:
+      - resourcemanager
+
+    env_file: ./hadoop.env
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      - SERVICE_PRECONDITION=namenode:9870 resourcemanager:8088
+
+    networks:
+      - flu_network
+
+
+  # =========================================================
+  # PYTORCH (Part 04/06 — GNN training & benchmarking)
+  # =========================================================
+  pytorch:
+    build: ./docker/pytorch
+    image: climaflu-pytorch:1.0
+    container_name: pytorch
+    restart: unless-stopped
+    mem_limit: 4g
+
+    volumes:
+      - ./exports:/data:ro
+      - ./python:/workspace
+      - ./models/climaflu_gnn:/output
+      - ./datasets/weather_raw:/rawdata:ro
+      - ./results:/results
+
+    working_dir: /workspace
+    command: ["tail", "-f", "/dev/null"]
+
+    networks:
+      - flu_network
+
+
+  # =========================================================
+  # APACHE SPARK
+  # =========================================================
+  spark:
+    image: apache/spark:3.5.1
+    container_name: spark
+    restart: unless-stopped
+
+    depends_on:
+      - namenode
+      - datanode1
+      - datanode2
+
+    environment:
+      - HADOOP_CONF_DIR=/opt/hadoop-conf
+
+    volumes:
+      - ./hadoop-conf:/opt/hadoop-conf
+      - ./scala:/opt/scala
+      - ./datasets:/opt/datasets
+      - ./results:/opt/results
+      - ./.spark-local:/opt/spark-local   # spark.local.dir for big shuffles: freed space returns to Windows (the Docker VHDX never shrinks)
+
+    working_dir: /opt/scala
+
+    ports:
+      - "4040:4040"
+    command: ["tail", "-f", "/dev/null"]
+
+    networks:
+      - flu_network
+
+
+  # =========================================================
+  # YARN TIMELINE / APPLICATION HISTORY SERVER (web UI on 8188)
+  # =========================================================
+  historyserver:
+    image: bde2020/hadoop-historyserver:2.0.0-hadoop3.2.1-java8
+    platform: linux/amd64
+    container_name: flu-historyserver
+    hostname: historyserver
+    env_file: ./hadoop.env
+    restart: unless-stopped
+
+    ports:
+      - "8188:8188"
+
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+
+    networks:
+      - flu_network
+
+
+  # =========================================================
+  # DASHBOARD (Streamlit, http://localhost:8501) — reads result files only, read-only mounts
+  # =========================================================
+  dashboard:
+    build: ./docker/dashboard
+    image: climaflu-dashboard:1.0
+    container_name: flu-dashboard
+    restart: unless-stopped
+    mem_limit: 1g
+
+    ports:
+      - "127.0.0.1:8501:8501"   # localhost only
+
+    # code, results and docs are sibling read-only mounts (a mount nested inside a read-only mount cannot be created)
+    working_dir: /app
+    command: ["streamlit", "run", "code/app.py", "--server.headless=true", "--server.port=8501", "--browser.gatherUsageStats=false", "--theme.base=light"]
+    volumes:
+      - ./dashboard:/app/code:ro
+      - ./results:/app/results:ro
+      - ./docs:/app/docs:ro
+
+    networks:
+      - flu_network
+
+
+# =========================================================
+# VOLUMES
+# =========================================================
+
+volumes:
+
+  namenode_data:
+  datanode1_data:
+  datanode2_data:
+  datanode3_data:
+
+
+# =========================================================
+# NETWORK
+# =========================================================
+
+networks:
+
+  flu_network:
+    driver: bridge

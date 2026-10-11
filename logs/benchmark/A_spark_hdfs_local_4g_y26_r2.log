@@ -1,0 +1,152 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/09 20:06:50 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Spark context available as 'sc' (master = local[*], app id = local-1791576411057).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.1
+      /_/
+         
+Using Scala version 2.12.18 (OpenJDK 64-Bit Server VM, Java 11.0.22)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> // Entering paste mode (ctrl-D to finish)
+
+
+// Exiting paste mode, now interpreting.
+
+[Stage 0:>                                                       (0 + 24) / 262]26/10/09 20:06:59 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2000.csv
+26/10/09 20:06:59 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2001.csv
+26/10/09 20:06:59 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2002.csv
+26/10/09 20:07:06 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2003.csv
+[Stage 0:=>                                                      (7 + 24) / 262][Stage 0:=>                                                      (8 + 25) / 262][Stage 0:==>                                                    (13 + 24) / 262]26/10/09 20:07:07 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2004.csv
+[Stage 0:====>                                                  (21 + 24) / 262]26/10/09 20:07:07 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2005.csv
+[Stage 0:=====>                                                 (24 + 24) / 262][Stage 0:======>                                                (29 + 24) / 262]26/10/09 20:07:14 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2006.csv
+[Stage 0:======>                                                (33 + 24) / 262][Stage 0:========>                                              (40 + 23) / 262]26/10/09 20:07:15 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2007.csv
+[Stage 0:========>                                              (42 + 24) / 262][Stage 0:=========>                                             (46 + 24) / 262][Stage 0:==========>                                            (48 + 24) / 262]26/10/09 20:07:21 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2008.csv
+[Stage 0:==========>                                            (50 + 24) / 262][Stage 0:===========>                                           (53 + 24) / 262]26/10/09 20:07:22 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2009.csv
+[Stage 0:============>                                          (60 + 24) / 262][Stage 0:=============>                                         (62 + 24) / 262][Stage 0:=============>                                         (66 + 24) / 262][Stage 0:==============>                                        (69 + 24) / 262]26/10/09 20:07:23 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2010.csv
+[Stage 0:==============>                                        (71 + 24) / 262][Stage 0:===============>                                       (72 + 24) / 262][Stage 0:===============>                                       (73 + 24) / 262][Stage 0:===============>                                       (76 + 24) / 262][Stage 0:================>                                      (78 + 24) / 262]26/10/09 20:07:29 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2011.csv
+[Stage 0:=================>                                     (81 + 24) / 262][Stage 0:=================>                                     (83 + 24) / 262][Stage 0:==================>                                    (86 + 24) / 262][Stage 0:==================>                                    (90 + 24) / 262]26/10/09 20:07:30 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2012.csv
+[Stage 0:===================>                                   (94 + 24) / 262][Stage 0:===================>                                   (95 + 24) / 262][Stage 0:====================>                                  (96 + 24) / 262][Stage 0:====================>                                  (99 + 24) / 262]26/10/09 20:07:37 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2013.csv
+[Stage 0:====================>                                 (101 + 24) / 262][Stage 0:=====================>                                (105 + 24) / 262][Stage 0:=====================>                                (106 + 24) / 262][Stage 0:======================>                               (107 + 24) / 262]26/10/09 20:07:38 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2014.csv
+[Stage 0:=======================>                              (112 + 24) / 262][Stage 0:=======================>                              (115 + 24) / 262][Stage 0:========================>                             (117 + 24) / 262]26/10/09 20:07:38 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2015.csv
+[Stage 0:========================>                             (118 + 24) / 262][Stage 0:========================>                             (119 + 24) / 262][Stage 0:========================>                             (120 + 24) / 262][Stage 0:========================>                             (121 + 24) / 262][Stage 0:=========================>                            (122 + 24) / 262][Stage 0:=========================>                            (124 + 24) / 262][Stage 0:=========================>                            (125 + 24) / 262]26/10/09 20:07:45 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2016.csv
+[Stage 0:==========================>                           (128 + 24) / 262][Stage 0:==========================>                           (129 + 24) / 262][Stage 0:==========================>                           (130 + 24) / 262][Stage 0:===========================>                          (135 + 24) / 262]26/10/09 20:07:46 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2017.csv
+[Stage 0:=============================>                        (141 + 24) / 262][Stage 0:=============================>                        (142 + 24) / 262][Stage 0:=============================>                        (144 + 24) / 262]26/10/09 20:07:52 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2018.csv
+[Stage 0:=============================>                        (145 + 24) / 262][Stage 0:==============================>                       (146 + 24) / 262][Stage 0:==============================>                       (148 + 24) / 262][Stage 0:==============================>                       (150 + 24) / 262][Stage 0:===============================>                      (153 + 24) / 262]26/10/09 20:07:53 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2019.csv
+[Stage 0:===============================>                      (155 + 24) / 262][Stage 0:================================>                     (157 + 24) / 262][Stage 0:================================>                     (159 + 24) / 262][Stage 0:=================================>                    (162 + 24) / 262]26/10/09 20:07:54 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2020.csv
+[Stage 0:==================================>                   (167 + 24) / 262][Stage 0:==================================>                   (168 + 24) / 262][Stage 0:==================================>                   (169 + 24) / 262][Stage 0:===================================>                  (170 + 24) / 262][Stage 0:===================================>                  (172 + 24) / 262]26/10/09 20:08:00 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2021.csv
+[Stage 0:====================================>                 (175 + 24) / 262][Stage 0:====================================>                 (178 + 24) / 262][Stage 0:====================================>                 (179 + 24) / 262][Stage 0:=====================================>                (180 + 24) / 262]26/10/09 20:08:02 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2022.csv
+[Stage 0:======================================>               (185 + 24) / 262][Stage 0:======================================>               (187 + 24) / 262][Stage 0:======================================>               (189 + 24) / 262][Stage 0:=======================================>              (190 + 24) / 262][Stage 0:=======================================>              (191 + 24) / 262]26/10/09 20:08:03 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2023.csv
+[Stage 0:=======================================>              (192 + 24) / 262][Stage 0:=======================================>              (194 + 24) / 262][Stage 0:========================================>             (195 + 24) / 262][Stage 0:========================================>             (197 + 24) / 262][Stage 0:=========================================>            (199 + 24) / 262][Stage 0:=========================================>            (202 + 24) / 262]26/10/09 20:08:09 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2024.csv
+[Stage 0:=========================================>            (203 + 24) / 262][Stage 0:==========================================>           (204 + 24) / 262][Stage 0:==========================================>           (207 + 24) / 262][Stage 0:===========================================>          (211 + 24) / 262]26/10/09 20:08:10 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2025.csv
+[Stage 0:===========================================>          (213 + 24) / 262][Stage 0:============================================>         (214 + 24) / 262][Stage 0:============================================>         (215 + 24) / 262][Stage 0:============================================>         (216 + 24) / 262][Stage 0:============================================>         (217 + 24) / 262][Stage 0:============================================>         (218 + 24) / 262][Stage 0:=============================================>        (219 + 24) / 262][Stage 0:=============================================>        (221 + 24) / 262][Stage 0:=============================================>        (222 + 24) / 262][Stage 0:=============================================>        (223 + 24) / 262][Stage 0:==============================================>       (224 + 24) / 262][Stage 0:==============================================>       (225 + 24) / 262][Stage 0:==============================================>       (227 + 24) / 262][Stage 0:==============================================>       (228 + 24) / 262][Stage 0:================================================>     (233 + 24) / 262][Stage 0:================================================>     (236 + 24) / 262][Stage 0:=================================================>    (238 + 24) / 262][Stage 0:=================================================>    (239 + 23) / 262][Stage 0:=================================================>    (240 + 22) / 262][Stage 0:=================================================>    (241 + 21) / 262][Stage 0:==================================================>   (244 + 18) / 262][Stage 0:==================================================>   (245 + 17) / 262][Stage 0:===================================================>  (251 + 11) / 262][Stage 0:=====================================================> (257 + 5) / 262][Stage 0:======================================================>(260 + 2) / 262]                                                                                BENCHJSON {"engine": "spark", "label": "spark-hdfs-local[*]", "source": "hdfs", "master": "local[*]", "cores": 24, "years": 26, "rows_kept": 303631696, "groups": 78, "result_sha256": "a5c81104c45419c324653d6d63f85e3f832c28c589de68ebc3cb11efd5d18ba6", "elapsed_s": 90.129, "peak_rss_bytes": 2141626368, "cgroup_peak_bytes": 2192375808, "status": "ok"}

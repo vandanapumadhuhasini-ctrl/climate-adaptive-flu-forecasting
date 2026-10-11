@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-10-11T02:40:51.560699Z",
+  "app_id": "local-1791686431062",
+  "ilinet_raw": {"rows": 44808, "rows_by_region_type": {"States": 44808}, "state_rows": 44808,
+    "state_missing_X": {"weighted_ili": 44739, "unweighted_ili": 718, "ilitotal": 718, "total_patients": 718},
+    "weighted_ili_missing_fraction": 0.9984600964113551, "unweighted_ili_missing_fraction": 0.01602392429923228,
+    "decision": "target = UNWEIGHTED_ILI (WEIGHTED_ILI is almost always missing at state level)",
+    "new_york_plus_nyc_duplicate_state_weeks_raw": 827,
+    "new_york_plus_nyc_duplicate_state_weeks_after_finaljoin_filter": 782,
+    "nyc_decision": "NY and NYC merged by summing ILITOTAL and TOTAL_PATIENTS, then recomputing the rate (scala/FinalJoin.scala)"},
+  "modeling_table": {"rows": 40408, "null_counts": {"UNWEIGHTED_ILI": 0, "TMAX": 735, "TMIN": 735, "PRCP": 0, "DIURNAL_RANGE": 735},
+    "rows_with_any_null": 735, "rows_after_null_drop": 39673, "duplicate_state_week_keys": 0,
+    "tmax_lt_tmin": 0, "prcp_negative": 0, "ili_outside_0_100": 0},
+  "weather_cleaned_ranges": {
+    "PRCP": {"rows": 156130049, "min": 0.0, "max": 838.2, "temp_outside_-70_60C": 0, "prcp_negative": 0, "first_date": "2000-01-01", "last_date": "2025-12-31"},
+    "TMAX": {"rows": 73859304, "min": -53.3, "max": 55.6, "temp_outside_-70_60C": 0, "prcp_negative": 0, "first_date": "2000-01-01", "last_date": "2025-12-31"},
+    "TMIN": {"rows": 73642343, "min": -57.8, "max": 42.8, "temp_outside_-70_60C": 0, "prcp_negative": 0, "first_date": "2000-01-01", "last_date": "2025-12-31"}
+  }
+}

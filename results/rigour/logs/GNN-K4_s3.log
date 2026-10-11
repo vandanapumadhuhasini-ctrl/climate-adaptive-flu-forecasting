@@ -1,0 +1,1 @@
+{"model": "GNN-K4", "seed": 3, "best_epoch": 39, "val_rmse_best": 1.04812, "epochs_run_select": 69, "test_rmse": 0.91226, "test_mae": 0.48599, "test_r2": 0.78866, "n_test_rows": 7691, "n_params": 1265, "seconds": 37.1}

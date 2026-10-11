@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-10-10T02:47:51.929354Z",
+  "spark_app_id": "local-1791600189293",
+  "input": "hdfs://namenode:9000/flu_project/raw/weather/*.csv (26 yearly CSVs, 34.57 GB)",
+  "element_year": {
+    "description": "US stations, TMAX/TMIN/PRCP, empty quality flag; count and sum(value) per (element, year)",
+    "groups": 78, "rows_kept": 303631696,
+    "sha256": {"spark_rdd": "a5c81104c45419c324653d6d63f85e3f832c28c589de68ebc3cb11efd5d18ba6", "hadoop_mapreduce_mr1": "a5c81104c45419c324653d6d63f85e3f832c28c589de68ebc3cb11efd5d18ba6", "spark_dataframe_and_pandas_benchmark": "a5c81104c45419c324653d6d63f85e3f832c28c589de68ebc3cb11efd5d18ba6"},
+    "spark_rdd_seconds": 59.5,
+    "all_match": true
+  },
+  "state_year_element": {
+    "description": "same filter, joined with ghcnd-stations.txt (US id, non-blank STATE); count and sum per (state, year, element)",
+    "groups": 3920, "rows_joined": 303631696,
+    "sha256": {"spark_typed_dataset": "eb02de0659daa4665d474f3b08c85cbd0be67c3eba15f174321871ced615f332", "hadoop_mapreduce_mr2": "eb02de0659daa4665d474f3b08c85cbd0be67c3eba15f174321871ced615f332"},
+    "spark_dataset_seconds": 212.1,
+    "all_match": true
+  }
+}

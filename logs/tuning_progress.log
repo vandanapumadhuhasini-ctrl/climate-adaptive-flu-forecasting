@@ -1,0 +1,7 @@
+﻿10:23:14  p8-none                          ok=3 recorded=3  2,082 s  C: 25.8 GB  E: 7.7 GB
+11:57:42  p8-memory_and_disk               ok=3 recorded=3  5,667 s  C: 24.3 GB  E: 7.7 GB
+12:23:37  p24-none                         ok=3 recorded=3  1,554 s  C: 24.5 GB  E: 7.7 GB
+12:36:39  p24-memory_and_disk              ok=0 recorded=1  781 s  C: 24.3 GB  E: 7.7 GB
+13:01:12  p96-none                         ok=3 recorded=3  1,473 s  C: 24.3 GB  E: 7.7 GB
+STOP: watchdog aborted p96-memory_and_disk: killed (C: 7.7 GB, E: 7.7 GB). Nothing recorded for it; free space and re-run (resumes).
+Done. C:\Project\flu-hadoop-project\results\tuning\runs.jsonl

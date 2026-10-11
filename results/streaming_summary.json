@@ -1,0 +1,36 @@
+{
+  "feed": {
+    "files": 60,
+    "source_rows": 5972783,
+    "feed_span_s": 389.3,
+    "mean_interarrival_s": 6.6,
+    "arrival_rate_rows_per_s": 15343.5
+  },
+  "processing": {
+    "non_empty_batches": 59,
+    "triggers_logged": 59,
+    "rows_in": 5972783,
+    "rows_kept_us_qc_joined": 2122649,
+    "state_day_element_groups_written": 9060,
+    "batch_busy_s_total": 156.7,
+    "throughput_rows_per_busy_s": 38112.6,
+    "batch_duration_s": {
+      "median": 2.45,
+      "max": 8.49
+    },
+    "spark_processedRowsPerSecond_median": 37995.3,
+    "spark_inputRowsPerSecond_median": 19944.6
+  },
+  "latency_arrival_to_committed_s": {
+    "median": 4.7,
+    "p95": 7.61,
+    "max": 12.2,
+    "min": 2.15
+  },
+  "checks": {
+    "every_file_processed": true,
+    "each_file_exactly_once": true,
+    "rows_in_equals_source_rows": true,
+    "keeps_up_throughput_gt_arrival_rate": true
+  }
+}

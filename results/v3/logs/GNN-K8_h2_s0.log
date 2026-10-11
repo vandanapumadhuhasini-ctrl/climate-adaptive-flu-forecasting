@@ -1,0 +1,1 @@
+{"model": "GNN-K8", "horizon": 2, "seed": 0, "best_epoch": 10, "val_rmse_best": 1.32483, "test_rmse": 1.14566, "test_mae": 0.60477, "test_r2": 0.66822, "n_test_rows": 7641, "seconds": 21.5}

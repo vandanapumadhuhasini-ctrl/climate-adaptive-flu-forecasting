@@ -1,0 +1,97 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/09 20:20:44 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Spark context available as 'sc' (master = local[*], app id = local-1791577245189).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.1
+      /_/
+         
+Using Scala version 2.12.18 (OpenJDK 64-Bit Server VM, Java 11.0.22)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> // Entering paste mode (ctrl-D to finish)
+
+
+// Exiting paste mode, now interpreting.
+
+[Stage 0:>                                                       (0 + 24) / 152]26/10/09 20:20:52 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2000.csv
+26/10/09 20:20:52 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2002.csv
+26/10/09 20:20:52 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2001.csv
+[Stage 0:>                                                       (1 + 24) / 152][Stage 0:=>                                                      (4 + 24) / 152]26/10/09 20:21:03 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2003.csv
+[Stage 0:==>                                                     (8 + 24) / 152]26/10/09 20:21:03 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2004.csv
+[Stage 0:======>                                                (17 + 24) / 152][Stage 0:=======>                                               (21 + 24) / 152]26/10/09 20:21:03 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2005.csv
+[Stage 0:=======>                                               (22 + 24) / 152][Stage 0:========>                                              (23 + 24) / 152][Stage 0:========>                                              (24 + 24) / 152][Stage 0:=========>                                             (25 + 24) / 152][Stage 0:=========>                                             (26 + 24) / 152][Stage 0:==========>                                            (30 + 24) / 152]26/10/09 20:21:14 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2006.csv
+[Stage 0:============>                                          (34 + 24) / 152][Stage 0:=============>                                         (38 + 24) / 152]26/10/09 20:21:15 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2007.csv
+[Stage 0:===============>                                       (44 + 24) / 152][Stage 0:================>                                      (45 + 24) / 152][Stage 0:=================>                                     (47 + 24) / 152][Stage 0:=================>                                     (48 + 24) / 152][Stage 0:=================>                                     (49 + 24) / 152]26/10/09 20:21:25 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2008.csv
+[Stage 0:==================>                                    (50 + 24) / 152][Stage 0:===================>                                   (53 + 24) / 152][Stage 0:====================>                                  (56 + 24) / 152][Stage 0:====================>                                  (58 + 24) / 152][Stage 0:=====================>                                 (60 + 24) / 152]26/10/09 20:21:26 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2009.csv
+[Stage 0:=======================>                               (64 + 24) / 152][Stage 0:=======================>                               (66 + 24) / 152]26/10/09 20:21:27 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2010.csv
+[Stage 0:=========================>                             (70 + 24) / 152][Stage 0:==========================>                            (72 + 24) / 152][Stage 0:==========================>                            (73 + 24) / 152][Stage 0:==========================>                            (74 + 24) / 152][Stage 0:===========================>                           (75 + 24) / 152][Stage 0:===========================>                           (77 + 24) / 152][Stage 0:============================>                          (79 + 24) / 152]26/10/09 20:21:37 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2011.csv
+[Stage 0:=============================>                         (81 + 24) / 152][Stage 0:==============================>                        (84 + 24) / 152][Stage 0:===============================>                       (87 + 24) / 152][Stage 0:===============================>                       (88 + 24) / 152][Stage 0:================================>                      (89 + 24) / 152]26/10/09 20:21:38 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2012.csv
+[Stage 0:================================>                      (90 + 24) / 152][Stage 0:=================================>                     (92 + 24) / 152][Stage 0:==================================>                    (96 + 24) / 152][Stage 0:===================================>                   (97 + 24) / 152][Stage 0:===================================>                   (99 + 24) / 152][Stage 0:===================================>                  (100 + 24) / 152]26/10/09 20:21:48 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2013.csv
+[Stage 0:===================================>                  (101 + 24) / 152][Stage 0:====================================>                 (104 + 24) / 152][Stage 0:======================================>               (107 + 24) / 152]26/10/09 20:21:49 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2014.csv
+[Stage 0:======================================>               (109 + 24) / 152][Stage 0:=======================================>              (110 + 24) / 152][Stage 0:=======================================>              (111 + 24) / 152][Stage 0:========================================>             (115 + 24) / 152][Stage 0:=========================================>            (117 + 24) / 152][Stage 0:=========================================>            (118 + 24) / 152][Stage 0:==========================================>           (120 + 24) / 152][Stage 0:==========================================>           (121 + 24) / 152][Stage 0:============================================>         (124 + 24) / 152][Stage 0:============================================>         (126 + 24) / 152][Stage 0:==============================================>       (130 + 22) / 152][Stage 0:==============================================>       (132 + 20) / 152][Stage 0:===============================================>      (134 + 18) / 152][Stage 0:================================================>     (136 + 16) / 152][Stage 0:=================================================>    (139 + 13) / 152][Stage 0:==================================================>   (141 + 11) / 152][Stage 0:====================================================>  (144 + 8) / 152][Stage 0:====================================================>  (145 + 7) / 152][Stage 0:=====================================================> (148 + 4) / 152][Stage 0:=====================================================> (149 + 3) / 152][Stage 0:======================================================>(151 + 1) / 152]                                                                                BENCHJSON {"engine": "spark", "label": "spark-localfs-local[*]", "source": "local", "master": "local[*]", "cores": 24, "years": 15, "rows_kept": 161018010, "groups": 45, "result_sha256": "fd3a57c8ee6947b78cc2e0f8339b4dbe1e986f1ee243b4abeb5f21e04a4544e1", "elapsed_s": 77.150, "peak_rss_bytes": 2253934592, "cgroup_peak_bytes": 2255101952, "status": "ok"}

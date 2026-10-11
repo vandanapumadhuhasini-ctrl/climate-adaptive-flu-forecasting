@@ -1,0 +1,1 @@
+{"model": "MLP-lagsOnly", "horizon": 4, "seed": 9, "best_epoch": 132, "val_rmse_best": 1.68589, "test_rmse": 1.39929, "test_mae": 0.79579, "test_r2": 0.50867, "n_test_rows": 7541, "seconds": 38.1}

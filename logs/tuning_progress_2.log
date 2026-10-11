@@ -1,0 +1,10 @@
+﻿skip p8-none (finished)
+skip p8-memory_and_disk (finished)
+skip p24-none (finished)
+skip p24-memory_and_disk (finished)
+skip p96-none (finished)
+skip p96-memory_and_disk (-OnlyPersist none)
+23:40:03  p384-none                        ok=3 recorded=3  1,441 s  C: 40.3 GB  E: 9 GB
+skip p384-memory_and_disk (-OnlyPersist none)
+00:01:13  spark-defaults-aqe-p200-none     ok=3 recorded=3  1,269 s  C: 40.3 GB  E: 50.1 GB
+Done. C:\Project\flu-hadoop-project\results\tuning\runs.jsonl

@@ -1,0 +1,945 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/10 06:53:47 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/10/10 06:53:47 WARN SparkConf: Note that spark.local.dir will be overridden by the value set by the cluster manager (via SPARK_LOCAL_DIRS in mesos/standalone/kubernetes and LOCAL_DIRS in YARN).
+Spark context available as 'sc' (master = local[*], app id = local-1791615228218).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.1
+      /_/
+         
+Using Scala version 2.12.18 (OpenJDK 64-Bit Server VM, Java 11.0.22)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> // Entering paste mode (ctrl-D to finish)
+
+
+// Exiting paste mode, now interpreting.
+
+[Stage 0:>                                                          (0 + 1) / 1]                                                                                [Stage 2:>                                                          (0 + 2) / 2]                                                                                [Stage 3:>                                                        (0 + 24) / 32][Stage 3:===>                                                     (2 + 24) / 32][Stage 3:=====>                                                   (3 + 24) / 32][Stage 3:=======>                                                 (4 + 24) / 32][Stage 3:========>                                                (5 + 24) / 32][Stage 3:==========>                                              (6 + 24) / 32][Stage 3:============>                                            (7 + 24) / 32][Stage 3:==============>                                          (8 + 24) / 32][Stage 3:================>                                        (9 + 23) / 32][Stage 3:=================>                                      (10 + 22) / 32][Stage 3:===================>                                    (11 + 21) / 32][Stage 3:=====================>                                  (12 + 20) / 32][Stage 3:========================>                               (14 + 18) / 32][Stage 3:==========================>                             (15 + 17) / 32][Stage 3:============================>                           (16 + 16) / 32][Stage 3:=============================>                          (17 + 15) / 32][Stage 3:===============================>                        (18 + 14) / 32][Stage 3:=================================>                      (19 + 13) / 32][Stage 3:===================================>                    (20 + 12) / 32][Stage 3:====================================>                   (21 + 11) / 32][Stage 3:======================================>                 (22 + 10) / 32][Stage 3:========================================>                (23 + 9) / 32][Stage 3:============================================>            (25 + 7) / 32][Stage 3:==============================================>          (26 + 6) / 32][Stage 3:================================================>        (27 + 5) / 32][Stage 3:=================================================>       (28 + 4) / 32][Stage 3:===================================================>     (29 + 3) / 32][Stage 3:=======================================================> (31 + 1) / 32][Stage 4:>                                                        (0 + 24) / 24][Stage 4:====>                                                    (2 + 22) / 24][Stage 4:===========>                                             (5 + 19) / 24][Stage 4:==============>                                          (6 + 18) / 24][Stage 4:================>                                        (7 + 17) / 24]26/10/10 06:56:06 WARN MemoryStore: Not enough space to cache rdd_14_17 in memory! (computed 86.0 MiB so far)
+26/10/10 06:56:06 WARN BlockManager: Persisting block rdd_14_17 to disk instead.
+[Stage 4:===================>                                     (8 + 16) / 24]26/10/10 06:56:07 WARN MemoryStore: Not enough space to cache rdd_14_7 in memory! (computed 74.0 MiB so far)
+26/10/10 06:56:07 WARN BlockManager: Persisting block rdd_14_7 to disk instead.
+26/10/10 06:56:07 WARN MemoryStore: Not enough space to cache rdd_14_9 in memory! (computed 77.6 MiB so far)
+26/10/10 06:56:07 WARN BlockManager: Persisting block rdd_14_9 to disk instead.
+26/10/10 06:56:07 WARN MemoryStore: Not enough space to cache rdd_14_12 in memory! (computed 76.4 MiB so far)
+26/10/10 06:56:07 WARN BlockManager: Persisting block rdd_14_12 to disk instead.
+26/10/10 06:56:07 WARN MemoryStore: Not enough space to cache rdd_14_6 in memory! (computed 76.4 MiB so far)
+26/10/10 06:56:07 WARN BlockManager: Persisting block rdd_14_6 to disk instead.
+26/10/10 06:56:07 WARN MemoryStore: Not enough space to cache rdd_14_19 in memory! (computed 93.3 MiB so far)
+26/10/10 06:56:07 WARN BlockManager: Persisting block rdd_14_19 to disk instead.
+[Stage 4:=====================>                                   (9 + 15) / 24]26/10/10 06:56:09 WARN MemoryStore: Not enough space to cache rdd_14_8 in memory! (computed 78.5 MiB so far)
+26/10/10 06:56:09 WARN BlockManager: Persisting block rdd_14_8 to disk instead.
+26/10/10 06:56:09 WARN MemoryStore: Not enough space to cache rdd_14_15 in memory! (computed 108.2 MiB so far)
+26/10/10 06:56:09 WARN BlockManager: Persisting block rdd_14_15 to disk instead.
+[Stage 4:=======================>                                (10 + 14) / 24][Stage 4:=========================>                              (11 + 13) / 24][Stage 4:============================>                           (12 + 12) / 24]26/10/10 06:57:34 WARN MemoryStore: Not enough space to cache rdd_14_6 in memory! (computed 33.1 MiB so far)
+[Stage 4:==============================>                         (13 + 11) / 24]26/10/10 06:57:37 WARN MemoryStore: Not enough space to cache rdd_14_23 in memory! (computed 180.6 MiB so far)
+26/10/10 06:57:37 WARN BlockManager: Persisting block rdd_14_23 to disk instead.
+26/10/10 06:57:37 WARN MemoryStore: Not enough space to cache rdd_14_4 in memory! (computed 180.7 MiB so far)
+26/10/10 06:57:37 WARN BlockManager: Persisting block rdd_14_4 to disk instead.
+26/10/10 06:57:38 WARN MemoryStore: Not enough space to cache rdd_14_1 in memory! (computed 167.7 MiB so far)
+26/10/10 06:57:38 WARN BlockManager: Persisting block rdd_14_1 to disk instead.
+26/10/10 06:57:42 WARN MemoryStore: Not enough space to cache rdd_14_14 in memory! (computed 210.4 MiB so far)
+26/10/10 06:57:42 WARN BlockManager: Persisting block rdd_14_14 to disk instead.
+26/10/10 06:57:43 WARN MemoryStore: Not enough space to cache rdd_14_10 in memory! (computed 209.9 MiB so far)
+26/10/10 06:57:43 WARN BlockManager: Persisting block rdd_14_10 to disk instead.
+26/10/10 06:57:50 WARN MemoryStore: Not enough space to cache rdd_14_12 in memory! (computed 116.6 MiB so far)
+[Stage 4:================================>                       (14 + 10) / 24][Stage 4:===================================>                     (15 + 9) / 24][Stage 4:===================================>                     (15 + 9) / 24][Stage 4:======================================>                  (16 + 8) / 24][Stage 4:========================================>                (17 + 7) / 24][Stage 4:==========================================>              (18 + 6) / 24][Stage 4:=============================================>           (19 + 5) / 24]26/10/10 06:59:51 WARN MemoryStore: Not enough space to cache rdd_14_4 in memory! (computed 180.7 MiB so far)
+[Stage 4:===============================================>         (20 + 4) / 24]26/10/10 07:00:26 WARN MemoryStore: Not enough space to cache rdd_14_10 in memory! (computed 210.0 MiB so far)
+[Stage 4:=================================================>       (21 + 3) / 24]26/10/10 07:01:02 WARN MemoryStore: Not enough space to cache rdd_14_14 in memory! (computed 210.4 MiB so far)
+[Stage 4:====================================================>    (22 + 2) / 24]26/10/10 07:01:46 WARN MemoryStore: Not enough space to cache rdd_14_19 in memory! (computed 26.2 MiB so far)
+26/10/10 07:01:58 WARN MemoryStore: Not enough space to cache rdd_14_15 in memory! (computed 256.5 MiB so far)
+[Stage 4:====================================================>    (22 + 2) / 24][Stage 4:======================================================>  (23 + 1) / 24][Stage 5:>                                                          (0 + 1) / 1]                                                                                [Stage 7:>                                                        (0 + 24) / 24][Stage 7:===========>                                             (5 + 19) / 24][Stage 7:==============>                                          (6 + 18) / 24][Stage 7:================>                                        (7 + 17) / 24][Stage 7:=======================>                                (10 + 14) / 24][Stage 7:==============================>                         (13 + 11) / 24][Stage 7:================================>                       (14 + 10) / 24][Stage 7:======================================>                  (16 + 8) / 24][Stage 7:========================================>                (17 + 7) / 24]26/10/10 07:03:21 WARN MemoryStore: Not enough space to cache rdd_14_6 in memory! (computed 33.1 MiB so far)
+26/10/10 07:03:21 WARN MemoryStore: Not enough space to cache rdd_14_4 in memory! (computed 34.1 MiB so far)
+26/10/10 07:03:26 WARN MemoryStore: Not enough space to cache rdd_14_12 in memory! (computed 50.7 MiB so far)
+26/10/10 07:03:26 WARN MemoryStore: Not enough space to cache rdd_14_15 in memory! (computed 47.7 MiB so far)
+26/10/10 07:03:41 WARN MemoryStore: Not enough space to cache rdd_14_19 in memory! (computed 93.3 MiB so far)
+[Stage 7:==========================================>              (18 + 6) / 24]26/10/10 07:03:54 WARN MemoryStore: Not enough space to cache rdd_14_14 in memory! (computed 137.3 MiB so far)
+[Stage 7:=============================================>           (19 + 5) / 24][Stage 7:===============================================>         (20 + 4) / 24][Stage 7:=================================================>       (21 + 3) / 24][Stage 7:====================================================>    (22 + 2) / 24][Stage 7:======================================================>  (23 + 1) / 24]                                                                                [Stage 9:>                                                        (0 + 24) / 24]26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Calling spill() on RowBasedKeyValueBatch. Will not spill but return 0.
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Calling spill() on RowBasedKeyValueBatch. Will not spill but return 0.
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Failed to allocate page (4194288 bytes).
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Failed to allocate page (4194288 bytes).
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Failed to allocate page (4194288 bytes).
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Failed to allocate page (4194288 bytes).
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Failed to allocate page (4194288 bytes).
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Failed to allocate page (4194288 bytes).
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Calling spill() on RowBasedKeyValueBatch. Will not spill but return 0.
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Calling spill() on RowBasedKeyValueBatch. Will not spill but return 0.
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Calling spill() on RowBasedKeyValueBatch. Will not spill but return 0.
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Calling spill() on RowBasedKeyValueBatch. Will not spill but return 0.
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Calling spill() on RowBasedKeyValueBatch. Will not spill but return 0.
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Calling spill() on RowBasedKeyValueBatch. Will not spill but return 0.
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Calling spill() on RowBasedKeyValueBatch. Will not spill but return 0.
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Failed to allocate page (4194288 bytes).
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Failed to allocate page (4194288 bytes).
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Failed to allocate page (4194288 bytes).
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Failed to allocate page (4194288 bytes).
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Failed to allocate page (4194288 bytes).
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Failed to allocate page (4194288 bytes).
+26/10/10 07:05:28 WARN RowBasedKeyValueBatch: Failed to allocate page (4194288 bytes).
+26/10/10 07:05:28 ERROR Executor: Exception in task 20.0 in stage 9.0 (TID 105)
+org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+26/10/10 07:05:28 WARN TaskSetManager: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+26/10/10 07:05:28 ERROR TaskSetManager: Task 20 in stage 9.0 failed 1 times; aborting job
+26/10/10 07:05:28 ERROR Executor: Exception in task 7.0 in stage 9.0 (TID 92)
+org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 0.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+26/10/10 07:05:28 WARN TaskSetManager: Lost task 7.0 in stage 9.0 (TID 92) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 0.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+[Stage 9:>                                                        (0 + 22) / 24]26/10/10 07:05:28 WARN TaskSetManager: Lost task 13.0 in stage 9.0 (TID 98) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+26/10/10 07:05:28 WARN TaskSetManager: Lost task 3.0 in stage 9.0 (TID 88) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+26/10/10 07:05:28 WARN TaskSetManager: Lost task 16.0 in stage 9.0 (TID 101) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+26/10/10 07:05:28 WARN TaskSetManager: Lost task 17.0 in stage 9.0 (TID 102) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+26/10/10 07:05:28 WARN TaskSetManager: Lost task 18.0 in stage 9.0 (TID 103) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+26/10/10 07:05:28 WARN TaskSetManager: Lost task 10.0 in stage 9.0 (TID 95) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+26/10/10 07:05:28 WARN TaskSetManager: Lost task 1.0 in stage 9.0 (TID 86) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+26/10/10 07:05:28 WARN TaskSetManager: Lost task 23.0 in stage 9.0 (TID 108) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+26/10/10 07:05:28 WARN TaskSetManager: Lost task 0.0 in stage 9.0 (TID 85) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+26/10/10 07:05:28 WARN TaskSetManager: Lost task 5.0 in stage 9.0 (TID 90) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+26/10/10 07:05:28 WARN TaskSetManager: Lost task 2.0 in stage 9.0 (TID 87) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+26/10/10 07:05:28 WARN TaskSetManager: Lost task 9.0 in stage 9.0 (TID 94) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+26/10/10 07:05:28 WARN TaskSetManager: Lost task 11.0 in stage 9.0 (TID 96) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+26/10/10 07:05:28 WARN TaskSetManager: Lost task 22.0 in stage 9.0 (TID 107) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+26/10/10 07:05:28 WARN TaskSetManager: Lost task 21.0 in stage 9.0 (TID 106) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+[Stage 9:>                                                         (0 + 7) / 24]26/10/10 07:05:33 WARN MemoryStore: Not enough space to cache rdd_14_6 in memory! (computed 21.3 MiB so far)
+26/10/10 07:05:33 WARN MemoryStore: Not enough space to cache rdd_14_12 in memory! (computed 21.3 MiB so far)
+26/10/10 07:05:33 WARN TaskSetManager: Lost task 6.0 in stage 9.0 (TID 91) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+26/10/10 07:05:33 WARN TaskSetManager: Lost task 12.0 in stage 9.0 (TID 97) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+[Stage 9:>                                                         (0 + 5) / 24]26/10/10 07:05:48 WARN MemoryStore: Not enough space to cache rdd_14_15 in memory! (computed 71.9 MiB so far)
+26/10/10 07:05:48 WARN TaskSetManager: Lost task 15.0 in stage 9.0 (TID 100) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+[Stage 9:>                                                         (0 + 4) / 24]26/10/10 07:05:53 WARN MemoryStore: Not enough space to cache rdd_14_14 in memory! (computed 91.0 MiB so far)
+26/10/10 07:05:53 WARN TaskSetManager: Lost task 14.0 in stage 9.0 (TID 99) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+[Stage 9:>                                                         (0 + 3) / 24]26/10/10 07:05:56 WARN TaskSetManager: Lost task 8.0 in stage 9.0 (TID 93) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+[Stage 9:>                                                         (0 + 2) / 24]26/10/10 07:06:09 WARN MemoryStore: Not enough space to cache rdd_14_4 in memory! (computed 180.7 MiB so far)
+26/10/10 07:06:09 WARN TaskSetManager: Lost task 4.0 in stage 9.0 (TID 89) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+[Stage 9:>                                                         (0 + 1) / 24]26/10/10 07:06:23 WARN MemoryStore: Not enough space to cache rdd_14_19 in memory! (computed 322.6 MiB so far)
+26/10/10 07:06:24 WARN TaskSetManager: Lost task 19.0 in stage 9.0 (TID 104) (1d530106f37b executor driver): TaskKilled (Stage cancelled: Job aborted due to stage failure: Task 20 in stage 9.0 failed 1 times, most recent failure: Lost task 20.0 in stage 9.0 (TID 105) (1d530106f37b executor driver): org.apache.spark.memory.SparkOutOfMemoryError: [UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.
+	at org.apache.spark.errors.SparkCoreErrors$.outOfMemoryError(SparkCoreErrors.scala:467)
+	at org.apache.spark.errors.SparkCoreErrors.outOfMemoryError(SparkCoreErrors.scala)
+	at org.apache.spark.memory.MemoryConsumer.throwOom(MemoryConsumer.java:157)
+	at org.apache.spark.memory.MemoryConsumer.allocateArray(MemoryConsumer.java:98)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.allocate(BytesToBytesMap.java:865)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:200)
+	at org.apache.spark.unsafe.map.BytesToBytesMap.<init>(BytesToBytesMap.java:207)
+	at org.apache.spark.sql.execution.UnsafeFixedWidthAggregationMap.<init>(UnsafeFixedWidthAggregationMap.java:96)
+	at org.apache.spark.sql.execution.aggregate.HashAggregateExec.createHashMap(HashAggregateExec.scala:171)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.hashAgg_doAggregateWithKeys_0$(Unknown Source)
+	at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+	at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+	at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+	at org.apache.spark.sql.execution.SparkPlan.$anonfun$getByteArrayRdd$1(SparkPlan.scala:388)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+	at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+	at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+	at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+	at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+	at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+	at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+	at org.apache.spark.scheduler.Task.run(Task.scala:141)
+	at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+	at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+	at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+	at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+
+Driver stacktrace:)
+TUNEJSON {"label": "p24-memory_and_disk", "partitions": 24, "persist": "memory_and_disk", "aqe": false, "shuffle_partitions": 24, "repeat": 0, "status": "failed", "error_class": "org.apache.spark.memory.SparkOutOfMemoryError", "error": "[UNABLE_TO_ACQUIRE_MEMORY] Unable to acquire 262144 bytes of memory, got 87438.", "tmp_bytes_after_cleanup": 464014, "app_id": "local-1791615228218"}

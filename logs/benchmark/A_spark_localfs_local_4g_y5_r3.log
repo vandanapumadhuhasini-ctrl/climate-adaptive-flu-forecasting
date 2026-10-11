@@ -1,0 +1,47 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/09 20:14:02 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Spark context available as 'sc' (master = local[*], app id = local-1791576843190).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.1
+      /_/
+         
+Using Scala version 2.12.18 (OpenJDK 64-Bit Server VM, Java 11.0.22)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> // Entering paste mode (ctrl-D to finish)
+
+
+// Exiting paste mode, now interpreting.
+
+[Stage 0:>                                                        (0 + 24) / 49]26/10/09 20:14:09 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2002.csv
+26/10/09 20:14:09 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2000.csv
+26/10/09 20:14:09 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2001.csv
+26/10/09 20:14:21 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2003.csv
+[Stage 0:======>                                                  (6 + 24) / 49][Stage 0:===========>                                            (10 + 24) / 49]26/10/09 20:14:21 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: file:///rawdata/2004.csv
+[Stage 0:=====================>                                  (19 + 24) / 49][Stage 0:========================>                               (21 + 24) / 49][Stage 0:===========================>                            (24 + 24) / 49][Stage 0:============================>                           (25 + 24) / 49][Stage 0:=============================>                          (26 + 23) / 49][Stage 0:==============================>                         (27 + 22) / 49][Stage 0:================================>                       (28 + 21) / 49][Stage 0:=================================>                      (29 + 20) / 49][Stage 0:========================================>               (35 + 14) / 49][Stage 0:=====================================================>   (46 + 3) / 49][Stage 0:=======================================================> (48 + 1) / 49]                                                                                BENCHJSON {"engine": "spark", "label": "spark-localfs-local[*]", "source": "local", "master": "local[*]", "cores": 24, "years": 5, "rows_kept": 44428199, "groups": 15, "result_sha256": "9814a1ac5c5a1fc0c2afc2444724248df83980d04f36a6bdec412534006e3f5c", "elapsed_s": 26.765, "peak_rss_bytes": 2243670016, "cgroup_peak_bytes": 2237612032, "status": "ok"}

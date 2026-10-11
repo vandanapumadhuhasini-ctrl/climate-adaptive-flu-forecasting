@@ -1,0 +1,47 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/09 19:53:34 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Spark context available as 'sc' (master = local[*], app id = local-1791575615222).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.1
+      /_/
+         
+Using Scala version 2.12.18 (OpenJDK 64-Bit Server VM, Java 11.0.22)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> // Entering paste mode (ctrl-D to finish)
+
+
+// Exiting paste mode, now interpreting.
+
+[Stage 0:>                                                        (0 + 24) / 49]26/10/09 19:53:43 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2001.csv
+26/10/09 19:53:43 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2000.csv
+26/10/09 19:53:43 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2002.csv
+[Stage 0:===>                                                     (3 + 24) / 49]26/10/09 19:53:51 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2003.csv
+[Stage 0:=====>                                                   (5 + 24) / 49][Stage 0:==========>                                              (9 + 24) / 49][Stage 0:============>                                           (11 + 24) / 49][Stage 0:==================>                                     (16 + 24) / 49]26/10/09 19:53:52 WARN CSVHeaderChecker: CSV header does not conform to the schema.
+ Header: ID, DATE, ELEMENT, DATA_VALUE, Q_FLAG
+ Schema: id, date, element, value, qflag
+Expected: value but found: DATA_VALUE
+CSV file: hdfs://namenode:9000/flu_project/raw/weather/2004.csv
+[Stage 0:=====================>                                  (19 + 24) / 49][Stage 0:==========================>                             (23 + 24) / 49][Stage 0:===========================>                            (24 + 24) / 49][Stage 0:============================>                           (25 + 24) / 49][Stage 0:==============================>                         (27 + 22) / 49][Stage 0:================================>                       (28 + 21) / 49][Stage 0:===================================>                    (31 + 18) / 49][Stage 0:===========================================>            (38 + 11) / 49][Stage 0:===============================================>         (41 + 8) / 49][Stage 0:======================================================>  (47 + 2) / 49]                                                                                BENCHJSON {"engine": "spark", "label": "spark-hdfs-local[*]", "source": "hdfs", "master": "local[*]", "cores": 24, "years": 5, "rows_kept": 44428199, "groups": 15, "result_sha256": "9814a1ac5c5a1fc0c2afc2444724248df83980d04f36a6bdec412534006e3f5c", "elapsed_s": 21.186, "peak_rss_bytes": 2280873984, "cgroup_peak_bytes": 2345193472, "status": "ok"}

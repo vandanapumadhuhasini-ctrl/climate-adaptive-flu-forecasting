@@ -1,0 +1,32 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/11 03:06:33 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Spark context Web UI available at http://1d530106f37b:4040
+Spark context available as 'sc' (master = local[*], app id = local-1791687994121).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.1
+      /_/
+         
+Using Scala version 2.12.18 (OpenJDK 64-Bit Server VM, Java 11.0.22)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> // Entering paste mode (ctrl-D to finish)
+
+
+// Exiting paste mode, now interpreting.
+
+<console>:68: error: no `: _*' annotation allowed here
+(such annotations are only allowed in arguments to *-parameters)
+         .agg(climate.flatMap(f => Seq(avg(f).as(s"${f}_m"), stddev(f).as(s"${f}_s"))): _*)
+                                                                                      ^
+<console>:93: error: no `: _*' annotation allowed here
+(such annotations are only allowed in arguments to *-parameters)
+           val ps = res.groupBy("state_abbrev").agg(leads.map(L => corr("resid", s"${f}_zL$L").as(s"c$L")): _*).collect()
+                                                                                                          ^
+
+scala> :quit

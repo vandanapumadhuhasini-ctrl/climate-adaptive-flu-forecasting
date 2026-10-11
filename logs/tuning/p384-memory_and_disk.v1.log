@@ -1,0 +1,10 @@
+Error response from daemon: Docker Desktop is unable to start
+terminating main distribution: un-mounting data disk: unmounting WSL VHDX: running wslexec: An error occurred while running the command. DockerDesktop/Wsl/ExecError: c:\windows\system32\wsl.exe --unmount docker_data.vhdx: exit status 0xffffffff (stderr: , wslErrorCode: DockerDesktop/Wsl/ExecError)
+github.com/docker/pinata/common/pkg/errordef.helper.Wrap
+	github.com/docker/pinata/common/pkg/errordef/helper.go:52
+github.com/docker/pinata/win/backend/wsl.Config.Run.func2
+	github.com/docker/pinata/win/backend/wsl/config.go:71
+golang.org/x/sync/errgroup.(*Group).Go.func1
+	golang.org/x/sync@v0.18.0/errgroup/errgroup.go:93
+runtime.goexit
+	runtime/asm_amd64.s:1693

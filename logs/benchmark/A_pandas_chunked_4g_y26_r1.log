@@ -1,0 +1,1 @@
+BENCHJSON {"engine": "pandas", "label": "pandas-chunked", "source": "local", "master": "single-process", "cores": 24, "years": 26, "rows_kept": 303631696, "groups": 78, "result_sha256": "a5c81104c45419c324653d6d63f85e3f832c28c589de68ebc3cb11efd5d18ba6", "elapsed_s": 1619.041, "peak_rss_bytes": 854011904, "cgroup_peak_bytes": 805531648, "status": "ok"}
