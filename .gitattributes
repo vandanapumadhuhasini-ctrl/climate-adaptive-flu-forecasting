@@ -1,0 +1,15 @@
+# Files that run inside the Linux containers must keep LF line endings on every checkout
+# (a CRLF shell script fails with "bad interpreter"; this broke the first streaming drip script).
+*.sh     text eol=lf
+*.scala  text eol=lf
+*.java   text eol=lf
+*.py     text eol=lf
+*.env    text eol=lf
+Dockerfile text eol=lf
+docker-compose.yml text eol=lf
+# Windows-side scripts
+*.ps1    text eol=crlf
+# binary results
+*.parquet binary
+*.png     binary
+*.pdf     binary
