@@ -36,8 +36,8 @@ A row is VERIFIED only when its evidence file exists.
 | Variety ≥ 2 data types | **DONE**: 4 raw format families + 13 Parquet tables, `results/variety_inventory.json` |
 | Veracity | **DONE**: `results/veracity_audit.json` (re-measured: WEIGHTED_ILI 99.85% missing, NY+NYC 827 raw / 782 merged weeks, 0 dup keys, 0 implausible values) |
 | Hadoop HDFS | Done (3 DataNodes, HEALTHY, 34.59 GB raw). Screenshots + results/cluster_verification.json DONE |
-| Hadoop MapReduce on YARN | **DONE 2026-10-10**: 2 Java jobs (combiner + custom Writable; map-side join via distributed cache), 268 maps each, `results/mapreduce_jobs.json` |
-| Spark API | **DataFrame API only** (professor's requirement, 2026-10-21). The RDD/typed-Dataset code was rewritten with DataFrames (`StationsPreprocess`, `Preprocess`, `VeracityAudit`) and the RDD/Dataset-only files were removed. `src/reporting/build_reports.py` scans `bigdata_pipeline/` and `src/` for RDD/Dataset calls (must be 0) |
+| Hadoop MapReduce on YARN | **DONE 2026-10-10**: 2 jobs, since 2026-10-21 in **Python via Hadoop Streaming** (`bigdata_pipeline/hadoop_mapreduce/climaflu_mapreduce.py`; MR1 with a combiner, MR2 map-side join via distributed cache), `results/mapreduce_jobs.json`. The earlier Java version is in tag `v1-archive` |
+| Spark API | **DataFrame API only** (professor's requirement, 2026-10-21). The RDD/typed-Dataset code was rewritten with DataFrames (stations + FluView parsing in `Preprocess`, `DataChecks`) and the RDD/Dataset-only files were removed. `src/reporting/build_reports.py` scans `bigdata_pipeline/` and `src/` for RDD/Dataset calls (must be 0) |
 | Cross-engine consistency | MR1 = Spark DataFrame = pandas, MR2 = Spark DataFrame broadcast join, and the rewritten jobs' `_dfcheck` tables must equal the existing HDFS tables: `bigdata_pipeline/spark_checks/DataFrameConsistency.scala` → `results/cross_engine_consistency.json`, `docs/HADOOP_SPARK_API_EVIDENCE.md` |
 | Scala AND Python | Done (Scala Spark jobs; Python PyG + pandas) |
 | Spark ML | **DONE**: MLlib GBT baselines + tuned Linear Regression / Random Forest / GBT comparison (`docs/MLLIB_RESULTS.md`) |
@@ -80,7 +80,7 @@ Inside `flu_network` the service names/hostnames are unchanged (`hdfs://namenode
 | flu-namenode | bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8 | 9870, 9000 | repl 2; mounts `./datasets:/mnt/datasets:ro`, `./exports:/export`, `./bigdata_pipeline/hadoop_mapreduce:/opt/mapreduce`; also the MapReduce job client |
 | flu-datanode1/2/3 | bde2020/hadoop-datanode | 9864/9865/9866 | named volumes `flu-hadoop-project_datanode{1,2,3}_data` (~23 GB each) |
 | flu-resourcemanager | bde2020/hadoop-resourcemanager | 8088 | YARN works (1 node, 4096 MB, 4 vcores) |
-| flu-nodemanager | bde2020/hadoop-nodemanager | — | registered, RUNNING |
+| flu-nodemanager | climaflu-nodemanager:1.0 (`docker/nodemanager.Dockerfile` = bde2020 image + `python3-minimal` 3.5 from archive.debian.org) | — | runs the Python MapReduce tasks |
 | flu-historyserver | bde2020/hadoop-historyserver | **8188** | YARN Timeline / Application History server (not 19888 — that is the MR JobHistory server, not in this image) |
 | spark | apache/spark:3.5.1 | **4040** | `tail -f /dev/null`; mounts `./docker/hadoop-conf`, `./bigdata_pipeline:/opt/pipeline`, `./datasets`, `./results:/opt/results` |
 | flu-spark-history | apache/spark:3.5.1 | **18080** | Spark History Server over `results/spark-events` (every finished Spark job, stages, SQL); same port as the misinformation project's `spark-history` |
@@ -90,7 +90,7 @@ Inside `flu_network` the service names/hostnames are unchanged (`hdfs://namenode
   Encoding: `_`→`.`, `__`→`_`, `___`→`-`. **Never use a literal `-` in a variable name** — the old `YARN_CONF_yarn_nodemanager_aux-services`
   made the entrypoint skip every YARN setting (NodeManager dialled 0.0.0.0:8031, YARN had 0 nodes).
 - Spark jobs run `--master local[*]` in the spark container (not on YARN); Hadoop MapReduce runs on YARN from `flu-namenode`.
-- Spark UI 4040 exists only while a job runs (`bigdata_pipeline/spark_checks/SparkUiDemo.scala` keeps one open 120 s); finished jobs are on the Spark History Server, http://localhost:18080.
+- Spark UI 4040 exists only while a job runs; finished jobs are on the Spark History Server, http://localhost:18080.
 - `docker/hadoop-conf/` holds only `.gitkeep`, hence `fs.defaultFS` is passed explicitly everywhere.
 - pytorch packages are baked into the image (torch 2.4.1+cpu, PyG 2.6.1, pandas 2.2.3, pyarrow, scipy, scikit-learn, matplotlib).
 - Docker WSL disk is `E:\dockerData\DockerDesktopWSL\disk\docker_data.vhdx` (169.5 GB on 2026-10-11, ~121 GB real data).
@@ -121,7 +121,7 @@ Everything runs through `run_pipeline.ps1` (stages listed in README section 2):
 ```powershell
 .\run_pipeline.ps1 up                       # start the cluster, wait for HDFS
 .\run_pipeline.ps1 job Preprocess           # one Spark job (found by name under bigdata_pipeline\)
-.\run_pipeline.ps1 job StationsPreprocess -Conf spark.flu.outputSuffix=_dfcheck   # extra Spark settings
+.\run_pipeline.ps1 job Preprocess -Conf spark.flu.outputSuffix=_dfcheck           # extra Spark settings
 .\run_pipeline.ps1 mapreduce                # MR1 + MR2 on YARN (~25 min) -> results\mapreduce_jobs.json
 .\run_pipeline.ps1 checks                   # smoke test, veracity, MapReduce = DataFrame check
 .\run_pipeline.ps1 report                   # cluster snapshot, dashboard data, evidence docs
@@ -187,7 +187,7 @@ Runs reproduce exactly only for a fixed PyTorch thread count (3); 4 vs 3 threads
 **v3 novelty experiment (2026-10-11, amendment A1 + A1.1, `docs/V3_RESULTS.md`)** — lag-aware climate + horizons 1–4 weeks.
 Features built in Spark on HDFS (`bigdata_pipeline/spark_etl/LagAwareFeaturesV3.scala` → `/flu_project/processed/v3_features/h1..h4`), identical
 to the v2 Python table (39,365 rows, max |diff| 0). Lag scan (≤ 2021) chose **lead 0 for every feature and horizon**.
-160 neural runs + Spark GBT per horizon (`bigdata_pipeline/spark_mllib/BaselineGBTv3.scala`). Holm-adjusted claims: **N1 NO** (models identical),
+160 neural runs + Spark GBT per horizon (`bigdata_pipeline/spark_mllib/BaselineGBT.scala`, v3 part). Holm-adjusted claims: **N1 NO** (models identical),
 **N2 NO** (climate gain grows with horizon: h=3 1.251 vs 1.293, 10/10 seeds, raw p 0.028, Holm 0.080), **N3 NO**,
 **N4 YES at h = 3** vs the fixed-setting GBT (GNN 1.251 vs GBT 1.289, Holm p 0.017, 9/10 seeds).
 
@@ -222,12 +222,12 @@ Same workload (filter + group by element×year), equal 4 GB cap in fresh contain
 - Re-run: `.\scripts\run_benchmark.ps1` (resumable), then the `analyze_benchmark.py` command in its docstring.
 
 Streaming v1 (Part 05, ILINet, 5 tiny files, no metrics) is superseded by **streaming v2** (2026-10-11): raw GHCN 2025
-1 Jan–1 Mar split into 60 daily files (`bigdata_pipeline/spark_streaming/PrepareStreamingV2.scala` → HDFS `/flu_project/streaming_v2/source`), dripped
+1 Jan–1 Mar split into 60 daily files (`bigdata_pipeline/spark_streaming/StreamingV2.scala` prepare mode → HDFS `/flu_project/streaming_v2/source`), dripped
 by atomic HDFS renames (`run_pipeline.ps1 streaming` → `bigdata_pipeline/spark_streaming/drip_feed.sh` in flu-namenode), processed by
 `bigdata_pipeline/spark_streaming/StreamingV2.scala` (5 s trigger, QC filter + broadcast station join → state×day×element aggregates appended to HDFS,
 progress listener + per-batch file log), analysed by `src/reporting/analyze_performance.py` → `results/streaming_summary.json`,
 `docs/figures/streaming_latency.png`. 59 batches, 2,122,649 US observations → 9,060 aggregates; all checks pass.
-Re-run: rerun PrepareStreamingV2 (refills source), clear `streaming_v2/{incoming,output,checkpoint}`, start StreamingV2, then drip.
+Re-run: `.\run_pipeline.ps1 streaming` (prepare → clear `streaming_v2/{incoming,output,checkpoint}` → StreamingV2 → drip → analysis).
 
 **Dashboard:** `docker compose up -d dashboard` → http://localhost:8501; pages via `?page=overview|cluster|batch|streaming|forecast|graph`
 (`&view=benchmark|tuning` on batch, `&shot=1` collapses the sidebar). Screenshots: `.\scripts\capture_screenshots.ps1` (drives headless
@@ -285,6 +285,10 @@ Step 1 of section 10 (cluster verification) — **DONE 2026-10-10**: evidence in
 32 (2026-10-21) Professor: minimal file structure → `bigdata_pipeline/` + `src/` + one `run_pipeline.ps1`; v1/legacy/audit
    files removed (tag `v1-archive`); merged scripts re-run on the same inputs gave identical outputs (0 differing lines);
    headless Edge hung on a reused temp profile → fresh profile per screenshot + 60 s timeout.
+33 (2026-10-21) MapReduce rewritten in Python (Hadoop Streaming; NodeManager image + python3 3.5 from archive.debian.org):
+   MR1/MR2 output byte-identical to the Java version, same counters. Files merged (Preprocess+stations, BuildModelingTable,
+   BaselineGBT, StreamingV2 prepare mode, DataChecks, run_all --version, prepare_v2+baselines): every output re-checked identical.
+   BuildModelingTable / DataFrameConsistency were VM-OOM-killed at 3g (Hadoop now holds ~4.5 GB) → 2g driver, aggregate cached.
 
 ## 9. Known weaknesses (reviewer will find these)
 
@@ -301,7 +305,7 @@ Step 1 of section 10 (cluster verification) — **DONE 2026-10-10**: evidence in
 2. ~~Finish Part 06~~ DONE 2026-10-10.
 3. ~~Rubric gaps: MapReduce, RDD + typed Dataset, tuning~~ DONE 2026-10-11.
 4. ~~Rigour pass on Part 04~~ DONE 2026-10-11. Re-run: `docker exec -w /workspace/gnn pytorch python prepare_v2.py`,
-   `baselines_v2.py`, `.\run_pipeline.ps1 job BaselineGBTv2 -DriverMemory 3g`, `run_all.py --workers 6` (~15 min), then
+   (now incl. baselines), `.\run_pipeline.ps1 job BaselineGBT -Conf spark.flu.gbt=v2`, `run_all.py --version v2 --workers 6` (~15 min), then
    `docker run --rm -v "C:/Project/flu-hadoop-project:/proj" climaflu-pytorch:1.0 python /proj/src/gnn/evaluate_v2.py`.
 5. ~~Dashboard + streaming v2 metrics~~ DONE 2026-10-11.
 6. ~~Evidence + compliance matrix~~ DONE 2026-10-11: **21/21 VERIFIED** (`docs/COURSE_COMPLIANCE_MATRIX.md`, `docs/RESEARCH_EVIDENCE_MATRIX.md`); resume/re-verify steps in `docs/RESUME.md`.

@@ -108,10 +108,10 @@ def api_evidence():
         "## 1. One computation, three engines (Hadoop MapReduce, Spark DataFrame, pandas)", "",
         f"Filter: US station, element in {{TMAX, TMIN, PRCP}}, empty quality flag, over all 26 raw yearly CSVs ({cc['input']}).", "",
         "| Aggregate | Implementation | Framework / API | SHA-256 of the sorted result |", "|---|---|---|---|",
-        f"| element x year ({ey['groups']} groups, {n(ey['rows_kept'])} rows) | `bigdata_pipeline/hadoop_mapreduce/ElementYearAggregate.java` | Hadoop MapReduce on YARN | `{ey['sha256']['hadoop_mapreduce_mr1']}` |",
+        f"| element x year ({ey['groups']} groups, {n(ey['rows_kept'])} rows) | `bigdata_pipeline/hadoop_mapreduce/climaflu_mapreduce.py` (map_element_year + reduce) | Hadoop MapReduce on YARN (Python, Hadoop Streaming) | `{ey['sha256']['hadoop_mapreduce_mr1']}` |",
         f"| | `bigdata_pipeline/spark_checks/DataFrameConsistency.scala` (part A) | Spark DataFrame (filter + groupBy/agg) | `{ey['sha256']['spark_dataframe']}` |",
         f"| | `bigdata_pipeline/spark_tuning/BenchmarkWorkload.scala` / `bigdata_pipeline/spark_tuning/benchmark_pandas.py` | Spark DataFrame / pandas | `{ey['sha256']['spark_dataframe_and_pandas_benchmark']}` |",
-        f"| state x year x element ({sy['groups']} groups, {n(sy['rows_joined'])} rows) | `bigdata_pipeline/hadoop_mapreduce/StateYearCoverage.java` | Hadoop MapReduce, map-side join | `{sy['sha256']['hadoop_mapreduce_mr2']}` |",
+        f"| state x year x element ({sy['groups']} groups, {n(sy['rows_joined'])} rows) | `bigdata_pipeline/hadoop_mapreduce/climaflu_mapreduce.py` (map_state_year + reduce) | Hadoop MapReduce (Python), map-side join | `{sy['sha256']['hadoop_mapreduce_mr2']}` |",
         f"| | `bigdata_pipeline/spark_checks/DataFrameConsistency.scala` (part B) | Spark DataFrame (broadcast join + groupBy/agg) | `{sy['sha256']['spark_dataframe']}` |", "",
         f"**All element x year implementations agree: {ey['all_match']}. Both state x year x element implementations agree: {sy['all_match']}.**", "",
         f"The kept-row count ({n(ey['rows_kept'])}) also equals the row count of the Spark pipeline's own `weather_cleaned` table "
@@ -129,8 +129,8 @@ def api_evidence():
         "", f"**All rewritten tables identical: {eq['all_identical']}.**", "",
         "## 3. Hadoop MapReduce jobs on YARN", "",
         f"Container sizing: {mr['container_sizing']}.", "",
-        "| | MR1 ElementYearAggregate | MR2 StateYearCoverage |", "|---|---|---|",
-        "| Pattern | combiner + custom `Writable` (count, sum) | replicated map-side join, stations file via distributed cache |",
+        "| | MR1 element x year | MR2 state x year x element |", "|---|---|---|",
+        "| Pattern | Python mapper + reducer, the reducer also runs as combiner | replicated map-side join, stations file via distributed cache (-files) |",
         f"| YARN application | `{mr1['yarn_app_id']}` | `{mr2['yarn_app_id']}` |",
         f"| Succeeded | {mr1['succeeded']} | {mr2['succeeded']} |",
         f"| Input splits / map tasks | {mr1['input_splits']} / {n(c1.get('Launched map tasks'))} | {mr2['input_splits']} / {n(c2.get('Launched map tasks'))} |",
@@ -207,7 +207,6 @@ def compliance_matrix():
     gnn, gbt = rg["models"]["GNN-K8"], rg["models"]["GBT-lags"]
     n_scala = len(glob.glob(f"{P}/bigdata_pipeline/**/*.scala", recursive=True))
     n_py = len(glob.glob(f"{P}/src/**/*.py", recursive=True)) + len(glob.glob(f"{P}/bigdata_pipeline/**/*.py", recursive=True))
-    n_java = len(glob.glob(f"{P}/bigdata_pipeline/hadoop_mapreduce/*.java"))
     raw_bytes = sum(f["bytes"] for f in vi["raw_formats"])
 
 
@@ -233,13 +232,13 @@ def compliance_matrix():
          all(ss["checks"].values())),
         ("Variety (>= 2 data types)",
          "; ".join(f"{f['format']} ({f['files']} file(s))" for f in vi["raw_formats"]) + "; Parquet lake",
-         "VeracityAudit (HDFS namespace listing)",
+         "DataChecks (HDFS namespace listing)",
          "results/variety_inventory.json",
          f"{vi['distinct_raw_format_families']} raw format families + {len(vi['processed_parquet_tables'])} Parquet tables",
          vi["distinct_raw_format_families"] >= 2),
         ("Veracity",
          "QC-flag drop, 'X'/null audit, NY+NYC merge, duplicate keys, physical ranges, exact MapReduce record accounting, cross-engine checksums",
-         f"VeracityAudit {app('VeracityAudit')}; MR1 counters",
+         f"DataChecks {app('DataChecks')}; MR1 counters",
          "results/veracity_audit.json; results/mapreduce_jobs.json; results/cross_engine_consistency.json",
          f"QC-flagged dropped {c1['QC_FLAGGED']:,}; malformed {c1.get('MALFORMED', 0)}; WEIGHTED_ILI missing "
          f"{vy['ilinet_raw']['weighted_ili_missing_fraction']:.2%} -> target UNWEIGHTED_ILI; NY+NYC weeks merged "
@@ -256,7 +255,7 @@ def compliance_matrix():
          h["fsck_status"] == "HEALTHY" and h["live_datanodes"] == 3 and h["under_replicated"] == 0
          and (pub is not None and pub["size_mismatches_after_copy"] == 0)),
         ("Hadoop MapReduce",
-         f"{n_java} Java classes: MR1 combiner + custom Writable; MR2 map-side join via distributed cache; run on YARN",
+         "Python MapReduce (climaflu_mapreduce.py) run on YARN by Hadoop Streaming: MR1 with a combiner; MR2 map-side join via the distributed cache",
          f"{mr1['yarn_app_id']} ({mr1['wall_seconds']} s), {mr2['yarn_app_id']} ({mr2['wall_seconds']} s)",
          "results/mapreduce_jobs.json; docs/screenshots/yarn_timeline*.png; logs/mapreduce_mr1_mr2.log",
          f"{c1['Launched map tasks']} maps each, {c1['HDFS: Number of bytes read']:,} B read; accounting exact; "
@@ -284,10 +283,10 @@ def compliance_matrix():
          "src/; bigdata_pipeline/dashboard/; results/rigour/runs.jsonl; results/v3/runs.jsonl",
          f"{n_runs_v2} neural runs (v2) + {n_runs_v3} (v3) + baselines + all analyses", n_py > 0),
         ("Spark ML",
-         "MLlib Pipelines on HDFS feature tables: GBTRegressor baselines (bigdata_pipeline/spark_mllib/BaselineGBTv2.scala, BaselineGBTv3.scala) and a tuned "
+         "MLlib Pipelines on HDFS feature tables: GBTRegressor baselines (bigdata_pipeline/spark_mllib/BaselineGBT.scala, v2 + v3) and a tuned "
          "comparison of LinearRegression, RandomForestRegressor, GBTRegressor (ParamGridBuilder grids, RegressionEvaluator, "
          "temporal 2022 hold-out; bigdata_pipeline/spark_mllib/MLlibComparison.scala)",
-         f"BaselineGBTv2 {app('BaselineGBTv2')}; MLlibComparison {app('MLlibComparison')}",
+         f"BaselineGBT {app('BaselineGBT')}; MLlibComparison {app('MLlibComparison')}",
          "results/rigour/predictions_spark/; results/mllib/selection.jsonl; results/mllib/summary.json; docs/MLLIB_RESULTS.md",
          f"fixed GBT-lags RMSE {gbt['rmse_mean']:.4f} (h=1); tuned MLlib h=1: "
          + (", ".join(f"{k} {v['rmse']:.4f}" for k, v in mll["per_horizon"]["1"].items() if not k.startswith("ClimaFlu")) if mll else "not run"),

@@ -1,7 +1,10 @@
 """Rigour pass step 1: canonical feature table with exact calendar lags + check that the Python graph builder
-reproduces the Spark KNN graph (GraphConstruction.scala) when given the same all-years statistics.
-Outputs: results/rigour/feature_table.parquet, results/rigour/prepare_summary.json
-Run: docker exec pytorch python /workspace/gnn/prepare_v2.py
+reproduces the Spark KNN graph (GraphConstruction.scala) when given the same all-years statistics; then the
+deterministic Python baselines (docs/RESEARCH_PROTOCOL.md section 5):
+  Persistence: y_hat = ILI_lag1        Ridge: alpha = 1.0 on all features, standardised on YEAR <= 2022
+Outputs: results/rigour/feature_table.parquet, results/rigour/prepare_summary.json,
+         results/rigour/predictions/{Persistence,Ridge}.parquet (same columns as the neural predictions)
+Run: docker exec -w /workspace/gnn pytorch python prepare_v2.py
 """
 import glob
 import json
@@ -9,8 +12,11 @@ import os
 
 import numpy as np
 import pandas as pd
+from sklearn.linear_model import Ridge
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 
-from common import CLIMATE, DATA, OUT, build_feature_table, knn_edges, load_modeling_table
+from common import CLIMATE, DATA, FEATURES, OUT, build_feature_table, knn_edges, load_modeling_table, rmse
 
 os.makedirs(OUT, exist_ok=True)
 raw = load_modeling_table()
@@ -61,3 +67,14 @@ summary = {
 with open(f"{OUT}/prepare_summary.json", "w") as f:
     json.dump(summary, f, indent=2)
 print(json.dumps(summary, indent=2))
+
+# ---------------------------------------------------------------- deterministic Python baselines (read back from the saved table)
+feat = pd.read_parquet(f"{OUT}/feature_table.parquet")
+train, test = feat[feat.YEAR <= 2022], feat[feat.YEAR >= 2023]
+os.makedirs(f"{OUT}/predictions", exist_ok=True)
+base = test[["state_abbrev", "YEAR", "WEEK", "target"]].rename(columns={"state_abbrev": "state", "YEAR": "year", "WEEK": "week"})
+base.assign(pred=test["ILI_lag1"].values).to_parquet(f"{OUT}/predictions/Persistence.parquet", index=False)
+ridge = make_pipeline(StandardScaler(), Ridge(alpha=1.0)).fit(train[FEATURES], train["target"])
+base.assign(pred=ridge.predict(test[FEATURES])).to_parquet(f"{OUT}/predictions/Ridge.parquet", index=False)
+print("Persistence RMSE", round(rmse(test["ILI_lag1"], test["target"]), 4),
+      "| Ridge RMSE", round(rmse(ridge.predict(test[FEATURES]), test["target"]), 4))

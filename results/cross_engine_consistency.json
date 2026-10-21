@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-10-21T13:02:42.540397Z",
-  "spark_app_id": "local-1792587533642",
+  "generated_at": "2026-10-21T16:06:17.946602Z",
+  "spark_app_id": "local-1792598570554",
   "spark_api": "DataFrame API only",
   "input": "hdfs://namenode:9000/flu_project/raw/weather/*.csv (26 yearly CSVs, 34.57 GB)",
   "element_year": {
     "description": "US stations, TMAX/TMIN/PRCP, empty quality flag; count and sum(value) per (element, year)",
     "groups": 78, "rows_kept": 303631696,
     "sha256": {"spark_dataframe": "a5c81104c45419c324653d6d63f85e3f832c28c589de68ebc3cb11efd5d18ba6", "hadoop_mapreduce_mr1": "a5c81104c45419c324653d6d63f85e3f832c28c589de68ebc3cb11efd5d18ba6", "spark_dataframe_and_pandas_benchmark": "a5c81104c45419c324653d6d63f85e3f832c28c589de68ebc3cb11efd5d18ba6"},
-    "spark_dataframe_seconds": 100.0, "all_match": true
+    "spark_dataframe_seconds": 91.2, "all_match": true
   },
   "state_year_element": {
     "description": "same filter, broadcast-joined with ghcnd-stations.txt (US id, non-blank STATE); count and sum per (state, year, element)",
     "groups": 3920, "rows_joined": 303631696,
     "sha256": {"spark_dataframe": "eb02de0659daa4665d474f3b08c85cbd0be67c3eba15f174321871ced615f332", "hadoop_mapreduce_mr2": "eb02de0659daa4665d474f3b08c85cbd0be67c3eba15f174321871ced615f332"},
-    "spark_dataframe_seconds": 109.3, "all_match": true
+    "spark_dataframe_seconds": 95.2, "all_match": true
   },
   "dataframe_rewrite_equivalence": {
     "us_stations": {"schema_names_types_equal": true, "rows_existing": 78567, "rows_dataframe_rewrite": 78567, "only_in_existing": 0, "only_in_rewrite": 0, "identical": true},
@@ -21,6 +21,8 @@
     "ICL_NREVSS_Clinical_Labs": {"schema_names_types_equal": true, "rows_existing": 30564, "rows_dataframe_rewrite": 30564, "only_in_existing": 0, "only_in_rewrite": 0, "identical": true},
     "ICL_NREVSS_Public_Health_Labs": {"schema_names_types_equal": true, "rows_existing": 605, "rows_dataframe_rewrite": 605, "only_in_existing": 0, "only_in_rewrite": 0, "identical": true},
     "ICL_NREVSS_Combined_prior_to_2015_16": {"schema_names_types_equal": true, "rows_existing": 14094, "rows_dataframe_rewrite": 14094, "only_in_existing": 0, "only_in_rewrite": 0, "identical": true},
+    "weather_state_week": {"schema_names_types_equal": true, "rows_existing": 68833, "rows_dataframe_rewrite": 68833, "only_in_existing": 0, "only_in_rewrite": 0, "identical": true},
+    "modeling_table": {"schema_names_types_equal": true, "rows_existing": 40408, "rows_dataframe_rewrite": 40408, "only_in_existing": 0, "only_in_rewrite": 0, "identical": true},
     "all_identical": true
   }
 }

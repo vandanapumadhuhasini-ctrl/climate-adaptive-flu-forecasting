@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T13:03:28.688504Z",
+  "generated_at": "2026-10-21T15:11:04.964213Z",
   "raw_formats": [
     {"format": "CDC ILINet: CSV with a title line before the header", "files": 1, "bytes": 2648216, "replication": 2},
     {"format": "CDC NREVSS lab surveillance: CSV with a title line before the header", "files": 3, "bytes": 2059103, "replication": 2},

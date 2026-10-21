@@ -1,20 +1,20 @@
 {
-    "generated_at":  "2026-10-10T02:51:26.7182469Z",
+    "generated_at":  "2026-10-21T15:10:07.7006747Z",
     "input":  "hdfs:///flu_project/raw/weather/*.csv (26 yearly GHCN-Daily CSVs)",
     "container_sizing":  "AM 1024 MB, map 768 MB (-Xmx600m), reduce 1024 MB on one NodeManager with 4096 MB / 4 vcores",
     "jobs":  [
                  {
-                     "job":  "ElementYearAggregate (combiner + custom Writable)",
-                     "yarn_app_id":  "application_1791573873798_0002",
-                     "mr_job_id":  "job_1791573873798_0002",
+                     "job":  "MR1 element x year (Python streaming, combiner)",
+                     "yarn_app_id":  "application_1792587415514_0001",
+                     "mr_job_id":  "job_1792587415514_0001",
                      "succeeded":  true,
                      "input_splits":  268,
-                     "wall_seconds":  707,
+                     "wall_seconds":  1290,
                      "result_sha256":  "a5c81104c45419c324653d6d63f85e3f832c28c589de68ebc3cb11efd5d18ba6",
                      "result_groups":  78,
                      "counters":  {
                                       "Launched map tasks":  268,
-                                      "Launched reduce tasks":  2,
+                                      "Launched reduce tasks":  32,
                                       "Rack-local map tasks":  268,
                                       "Map input records":  968905773,
                                       "Map output records":  303631696,
@@ -22,29 +22,29 @@
                                       "Combine output records":  804,
                                       "Reduce input records":  804,
                                       "Reduce output records":  78,
-                                      "HDFS: Number of bytes read":  34571171972,
-                                      "Total time spent by all map tasks (ms)":  1102310,
-                                      "Total megabyte-milliseconds taken by all map tasks":  1128765440,
+                                      "HDFS: Number of bytes read":  34571168488,
+                                      "Total time spent by all map tasks (ms)":  1804466,
+                                      "Total megabyte-milliseconds taken by all map tasks":  1847773184,
                                       "KEPT":  303631696,
                                       "HEADER":  26,
                                       "NOT_US":  305732176,
                                       "OTHER_ELEMENT":  358481524,
                                       "QC_FLAGGED":  1060351,
-                                      "GC time elapsed (ms)":  40948
+                                      "GC time elapsed (ms)":  16230
                                   }
                  },
                  {
-                     "job":  "StateYearCoverage (map-side join via distributed cache)",
-                     "yarn_app_id":  "application_1791573873798_0003",
-                     "mr_job_id":  "job_1791573873798_0003",
+                     "job":  "MR2 state x year x element (Python streaming, map-side join via distributed cache)",
+                     "yarn_app_id":  "application_1792587415514_0002",
+                     "mr_job_id":  "job_1792587415514_0002",
                      "succeeded":  true,
                      "input_splits":  268,
-                     "wall_seconds":  760,
+                     "wall_seconds":  1096,
                      "result_sha256":  "eb02de0659daa4665d474f3b08c85cbd0be67c3eba15f174321871ced615f332",
                      "result_groups":  3920,
                      "counters":  {
                                       "Launched map tasks":  268,
-                                      "Launched reduce tasks":  2,
+                                      "Launched reduce tasks":  3,
                                       "Rack-local map tasks":  268,
                                       "Map input records":  968905773,
                                       "Map output records":  303631696,
@@ -52,12 +52,12 @@
                                       "Combine output records":  40397,
                                       "Reduce input records":  40397,
                                       "Reduce output records":  3920,
-                                      "HDFS: Number of bytes read":  34571171972,
-                                      "Total time spent by all map tasks (ms)":  1157622,
-                                      "Total megabyte-milliseconds taken by all map tasks":  1185404928,
+                                      "HDFS: Number of bytes read":  34571168488,
+                                      "Total time spent by all map tasks (ms)":  1920918,
+                                      "Total megabyte-milliseconds taken by all map tasks":  1967020032,
                                       "JOINED":  303631696,
                                       "STATIONS_LOADED_PER_MAPPER":  21055956,
-                                      "GC time elapsed (ms)":  48749
+                                      "GC time elapsed (ms)":  13010
                                   }
                  }
              ]

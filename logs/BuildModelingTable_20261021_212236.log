@@ -1,0 +1,363 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/21 15:52:45 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/10/21 15:52:45 WARN SparkConf: Note that spark.local.dir will be overridden by the value set by the cluster manager (via SPARK_LOCAL_DIRS in mesos/standalone/kubernetes and LOCAL_DIRS in YARN).
+Spark context Web UI available at http://ff2e9568fb93:4040
+Spark context available as 'sc' (master = local[*], app id = local-1792597966526).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.1
+      /_/
+         
+Using Scala version 2.12.18 (OpenJDK 64-Bit Server VM, Java 11.0.22)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> // Entering paste mode (ctrl-D to finish)
+
+
+// Exiting paste mode, now interpreting.
+
+[Stage 0:>                                                          (0 + 1) / 1]                                                                                [Stage 2:>                                                          (0 + 2) / 2][Stage 2:=============================>                             (1 + 1) / 2]                                                                                [Stage 3:>                                                        (0 + 24) / 32][Stage 3:=>                                                       (1 + 24) / 32][Stage 3:===>                                                     (2 + 24) / 32][Stage 3:=====>                                                   (3 + 24) / 32][Stage 3:=======>                                                 (4 + 24) / 32][Stage 3:========>                                                (5 + 24) / 32][Stage 3:============>                                            (7 + 24) / 32][Stage 3:==============>                                          (8 + 24) / 32][Stage 3:================>                                        (9 + 23) / 32][Stage 3:===================>                                    (11 + 21) / 32][Stage 3:======================>                                 (13 + 19) / 32][Stage 3:========================>                               (14 + 18) / 32][Stage 3:==========================>                             (15 + 17) / 32][Stage 3:============================>                           (16 + 16) / 32][Stage 3:=============================>                          (17 + 15) / 32][Stage 3:===============================>                        (18 + 14) / 32][Stage 3:===================================>                    (20 + 12) / 32][Stage 3:======================================>                 (22 + 10) / 32][Stage 3:==========================================>              (24 + 8) / 32][Stage 3:============================================>            (25 + 7) / 32][Stage 3:==============================================>          (26 + 6) / 32][Stage 3:================================================>        (27 + 5) / 32][Stage 3:===================================================>     (29 + 3) / 32][Stage 5:>                                                          (0 + 6) / 6][Stage 5:=========>                                                 (1 + 5) / 6][Stage 5:===================>                                       (2 + 4) / 6][Stage 5:=======================================>                   (4 + 2) / 6][Stage 8:======>                                                (24 + 24) / 200][Stage 8:========>                                              (30 + 25) / 200][Stage 8:===============>                                       (57 + 25) / 200][Stage 8:==========================>                            (96 + 24) / 200][Stage 8:================================>                     (120 + 24) / 200][Stage 8:===================================>                  (133 + 25) / 200][Stage 8:======================================>               (144 + 24) / 200][Stage 8:=============================================>        (168 + 24) / 200][Stage 11:>                                                      (2 + 24) / 200][Stage 11:=>                                                     (5 + 24) / 200][Stage 11:==>                                                    (8 + 24) / 200][Stage 11:==>                                                   (11 + 24) / 200][Stage 11:====>                                                 (15 + 24) / 200][Stage 11:====>                                                 (18 + 24) / 200][Stage 11:=====>                                                (22 + 24) / 200][Stage 11:======>                                               (25 + 24) / 200][Stage 11:=======>                                              (28 + 24) / 200][Stage 11:========>                                             (31 + 24) / 200][Stage 11:=========>                                            (34 + 24) / 200][Stage 11:=========>                                            (37 + 24) / 200][Stage 11:==========>                                           (40 + 24) / 200][Stage 11:===========>                                          (44 + 24) / 200][Stage 11:============>                                         (48 + 24) / 200][Stage 11:=============>                                        (51 + 24) / 200][Stage 11:==============>                                       (54 + 25) / 200][Stage 11:===============>                                      (58 + 24) / 200][Stage 11:================>                                     (61 + 24) / 200][Stage 11:=================>                                    (64 + 24) / 200][Stage 11:==================>                                   (69 + 24) / 200][Stage 11:===================>                                  (73 + 24) / 200][Stage 11:====================>                                 (76 + 24) / 200][Stage 11:=====================>                                (79 + 24) / 200][Stage 11:======================>                               (82 + 24) / 200][Stage 11:======================>                               (85 + 24) / 200][Stage 11:=======================>                              (88 + 24) / 200][Stage 11:=========================>                            (93 + 24) / 200][Stage 11:=========================>                            (96 + 24) / 200][Stage 11:==========================>                           (99 + 25) / 200][Stage 11:===========================>                         (103 + 24) / 200][Stage 11:============================>                        (107 + 24) / 200][Stage 11:=============================>                       (111 + 24) / 200][Stage 11:==============================>                      (115 + 24) / 200][Stage 11:===============================>                     (118 + 24) / 200][Stage 11:===============================>                     (120 + 24) / 200][Stage 11:================================>                    (123 + 24) / 200][Stage 11:=================================>                   (126 + 24) / 200][Stage 11:==================================>                  (130 + 24) / 200][Stage 11:===================================>                 (134 + 24) / 200][Stage 11:====================================>                (138 + 24) / 200][Stage 11:=====================================>               (141 + 24) / 200][Stage 11:======================================>              (144 + 24) / 200][Stage 11:======================================>              (147 + 24) / 200][Stage 11:=======================================>             (150 + 24) / 200][Stage 11:========================================>            (152 + 24) / 200][Stage 11:=========================================>           (155 + 24) / 200][Stage 11:=========================================>           (158 + 24) / 200][Stage 11:==========================================>          (161 + 24) / 200][Stage 11:===========================================>         (164 + 24) / 200][Stage 11:============================================>        (168 + 24) / 200][Stage 11:=============================================>       (173 + 24) / 200][Stage 11:==============================================>      (176 + 24) / 200][Stage 11:===============================================>     (181 + 19) / 200][Stage 11:=================================================>   (187 + 13) / 200][Stage 11:====================================================> (194 + 6) / 200][Stage 15:>                                                         (0 + 1) / 1]                                                                                State-week aggregated rows: 68833
++-----+---------+---------+--------------------+-------------------+-------------------+------------------+
+|state|mmwr_year|mmwr_week|TMAX                |TMIN               |PRCP               |DIURNAL_RANGE     |
++-----+---------+---------+--------------------+-------------------+-------------------+------------------+
+|AK   |1999     |52       |-23.432323232323224 |-30.131188118811885|0.36448087431693976|6.698864886488661 |
+|AK   |2000     |1        |-17.448559381588204 |-24.62966878083155 |2.3453460620525077 |7.181109399243347 |
+|AK   |2000     |2        |-18.575251076040196 |-26.501410437235563|0.5091202582728003 |7.926159361195367 |
+|AK   |2000     |3        |-6.964697508896783  |-14.338719068413404|2.87913549459685   |7.374021559516621 |
+|AK   |2000     |4        |-3.4188530465949802 |-10.881164629762754|5.200164338537394  |7.462311583167773 |
+|AK   |2000     |5        |-4.234805003679176  |-13.471247199402548|4.522406639004158  |9.236442195723372 |
+|AK   |2000     |6        |-1.813753581661893  |-8.788017118402289 |0.7332009531374101 |6.974263536740396 |
+|AK   |2000     |7        |-3.1664534470504604 |-11.080214285714296|1.7142971887550196 |7.913760838663836 |
+|AK   |2000     |8        |-4.127867698803663  |-13.32431095406359 |1.1823101777059737 |9.196443255259926 |
+|AK   |2000     |9        |-1.2844017094017068 |-11.082374100719429|2.3390361445783148 |9.797972391317723 |
+|AK   |2000     |10       |-1.1699500356887937 |-12.474137931034475|0.3013610888710972 |11.304187895345681|
+|AK   |2000     |11       |0.4924410540915388  |-8.085903698534553 |1.9194354838709702 |8.578344752626093 |
+|AK   |2000     |12       |0.6027739251040225  |-8.362049861495839 |2.552524429967423  |8.964823786599862 |
+|AK   |2000     |13       |-0.43162274618585383|-11.223426573426584|3.8008190008190033 |10.79180382724073 |
+|AK   |2000     |14       |1.1678248783877685  |-9.738118466898952 |1.4141687141687111 |10.90594334528672 |
++-----+---------+---------+--------------------+-------------------+-------------------+------------------+
+only showing top 15 rows
+
+26/10/21 15:54:46 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:46 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:46 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:46 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:54:46 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 76.00% for 20 writers
+26/10/21 15:54:46 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 72.38% for 21 writers
+26/10/21 15:54:46 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 69.09% for 22 writers
+26/10/21 15:54:46 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 66.09% for 23 writers
+26/10/21 15:54:46 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 63.33% for 24 writers
+[Stage 21:>                                                      (0 + 24) / 200]26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 66.09% for 23 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 69.09% for 22 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 72.38% for 21 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 76.00% for 20 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+[Stage 21:======>                                               (24 + 24) / 200]26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 76.00% for 20 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 72.38% for 21 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 69.09% for 22 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 66.09% for 23 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 63.33% for 24 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 66.09% for 23 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 69.09% for 22 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 66.09% for 23 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 63.33% for 24 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 66.09% for 23 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 69.09% for 22 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 72.38% for 21 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 76.00% for 20 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+[Stage 21:=============>                                        (49 + 24) / 200]26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 76.00% for 20 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 76.00% for 20 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 76.00% for 20 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 72.38% for 21 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 76.00% for 20 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 72.38% for 21 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 76.00% for 20 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 72.38% for 21 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 76.00% for 20 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+[Stage 21:====================>                                 (75 + 24) / 200]26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 76.00% for 20 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 72.38% for 21 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 76.00% for 20 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:47 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+[Stage 21:==========================>                          (100 + 24) / 200]26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+[Stage 21:===================================>                 (134 + 25) / 200]26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:54:48 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+[Stage 21:===============================================>     (181 + 19) / 200][Stage 21:=====================================================>(199 + 1) / 200]                                                                                Written to hdfs://namenode:9000/flu_project/processed/weather_state_week_dfcheck
+[Stage 24:>                                                         (0 + 2) / 2][Stage 26:>                                                         (0 + 1) / 1]                                                                                [Stage 30:>                                                         (0 + 2) / 2][Stage 30:=============================>                            (1 + 1) / 2]                                                                                [Stage 33:>                                                         (0 + 1) / 1]                                                                                Merged ILI (state, year, week) rows: 41822
+Rows after join to weather:          40408
+[Stage 37:>                                                         (0 + 2) / 2][Stage 37:=============================>                            (1 + 1) / 2]                                                                                [Stage 40:>                                                         (0 + 1) / 1]                                                                                Remaining duplicate (state, year, week) after merge: 0
+[Stage 44:>                                                         (0 + 2) / 2]                                                                                +------------+----+----+-------------------+--------------------+-------------------+-------------------+------------------+
+|state_abbrev|YEAR|WEEK|UNWEIGHTED_ILI     |TMAX                |TMIN               |PRCP               |DIURNAL_RANGE     |
++------------+----+----+-------------------+--------------------+-------------------+-------------------+------------------+
+|AK          |2010|40  |0.8751458576429404 |6.398464912280717   |-1.8861135371179019|5.129146039603973  |8.28457844939862  |
+|AK          |2010|41  |1.1282660332541568 |1.9202464788732387  |-5.352571428571441 |4.173644859813095  |7.272817907444679 |
+|AK          |2010|42  |0.5860415556739478 |3.6506825187142304  |-4.095546737213404 |3.680857675574908  |7.746229255927634 |
+|AK          |2010|43  |0.967741935483871  |1.6146037399821855  |-5.496141906873632 |3.030268918073801  |7.1107456468558174|
+|AK          |2010|44  |0.6838506049447659 |-0.07174199210179925|-6.736000000000004 |7.514668289713923  |6.664258007898205 |
+|AK          |2010|45  |0.9519038076152305 |-2.621017990346639  |-8.499736263736242 |4.311904761904778  |5.8787182733896035|
+|AK          |2010|46  |0.9625668449197862 |-4.491688770999111  |-11.841017699115024|1.0850182704019435 |7.349328928115914 |
+|AK          |2010|47  |0.6523157208088715 |-1.1908528501988516 |-6.84103585657372  |4.057823129251724  |5.650183006374869 |
+|AK          |2010|48  |0.45977011494252873|-10.440116801437544 |-17.834260089686108|3.0426017262638725 |7.394143288248564 |
+|AK          |2010|49  |0.7977207977207977 |-11.137818181818195 |-17.273161930536713|1.5668504901960774 |6.135343748718517 |
+|AK          |2010|50  |1.0558069381598794 |-14.893030719853273 |-21.91941391941394 |0.8093325092707022 |7.026383199560668 |
+|AK          |2010|51  |0.8522727272727272 |-15.226761207685271 |-22.613937442502305|0.5569029850746264 |7.387176234817034 |
+|AK          |2010|52  |1.1308562197092082 |-10.404304029304011 |-17.14244239631339 |3.3240378548895957 |6.738138367009377 |
+|AK          |2011|1   |0.5925925925925926 |-2.4456919060052202 |-8.82088772845953  |3.670441817050419  |6.37519582245431  |
+|AK          |2011|2   |1.4822657490735838 |-10.040568927789938 |-17.778880629645837|0.22112500000000015|7.738311701855899 |
++------------+----+----+-------------------+--------------------+-------------------+-------------------+------------------+
+only showing top 15 rows
+
+[Stage 48:>                                                         (0 + 2) / 2]                                                                                26/10/21 15:55:34 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+26/10/21 15:55:34 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:55:34 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:55:34 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:55:34 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 76.00% for 20 writers
+26/10/21 15:55:34 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 72.38% for 21 writers
+26/10/21 15:55:34 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 69.09% for 22 writers
+26/10/21 15:55:34 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 66.09% for 23 writers
+26/10/21 15:55:35 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 69.09% for 22 writers
+26/10/21 15:55:35 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 72.38% for 21 writers
+26/10/21 15:55:35 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 76.00% for 20 writers
+26/10/21 15:55:35 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 80.00% for 19 writers
+26/10/21 15:55:35 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 84.44% for 18 writers
+26/10/21 15:55:35 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 89.41% for 17 writers
+26/10/21 15:55:35 WARN MemoryManager: Total allocation exceeds 95.00% (2,040,109,440 bytes) of heap memory
+Scaling row group sizes to 95.00% for 16 writers
+Written to hdfs://namenode:9000/flu_project/processed/modeling_table_dfcheck

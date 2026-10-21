@@ -19,12 +19,12 @@ climate-adaptive-flu-forecasting/
 ├── docker/                      pytorch.Dockerfile, dashboard.Dockerfile, hadoop-conf/
 │
 ├── bigdata_pipeline/            ── BIG DATA LAYER (Hadoop + Spark, runs on the cluster)
-│   ├── hadoop_mapreduce/          2 MapReduce jobs in Java on YARN + run_mapreduce.sh
-│   ├── spark_etl/                 raw → clean → weekly state features → climate graph (7 Scala jobs)
+│   ├── hadoop_mapreduce/          2 MapReduce jobs in Python (Hadoop Streaming on YARN) + run_mapreduce.sh
+│   ├── spark_etl/                 raw → clean → weekly state features → climate graph (5 Scala jobs)
 │   ├── spark_mllib/               Spark ML: GBT baselines + Linear Regression / Random Forest / GBT comparison
 │   ├── spark_streaming/           Structured Streaming on a live climate feed + the feed script
 │   ├── spark_tuning/              Spark vs pandas benchmark workload + partitioning/caching experiment
-│   ├── spark_checks/              smoke test, data-quality audit, MapReduce = Spark check, publish to HDFS, UI demo
+│   ├── spark_checks/              data checks, MapReduce = Spark check, publish results to HDFS
 │   └── dashboard/app.py           Streamlit dashboard (reads result files only)
 │
 ├── src/                         ── ML LAYER (Python, runs in the pytorch container)
@@ -57,8 +57,8 @@ Run everything from the project folder:
 |---|---|---|---|
 | 1 | `up` | start the containers, wait until HDFS leaves safe mode | cluster running |
 | 2 | `ingest` | copy 26 yearly GHCN CSVs + stations file + 4 CDC FluView CSVs into HDFS | HDFS `/flu_project/raw` (34.6 GB) |
-| 3 | `etl` | Spark: parse stations, clean 968.9 M climate records, clean FluView, aggregate to state-weeks, join with ILI, build the KNN climate graph | HDFS `/flu_project/processed` |
-| 4 | `mapreduce` | Hadoop MapReduce on YARN: element × year totals (combiner) and state × year join (distributed cache) | `results/mapreduce_jobs.json` |
+| 3 | `etl` | Spark: parse stations + clean FluView, clean 968.9 M climate records, aggregate to state-weeks and join with ILI, build the KNN climate graph | HDFS `/flu_project/processed` |
+| 4 | `mapreduce` | Python MapReduce on YARN (Hadoop Streaming): element × year totals (combiner) and state × year join (distributed cache) | `results/mapreduce_jobs.json` |
 | 5 | `gnn` | features, Python + Spark GBT baselines, 120 GNN training runs, statistical tests | `docs/RIGOUR_RESULTS.md` |
 | 6 | `v3` | lag-aware features for 1–4 week horizons in Spark, GBT + GNN, tests | `docs/V3_RESULTS.md` |
 | 7 | `mllib` | Spark MLlib Linear Regression, Random Forest, GBT tuned on 2022, compared with the GNN | `docs/MLLIB_RESULTS.md` |
@@ -81,8 +81,8 @@ datasets/ (GHCN 34.6 GB, CDC FluView)
 HDFS /flu_project/raw ─────────────► hadoop_mapreduce (YARN) ──► element×year, state×year totals ─┐
    │                                                                                               │ same SHA-256
    ▼  spark_etl (DataFrame API)                                                                    │
-StationsPreprocess ─► WeatherPreprocess (303.6 M clean rows) ─► WeatherAggregate (state-weeks)     │
-Preprocess (FluView) ──────────────────────────────────────────► FinalJoin ─► GraphConstruction    │
+Preprocess (stations, FluView) ─► WeatherPreprocess (303.6 M clean rows) ─► BuildModelingTable     │
+                                   (state-week climate ⋈ ILI = modeling_table) ─► GraphConstruction │
    │                                                              (modeling_table)  (KNN edges)    │
    ├─► spark_checks/DataFrameConsistency ◄─────────────────────────────────────────────────────────┘
    ├─► spark_mllib (GBT, Linear Regression, Random Forest) ─────────┐
@@ -102,26 +102,22 @@ Preprocess (FluView) ───────────────────�
 | `docker-compose.yml` | all containers and their mounts; HDFS data lives in Docker volumes |
 | `hadoop.env` | Hadoop/YARN settings (container memory, NodeManager resources, history server); HDFS replication 2 is set in `docker-compose.yml` |
 | `docker/pytorch.Dockerfile`, `docker/dashboard.Dockerfile` | Python images for the GNN and the dashboard |
+| `docker/nodemanager.Dockerfile` | YARN NodeManager + Python 3 (Debian package), so the Python MapReduce tasks can run |
 
-**`bigdata_pipeline/hadoop_mapreduce/`** (Java, Hadoop MapReduce on YARN)
+**`bigdata_pipeline/hadoop_mapreduce/`** (Python, Hadoop MapReduce on YARN via Hadoop Streaming)
 
 | File | Role |
 |---|---|
-| `GhcnRecord.java` | parses one GHCN line and applies the filter (US station, TMAX/TMIN/PRCP, no quality flag) |
-| `CountSumWritable.java` | custom Hadoop `Writable` carrying (count, sum) |
-| `ElementYearAggregate.java` | MR1: totals per element × year, with a combiner |
-| `StateYearCoverage.java` | MR2: map-side join with the stations file (distributed cache), totals per state × year × element |
-| `run_mapreduce.sh` | compiles the jar inside the NameNode and runs both jobs on YARN |
+| `climaflu_mapreduce.py` | the mappers and the reducer of both jobs: MR1 totals per element × year (the reducer is also the combiner); MR2 map-side join with the stations file shipped by the distributed cache, totals per state × year × element; record accounting as Hadoop counters |
+| `run_mapreduce.sh` | submits both jobs to YARN with the Hadoop Streaming jar and records each result's SHA-256 |
 
 **`bigdata_pipeline/spark_etl/`** (Scala, Spark DataFrame API)
 
 | File | Role |
 |---|---|
-| `StationsPreprocess.scala` | fixed-width `ghcnd-stations.txt` → US stations with state, lat, lon |
-| `WeatherPreprocess.scala` | 26 yearly CSVs → quality-filtered TMAX/TMIN/PRCP joined to states (303.6 M rows) |
-| `Preprocess.scala` | CDC ILINet and NREVSS CSVs → cleaned tables (title line removed, types fixed, missing values handled) |
-| `WeatherAggregate.scala` | daily climate → MMWR state-week features |
-| `FinalJoin.scala` | state-week climate ⋈ ILI → `modeling_table` (New York + New York City merged into one state) |
+| `WeatherPreprocess.scala` | 26 yearly CSVs → quality-filtered US TMAX/TMIN/PRCP, values scaled (303.6 M rows) |
+| `Preprocess.scala` | reference data: fixed-width `ghcnd-stations.txt` → US stations (state, lat, lon); CDC ILINet and NREVSS CSVs → cleaned tables (title line removed, types fixed, missing values handled) |
+| `BuildModelingTable.scala` | daily climate → MMWR state-week features, then ⋈ ILI → `modeling_table` (New York + New York City merged into one state) |
 | `GraphConstruction.scala` | weekly climate-similarity KNN graph between states |
 | `LagAwareFeaturesV3.scala` | lagged climate + 1–4 week horizon targets (v3) |
 
@@ -129,16 +125,14 @@ Preprocess (FluView) ───────────────────�
 
 | File | Role |
 |---|---|
-| `BaselineGBTv2.scala` | Spark GBT baselines for next-week ILI (rigour pass) |
-| `BaselineGBTv3.scala` | Spark GBT baselines for horizons 1–4 (v3) |
+| `BaselineGBT.scala` | Spark GBT baselines: next-week ILI (v2, rigour pass) and horizons 1–4 (v3) |
 | `MLlibComparison.scala` | Linear Regression, Random Forest, GBT with parameter grids and a 2022 validation year |
 
 **`bigdata_pipeline/spark_streaming/`**
 
 | File | Role |
 |---|---|
-| `PrepareStreamingV2.scala` | splits 2025 climate data into 60 daily files (the feed source) |
-| `StreamingV2.scala` | Structured Streaming query: QC filter, station join, state × day aggregates, latency log |
+| `StreamingV2.scala` | `prepare` mode: splits 2025 climate data into 60 daily files (the feed source); normal mode: the Structured Streaming query (QC filter, station join, state × day aggregates, latency log) |
 | `drip_feed.sh` | moves one daily file every 3 s into the watched HDFS folder |
 
 **`bigdata_pipeline/spark_tuning/`**
@@ -153,11 +147,9 @@ Preprocess (FluView) ───────────────────�
 
 | File | Role |
 |---|---|
-| `ClusterSmokeTest.scala` | reads every processed HDFS table and records row counts |
-| `VeracityAudit.scala` | re-measures data-quality facts (missing values, duplicate state-weeks, nulls) and the raw format inventory |
-| `DataFrameConsistency.scala` | proves MapReduce and Spark DataFrame give identical results (SHA-256) |
+| `DataChecks.scala` | smoke test (row count of every processed HDFS table) + re-measured data-quality facts (missing values, duplicate state-weeks, nulls) and the raw format inventory |
+| `DataFrameConsistency.scala` | proves MapReduce and Spark DataFrame give identical results (SHA-256) and that re-run jobs reproduce the HDFS tables |
 | `PublishResultsToHdfs.scala` | copies `results/` into HDFS with a SHA-256 manifest |
-| `SparkUiDemo.scala` | keeps a real aggregation running so the live Spark UI (4040) can be shown |
 
 **`bigdata_pipeline/dashboard/app.py`** — Streamlit dashboard: 4 V's, cluster, batch, streaming, forecasts, graph.
 
@@ -166,11 +158,11 @@ Preprocess (FluView) ───────────────────�
 | File | Role |
 |---|---|
 | `common.py` | shared code: feature table, exact calendar lags, graphs, GNN model, metrics |
-| `prepare_v2.py` | builds the canonical feature table and checks the graph against Spark's |
-| `baselines_v2.py` | persistence and other Python baselines |
-| `train_v2.py`, `run_all.py` | trains one model × seed; runs all models × 10 seeds in parallel |
+| `prepare_v2.py` | builds the canonical feature table, checks the graph against Spark's, Persistence + Ridge baselines |
+| `train_v2.py` | trains one model × seed (next week) |
+| `run_all.py` | runs every model × seed in parallel: `--version v2` or `--version v3` |
 | `evaluate_v2.py` | tests on 2023–2025 with Diebold-Mariano, Holm correction, bootstrap |
-| `train_v3.py`, `run_all_v3.py`, `evaluate_v3.py` | the same for horizons 1–4 (v3) |
+| `train_v3.py`, `evaluate_v3.py` | the same for horizons 1–4 (v3) |
 | `evaluate_mllib.py` | compares the MLlib models with the GNN |
 
 **`src/reporting/`**

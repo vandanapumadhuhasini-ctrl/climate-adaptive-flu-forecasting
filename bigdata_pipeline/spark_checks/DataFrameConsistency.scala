@@ -2,7 +2,7 @@
 // DataFrame-only cross-engine consistency + verification of the DataFrame rewrite (professor: DataFrame API only).
 //   A. element x year (count, sum) over the 26 raw CSVs        == Hadoop MapReduce MR1 == Spark/pandas benchmark (26 years)
 //   B. state x year x element via a broadcast join with the stations file (same rule as MR2) == Hadoop MapReduce MR2
-//   C. rewritten jobs (StationsPreprocess, Preprocess) run with --conf spark.flu.outputSuffix=_dfcheck must reproduce the
+//   C. rewritten/merged jobs (Preprocess, BuildModelingTable) run with --conf spark.flu.outputSuffix=_dfcheck must reproduce the
 //      existing HDFS tables exactly (schema names/types, row count, and no rows in either direction of exceptAll)
 // Outputs: /opt/results/cross_engine_consistency.json, /opt/results/spark_api_evidence.txt (DataFrame physical plans)
 import org.apache.spark.sql.DataFrame
@@ -47,7 +47,7 @@ val (rowsB, secsB) = timed(aggB.collect())
 val linesB = rowsB.map(r => s"${r.getString(0)}|${r.getString(1)}|${r.getString(2)}|${r.getLong(3)}|${r.getLong(4)}").toSeq
 
 // MapReduce outputs (read as DataFrames) and the benchmark reference
-def mrLines(dir: String): Seq[String] = spark.read.text(s"$base/mapreduce/$dir/part-r-*")
+def mrLines(dir: String): Seq[String] = spark.read.text(s"$base/mapreduce/$dir/part-*")
   .select(regexp_replace(col("value"), "\t", "|")).collect().map(_.getString(0)).toSeq
 val mr1 = mrLines("element_year"); val mr2 = mrLines("state_year_element")
 val benchRef = spark.read.json(s"$base/results/benchmark/runs.jsonl")
@@ -70,7 +70,8 @@ def same(name: String): String = {
   println(f"DFCHECK | C $name%-38s schema=$schemaSame rows=$na/$nb only-old=$onlyA only-new=$onlyB -> ${if (ok) "IDENTICAL" else "DIFFERENT"}")
   s"""${j(name)}: {"schema_names_types_equal": $schemaSame, "rows_existing": $na, "rows_dataframe_rewrite": $nb, "only_in_existing": $onlyA, "only_in_rewrite": $onlyB, "identical": $ok}"""
 }
-val tablesC = Seq("us_stations", "ILINet", "ICL_NREVSS_Clinical_Labs", "ICL_NREVSS_Public_Health_Labs", "ICL_NREVSS_Combined_prior_to_2015_16")
+val tablesC = Seq("us_stations", "ILINet", "ICL_NREVSS_Clinical_Labs", "ICL_NREVSS_Public_Health_Labs", "ICL_NREVSS_Combined_prior_to_2015_16",
+                  "weather_state_week", "modeling_table")
 val resC = tablesC.map(same)
 val okC = !resC.exists(_.contains("\"identical\": false"))
 

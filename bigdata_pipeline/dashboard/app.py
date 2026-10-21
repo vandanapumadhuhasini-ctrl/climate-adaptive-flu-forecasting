@@ -94,7 +94,7 @@ def overview():
     st.subheader("Pipeline")
     st.graphviz_chart("""digraph { rankdir=LR; node [shape=box, style="rounded,filled", fillcolor="#eef3fb", color="#2a78d6", fontname="Helvetica", fontsize=11];
       raw [label="NOAA GHCN-Daily 34.6 GB\\nCDC ILINet, stations"]; hdfs [label="HDFS\\n3 DataNodes, repl 2"];
-      mr [label="Hadoop MapReduce\\non YARN (Java)"]; spark [label="Spark (Scala)\\nDataFrame API"];
+      mr [label="Hadoop MapReduce\\non YARN (Python)"]; spark [label="Spark (Scala)\\nDataFrame API"];
       stream [label="Structured Streaming\\nlive climate feed"]; feat [label="State-week features\\n+ weekly climate KNN graph"];
       ml [label="MLlib GBT · PyTorch GNN\\n+ ablations, 10 seeds"]; dash [label="Dashboard\\n(result files only)"];
       raw -> hdfs -> mr; hdfs -> spark -> feat -> ml -> dash; stream -> hdfs; mr -> dash [style=dashed, label="cross-check"]; }""")
@@ -108,7 +108,7 @@ def overview():
             ("Hadoop MapReduce on YARN", all(j["succeeded"] for j in mr["jobs"]), "results/mapreduce_jobs.json"),
             ("Spark DataFrame API only (no RDD / typed Dataset)", exists(f"{R}/spark_api_evidence.txt"), "results/cross_engine_consistency.json"),
             ("Scala and Python", True, "bigdata_pipeline/**/*.scala, src/**/*.py"),
-            ("Spark ML", exists(f"{R}/rigour/predictions_spark/GBT-lags"), "bigdata_pipeline/spark_mllib/BaselineGBTv2.scala"),
+            ("Spark ML", exists(f"{R}/rigour/predictions_spark/GBT-lags"), "bigdata_pipeline/spark_mllib/BaselineGBT.scala"),
             ("Performance tuning", exists(f"{R}/tuning_summary.json"), "results/tuning_summary.json"),
             ("Visualisation dashboard", True, "this app"),
             ("YARN + HDFS UI screenshots", exists(f"{DOCS}/screenshots/yarn_nodes.png", f"{DOCS}/screenshots/hdfs_overview.png"), "docs/screenshots/")]
@@ -153,7 +153,7 @@ def batch():
         ey, sy = cc["element_year"], cc["state_year_element"]
         st.markdown("**The same computation in three engines — SHA-256 of the sorted result**")
         st.dataframe(pd.DataFrame([
-            ("element × year", "Hadoop MapReduce (Java, YARN)", ey["sha256"]["hadoop_mapreduce_mr1"]),
+            ("element × year", "Hadoop MapReduce (Python streaming, YARN)", ey["sha256"]["hadoop_mapreduce_mr1"]),
             ("element × year", "Spark DataFrame (Scala, groupBy/agg)", ey["sha256"]["spark_dataframe"]),
             ("element × year", "Spark DataFrame + pandas", ey["sha256"]["spark_dataframe_and_pandas_benchmark"]),
             ("state × year × element", "Hadoop MapReduce map-side join", sy["sha256"]["hadoop_mapreduce_mr2"]),

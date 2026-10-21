@@ -10,10 +10,10 @@ Filter: US station, element in {TMAX, TMIN, PRCP}, empty quality flag, over all 
 
 | Aggregate | Implementation | Framework / API | SHA-256 of the sorted result |
 |---|---|---|---|
-| element x year (78 groups, 303,631,696 rows) | `bigdata_pipeline/hadoop_mapreduce/ElementYearAggregate.java` | Hadoop MapReduce on YARN | `a5c81104c45419c324653d6d63f85e3f832c28c589de68ebc3cb11efd5d18ba6` |
+| element x year (78 groups, 303,631,696 rows) | `bigdata_pipeline/hadoop_mapreduce/climaflu_mapreduce.py` (map_element_year + reduce) | Hadoop MapReduce on YARN (Python, Hadoop Streaming) | `a5c81104c45419c324653d6d63f85e3f832c28c589de68ebc3cb11efd5d18ba6` |
 | | `bigdata_pipeline/spark_checks/DataFrameConsistency.scala` (part A) | Spark DataFrame (filter + groupBy/agg) | `a5c81104c45419c324653d6d63f85e3f832c28c589de68ebc3cb11efd5d18ba6` |
 | | `bigdata_pipeline/spark_tuning/BenchmarkWorkload.scala` / `bigdata_pipeline/spark_tuning/benchmark_pandas.py` | Spark DataFrame / pandas | `a5c81104c45419c324653d6d63f85e3f832c28c589de68ebc3cb11efd5d18ba6` |
-| state x year x element (3920 groups, 303,631,696 rows) | `bigdata_pipeline/hadoop_mapreduce/StateYearCoverage.java` | Hadoop MapReduce, map-side join | `eb02de0659daa4665d474f3b08c85cbd0be67c3eba15f174321871ced615f332` |
+| state x year x element (3920 groups, 303,631,696 rows) | `bigdata_pipeline/hadoop_mapreduce/climaflu_mapreduce.py` (map_state_year + reduce) | Hadoop MapReduce (Python), map-side join | `eb02de0659daa4665d474f3b08c85cbd0be67c3eba15f174321871ced615f332` |
 | | `bigdata_pipeline/spark_checks/DataFrameConsistency.scala` (part B) | Spark DataFrame (broadcast join + groupBy/agg) | `eb02de0659daa4665d474f3b08c85cbd0be67c3eba15f174321871ced615f332` |
 
 **All element x year implementations agree: True. Both state x year x element implementations agree: True.**
@@ -31,6 +31,8 @@ The pipeline jobs that used to parse files with an RDD or a typed Dataset (stati
 | ICL_NREVSS_Clinical_Labs | True | 30,564 / 30,564 | 0 | 0 | **True** |
 | ICL_NREVSS_Public_Health_Labs | True | 605 / 605 | 0 | 0 | **True** |
 | ICL_NREVSS_Combined_prior_to_2015_16 | True | 14,094 / 14,094 | 0 | 0 | **True** |
+| weather_state_week | True | 68,833 / 68,833 | 0 | 0 | **True** |
+| modeling_table | True | 40,408 / 40,408 | 0 | 0 | **True** |
 
 **All rewritten tables identical: True.**
 
@@ -38,19 +40,19 @@ The pipeline jobs that used to parse files with an RDD or a typed Dataset (stati
 
 Container sizing: AM 1024 MB, map 768 MB (-Xmx600m), reduce 1024 MB on one NodeManager with 4096 MB / 4 vcores.
 
-| | MR1 ElementYearAggregate | MR2 StateYearCoverage |
+| | MR1 element x year | MR2 state x year x element |
 |---|---|---|
-| Pattern | combiner + custom `Writable` (count, sum) | replicated map-side join, stations file via distributed cache |
-| YARN application | `application_1791573873798_0002` | `application_1791573873798_0003` |
+| Pattern | Python mapper + reducer, the reducer also runs as combiner | replicated map-side join, stations file via distributed cache (-files) |
+| YARN application | `application_1792587415514_0001` | `application_1792587415514_0002` |
 | Succeeded | True | True |
 | Input splits / map tasks | 268 / 268 | 268 / 268 |
 | Data-local / rack-local map tasks | 0 / 268 | 0 / 268 |
-| HDFS bytes read | 34,571,171,972 | 34,571,171,972 |
+| HDFS bytes read | 34,571,168,488 | 34,571,168,488 |
 | Map input records | 968,905,773 | 968,905,773 |
 | Map output records | 303,631,696 | 303,631,696 |
 | Combine output records (shuffle reduction) | 804 | 40,397 |
 | Reduce output records | 78 | 3,920 |
-| Wall time | 707 s | 760 s |
+| Wall time | 1290 s | 1096 s |
 
 All maps are rack-local: the single NodeManager runs in its own container, apart from the three DataNodes, so no map can be co-located with its block (a limitation of this single-host Docker deployment, not of the job).
 
@@ -58,7 +60,7 @@ Record accounting of MR1 (custom counters, group `ClimaFlu`): KEPT = 303,631,696
 
 ## 4. Spark DataFrame physical plans (Catalyst)
 
-Spark application `local-1792587533642`: part A 100.0 s, part B 109.3 s.
+Spark application `local-1792598570554`: part A 91.2 s, part B 95.2 s.
 
 ```text
 === A. element x year (DataFrame API): physical plan ===

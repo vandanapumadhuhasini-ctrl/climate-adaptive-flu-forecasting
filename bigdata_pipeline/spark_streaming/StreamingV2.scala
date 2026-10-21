@@ -5,11 +5,25 @@
 //   -> append Parquet to HDFS /flu_project/streaming_v2/output
 // Evidence written to /opt/results/streaming_v2/: progress.jsonl (StreamingQueryProgress per trigger, via a listener),
 // batches.jsonl (files, rows in/kept/out, start/end time of each non-empty micro-batch). Stops 40 s after the feed goes quiet.
+// --conf spark.flu.streaming=prepare runs the data preparation instead: raw GHCN-Daily 2025 (all stations, unfiltered = what a
+// live feed would deliver) split into one CSV per day for 1 Jan - 1 Mar 2025 under HDFS /flu_project/streaming_v2/source/day=YYYYMMDD/.
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.streaming.{StreamingQueryListener, Trigger}
 import java.nio.file.{Files, Paths, StandardOpenOption}
+
+if (spark.conf.get("spark.flu.streaming", "run") == "prepare") {
+  val base = "hdfs://namenode:9000/flu_project"
+  val schema = StructType(Seq("id", "date", "element", "value", "mflag", "qflag", "sflag", "obstime").map(StructField(_, StringType)))
+  val raw = spark.read.option("header", "true").schema(schema).csv(s"$base/raw/weather/2025.csv")
+  val days = raw.filter(col("date").between("20250101", "20250301"))
+  // partition on a copy of the date: partitionBy drops the partition column from the file contents, and the stream needs it
+  days.withColumn("day", col("date")).repartition(col("day")).write.mode("overwrite").partitionBy("day").option("header", "true").csv(s"$base/streaming_v2/source")
+  val perDay = spark.read.option("header", "true").csv(s"$base/streaming_v2/source").groupBy("day").count().orderBy("day").collect()
+  println(s"STREAMPREP | days=${perDay.length} rows=${perDay.map(_.getLong(1)).sum} min/day=${perDay.map(_.getLong(1)).min} max/day=${perDay.map(_.getLong(1)).max}")
+  System.exit(0)
+}
 
 val base = "hdfs://namenode:9000/flu_project"
 val outDir = "/opt/results/streaming_v2"

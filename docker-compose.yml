@@ -150,7 +150,10 @@ services:
   # YARN NODE MANAGER
   # =========================================================
   nodemanager:
-    image: bde2020/hadoop-nodemanager:2.0.0-hadoop3.2.1-java8
+    build:
+      context: ./docker
+      dockerfile: nodemanager.Dockerfile   # adds Python 3 for the Hadoop Streaming (Python) MapReduce jobs
+    image: climaflu-nodemanager:1.0
     platform: linux/amd64
     container_name: flu-nodemanager
     hostname: nodemanager

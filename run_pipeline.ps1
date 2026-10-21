@@ -1,4 +1,4 @@
-# ClimaFlu-GNN - ONE entry point for the whole project.
+﻿# ClimaFlu-GNN - ONE entry point for the whole project.
 #
 #   .\run_pipeline.ps1 <stage>              run one stage (stages below, in pipeline order)
 #   .\run_pipeline.ps1 all                  run every stage in order (many hours: GNN seeds, benchmark, tuning)
@@ -7,14 +7,14 @@
 # Stage        What it does                                                     Main output
 # up           start the Docker cluster, wait for HDFS                          containers running
 # ingest       copy the raw datasets (34.6 GB GHCN + 4 CDC FluView CSVs) to HDFS  /flu_project/raw
-# etl          Spark ETL: stations, weather cleaning, FluView, weekly join, graph /flu_project/processed
-# mapreduce    2 Hadoop MapReduce jobs on YARN + counters summary               results/mapreduce_jobs.json
+# etl          Spark ETL: stations + FluView, weather cleaning, weekly join, graph /flu_project/processed
+# mapreduce    2 Python MapReduce jobs (Hadoop Streaming) on YARN + counters     results/mapreduce_jobs.json
 # gnn          rigour pass: features, Python + Spark GBT baselines, 120 GNN runs results/rigour, docs/RIGOUR_RESULTS.md
 # v3           lag-aware multi-horizon features (Spark) + GBT + GNN, evaluation   results/v3, docs/V3_RESULTS.md
 # mllib        Spark MLlib comparison: Linear Regression, Random Forest, GBT      results/mllib, docs/MLLIB_RESULTS.md
 # streaming    live GHCN feed: Structured Streaming job + drip feed + analysis    results/streaming_summary.json
 # performance  Spark vs pandas benchmark + partition/caching tuning + analysis    docs/BENCHMARK_RESULTS.md, docs/TUNING_RESULTS.md
-# checks       cluster smoke test, veracity audit, MapReduce = DataFrame check    results/*.json
+# checks       smoke test + veracity audit, MapReduce = Spark DataFrame check     results/*.json
 # report       cluster verification, dashboard data, evidence docs, screenshots   docs/COURSE_COMPLIANCE_MATRIX.md
 # publish      copy every result file into HDFS with a SHA-256 manifest           /flu_project/results
 #
@@ -37,12 +37,12 @@ function Hdfs([string]$cmd) { docker exec flu-namenode bash -c $cmd }
 
 # Run one Scala job with spark-shell. The file is fed through cmd.exe '<' because a PowerShell pipe adds a BOM,
 # which breaks the ':paste' on line 1 of every job.
-function Job([string]$job, [string[]]$extra = @()) {
+function Job([string]$job, [string[]]$extra = @(), [string]$mem = $DriverMemory) {
     $src = Get-ChildItem (Join-Path $root "bigdata_pipeline") -Recurse -Filter "$job.scala" | Select-Object -First 1
     if (-not $src) { Write-Error "No Scala job named $job under bigdata_pipeline\"; return }
     $log  = Join-Path $root ("logs\{0}_{1}.log" -f $job, (Get-Date -Format "yyyyMMdd_HHmmss"))
     $opts = (($Conf + $extra) | ForEach-Object { "--conf $_ " }) -join ""
-    $cmd  = "docker exec -i spark /opt/spark/bin/spark-shell --master local[*] --driver-memory $DriverMemory " +
+    $cmd  = "docker exec -i spark /opt/spark/bin/spark-shell --master local[*] --driver-memory $mem " +
             "--conf spark.hadoop.fs.defaultFS=hdfs://namenode:9000 " +
             "--conf spark.eventLog.enabled=true --conf spark.eventLog.dir=file:///opt/results/spark-events " +
             "$opts< `"$($src.FullName)`" > `"$log`" 2>&1"
@@ -69,8 +69,10 @@ function Stage-Ingest {
 }
 
 function Stage-Etl {
-    foreach ($j in "StationsPreprocess", "WeatherPreprocess", "Preprocess", "WeatherAggregate", "FinalJoin", "GraphConstruction") {
-        if ($j -eq "WeatherPreprocess") { Job $j @("spark.local.dir=/opt/spark-local") } else { Job $j }
+    foreach ($j in "Preprocess", "WeatherPreprocess", "BuildModelingTable", "GraphConstruction") {
+        if ($j -eq "WeatherPreprocess") { Job $j @("spark.local.dir=/opt/spark-local") }
+        elseif ($j -eq "BuildModelingTable") { Job $j @("spark.local.dir=/opt/spark-local") "2g" }   # 2g: 3g was OOM-killed next to Hadoop
+        else { Job $j }
     }
     Say "Export the modelling tables for the Python GNN (HDFS -> exports\)"
     foreach ($t in "modeling_table", "graph_edges_knn", "us_stations") {
@@ -79,7 +81,7 @@ function Stage-Etl {
 }
 
 function Stage-MapReduce {
-    Say "Hadoop MapReduce on YARN: MR1 ElementYearAggregate, MR2 StateYearCoverage (~25 min)"
+    Say "Hadoop MapReduce on YARN (Python, Hadoop Streaming): MR1 element x year, MR2 state x year x element"
     $log = Join-Path $root "logs\mapreduce_mr1_mr2.log"
     cmd /c "docker exec flu-namenode bash /opt/mapreduce/run_mapreduce.sh > `"$log`" 2>&1"
     # parse the job log -> results\mapreduce_jobs.json (YARN app id, wall time, result SHA-256, Hadoop counters)
@@ -108,8 +110,8 @@ function Stage-MapReduce {
         generated_at     = (Get-Date).ToUniversalTime().ToString("o")
         input            = "hdfs:///flu_project/raw/weather/*.csv (26 yearly GHCN-Daily CSVs)"
         container_sizing = "AM 1024 MB, map 768 MB (-Xmx600m), reduce 1024 MB on one NodeManager with 4096 MB / 4 vcores"
-        jobs = @((Parse-Job $parts[0] "MR1" "ElementYearAggregate (combiner + custom Writable)"),
-                 (Parse-Job $(if ($parts.Count -gt 1) { $parts[1] } else { "" }) "MR2" "StateYearCoverage (map-side join via distributed cache)"))
+        jobs = @((Parse-Job $parts[0] "MR1" "MR1 element x year (Python streaming, combiner)"),
+                 (Parse-Job $(if ($parts.Count -gt 1) { $parts[1] } else { "" }) "MR2" "MR2 state x year x element (Python streaming, map-side join via distributed cache)"))
     }
     [IO.File]::WriteAllText((Join-Path $root "results\mapreduce_jobs.json"), ($result | ConvertTo-Json -Depth 5), $utf8)
     $result.jobs | ForEach-Object { "{0}: app={1} ok={2} {3}s sha={4}" -f $_.job, $_.yarn_app_id, $_.succeeded, $_.wall_seconds, $_.result_sha256 }
@@ -117,17 +119,16 @@ function Stage-MapReduce {
 
 function Stage-Gnn {
     Say "GNN rigour pass (docs/RESEARCH_PROTOCOL.md)"
-    docker exec -w /workspace/gnn pytorch python prepare_v2.py
-    docker exec -w /workspace/gnn pytorch python baselines_v2.py
-    Job "BaselineGBTv2"
-    docker exec -w /workspace/gnn pytorch python run_all.py --workers 6
+    docker exec -w /workspace/gnn pytorch python prepare_v2.py           # feature table + Persistence / Ridge baselines
+    Job "BaselineGBT" @("spark.flu.gbt=v2")
+    docker exec -w /workspace/gnn pytorch python run_all.py --version v2 --workers 6
     cmd /c "$py /proj/src/gnn/evaluate_v2.py"
 }
 
 function Stage-V3 {
     Job "LagAwareFeaturesV3"
-    Job "BaselineGBTv3"
-    docker exec -w /workspace/gnn pytorch python run_all_v3.py --workers 6
+    Job "BaselineGBT" @("spark.flu.gbt=v3")
+    docker exec -w /workspace/gnn pytorch python run_all.py --version v3 --workers 6
     cmd /c "$py /proj/src/gnn/evaluate_v3.py"
 }
 
@@ -138,7 +139,7 @@ function Stage-MLlib {
 
 function Stage-Streaming {
     Say "Structured Streaming on a live GHCN feed (60 daily files dripped into HDFS every 3 s)"
-    Job "PrepareStreamingV2"
+    Job "StreamingV2" @("spark.flu.streaming=prepare")
     Hdfs "hdfs dfs -rm -r -f -skipTrash /flu_project/streaming_v2/incoming /flu_project/streaming_v2/output /flu_project/streaming_v2/checkpoint; hdfs dfs -mkdir -p /flu_project/streaming_v2/incoming"
     $stream = Start-Job -ScriptBlock { param($r) & powershell -ExecutionPolicy Bypass -File (Join-Path $r "run_pipeline.ps1") job StreamingV2 } -ArgumentList $root
     Start-Sleep 60   # let the streaming query start before the first file arrives
@@ -157,12 +158,11 @@ function Stage-Performance {
 }
 
 function Stage-Checks {
-    Job "ClusterSmokeTest"
-    Job "VeracityAudit"
+    Job "DataChecks"
     # DataFrame rewrite check: re-run the parsers into *_dfcheck tables, then compare with MapReduce and with the existing tables
-    Job "StationsPreprocess" @("spark.flu.outputSuffix=_dfcheck")
     Job "Preprocess" @("spark.flu.outputSuffix=_dfcheck")
-    Job "DataFrameConsistency"
+    Job "BuildModelingTable" @("spark.flu.outputSuffix=_dfcheck", "spark.local.dir=/opt/spark-local") "2g"
+    Job "DataFrameConsistency" @() "2g"
 }
 
 function Stage-Report {

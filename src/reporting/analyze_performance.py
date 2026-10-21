@@ -459,7 +459,7 @@ def streaming():
 
     PROJ = os.environ.get("PROJ", "/proj")
     D = f"{PROJ}/results/streaming_v2"
-    SOURCE_ROWS = 5972783          # STREAMPREP log of bigdata_pipeline/spark_streaming/PrepareStreamingV2.scala (60 daily files)
+    SOURCE_ROWS = 5972783          # STREAMPREP log of bigdata_pipeline/spark_streaming/StreamingV2.scala prepare mode (60 daily files)
     INK, INK2, GRID, BLUE, ORANGE = "#0b0b0b", "#52514e", "#e4e3df", "#2a78d6", "#eb6834"
 
 

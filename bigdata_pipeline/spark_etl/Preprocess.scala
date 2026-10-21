@@ -1,8 +1,11 @@
 :paste
 // =========================================================
-// Preprocess.scala
-// Big Data Analytics (23AID302) — Group 04
-// FluView / ILINet preprocessing job
+// Preprocess.scala — Big Data Analytics (23AID302), Group 04
+// Reference data preprocessing (DataFrame API only):
+//   1. GHCN station metadata (fixed-width ghcnd-stations.txt) -> processed/us_stations
+//   2. CDC FluView: ILINet + 3 NREVSS lab tables (CSV with a title line)  -> processed/<table>
+// Optional: --conf spark.flu.outputSuffix=_dfcheck writes processed/<table>_dfcheck instead (verification runs).
+// Run before WeatherPreprocess (which joins observations to us_stations).
 // =========================================================
 
 import org.apache.spark.sql.DataFrame
@@ -38,6 +41,24 @@ def cleanDataset(df: DataFrame): DataFrame = {
   nullified.dropDuplicates()
 }
 
+// ---------------------------------------------------------------- 1. stations (fixed-width)
+// Columns (1-based): ID 1-11, LATITUDE 13-20, LONGITUDE 22-30, STATE 39-40, NAME 42-71.
+println("=== Processing ghcnd-stations.txt ===")
+val stationLines = spark.read.text(s"$rawDir/weather/ghcnd-stations.txt")
+val stations = stationLines
+  .filter(length(col("value")) >= 71)                                   // a line must reach the end of NAME
+  .select(
+    trim(substring(col("value"), 1, 11)).as("stationId"),
+    trim(substring(col("value"), 39, 2)).as("state"),
+    trim(substring(col("value"), 13, 8)).cast("double").as("lat"),
+    trim(substring(col("value"), 22, 9)).cast("double").as("lon"),
+    trim(substring(col("value"), 42, 30)).as("name"))
+  .na.drop(Seq("lat", "lon"))                                           // unparseable coordinates are dropped
+val usStations = stations.filter(col("stationId").startsWith("US") && length(col("state")) > 0)
+println(s"Total station records parsed: ${stations.count()}; US stations retained: ${usStations.count()}")
+usStations.write.mode("overwrite").parquet(s"$processedDir/us_stations$suffix")
+
+// ---------------------------------------------------------------- 2. FluView tables
 println("=== Processing ILINet.csv ===")
 val iliRaw = readFluViewCsv(s"$rawDir/ILINet.csv")
 val ili = cleanDataset(iliRaw)
@@ -91,3 +112,4 @@ combined.write.mode("overwrite").parquet(s"$processedDir/ICL_NREVSS_Combined_pri
 println(s"Combined (pre-2015-16) rows after cleaning: ${combined.count()}")
 
 println("=== ALL DATASETS PREPROCESSED AND WRITTEN TO HDFS ===")
+System.exit(0)
