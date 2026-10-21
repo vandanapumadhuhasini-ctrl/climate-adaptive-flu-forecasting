@@ -1,7 +1,7 @@
 {
-  "applications": 43,
-  "total_tasks": 162376,
-  "total_input_GB": 577.74,
+  "applications": 44,
+  "total_tasks": 162447,
+  "total_input_GB": 577.75,
   "apps": [
     {
       "app_id": "local-1791573656925",
@@ -561,6 +561,19 @@
       "end_ms": 1792587859107,
       "duration_s": 16.0,
       "job": "PrepareStreamingDemo"
+    },
+    {
+      "app_id": "local-1792591677703",
+      "jobs": 21,
+      "stages": 21,
+      "tasks": 71,
+      "failed_tasks": 0,
+      "shuffle_write_bytes": 3363,
+      "input_bytes": 711385,
+      "start_ms": 1792591676635,
+      "end_ms": 1792591690246,
+      "duration_s": 13.6,
+      "job": "ClusterSmokeTest"
     }
   ]
 }

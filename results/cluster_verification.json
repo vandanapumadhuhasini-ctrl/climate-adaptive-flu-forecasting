@@ -1,55 +1,55 @@
 {
-    "generated_at":  "2026-10-21T13:48:29.2786548Z",
+    "generated_at":  "2026-10-21T14:09:20.8550676Z",
     "containers":  [
                        {
                            "name":  "flu-dashboard",
                            "state":  "running",
-                           "status":  "Up 51 minutes"
+                           "status":  "Up 2 minutes"
                        },
                        {
                            "name":  "flu-datanode1",
                            "state":  "running",
-                           "status":  "Up 51 minutes (healthy)"
+                           "status":  "Up About an hour (healthy)"
                        },
                        {
                            "name":  "flu-datanode2",
                            "state":  "running",
-                           "status":  "Up 51 minutes (healthy)"
+                           "status":  "Up About an hour (healthy)"
                        },
                        {
                            "name":  "flu-datanode3",
                            "state":  "running",
-                           "status":  "Up 51 minutes (healthy)"
+                           "status":  "Up About an hour (healthy)"
                        },
                        {
                            "name":  "flu-historyserver",
                            "state":  "running",
-                           "status":  "Up 51 minutes (healthy)"
+                           "status":  "Up About an hour (healthy)"
                        },
                        {
                            "name":  "flu-namenode",
                            "state":  "running",
-                           "status":  "Up 51 minutes (healthy)"
+                           "status":  "Up 2 minutes (healthy)"
                        },
                        {
                            "name":  "flu-nodemanager",
                            "state":  "running",
-                           "status":  "Up 51 minutes (healthy)"
+                           "status":  "Up About an hour (healthy)"
                        },
                        {
                            "name":  "flu-resourcemanager",
                            "state":  "running",
-                           "status":  "Up 51 minutes (healthy)"
+                           "status":  "Up About an hour (healthy)"
                        },
                        {
                            "name":  "pytorch",
                            "state":  "running",
-                           "status":  "Up 51 minutes"
+                           "status":  "Up 2 minutes"
                        },
                        {
                            "name":  "spark",
                            "state":  "running",
-                           "status":  "Up 51 minutes"
+                           "status":  "Up 2 minutes"
                        }
                    ],
     "hdfs":  {
@@ -79,7 +79,8 @@
                                                           }
                            },
                  "raw_logical_GB":  34.59,
-                 "volume_requirement_25GB_met":  true
+                 "volume_requirement_25GB_met":  true,
+                 "raw_weather_yearly_csv_files":  26
              },
     "yarn":  {
                  "active_nodes":  1,
@@ -95,7 +96,8 @@
                                "datanode3_9866":  200,
                                "yarn_rm_8088":  200,
                                "yarn_timeline_8188":  200,
-                               "spark_ui_4040":  "down (only while a Spark job runs)"
+                               "spark_history_18080":  200,
+                               "dashboard_8501":  200
                            },
     "versions":  {
                      "hadoop":  "3.2.1",

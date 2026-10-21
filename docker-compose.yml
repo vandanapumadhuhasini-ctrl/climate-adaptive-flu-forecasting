@@ -26,9 +26,9 @@ services:
 
     volumes:
       - namenode_data:/hadoop/dfs/name
-      - ./datasets/weather_raw:/mnt/weather_raw:ro
+      - ./datasets:/mnt/datasets:ro                       # raw GHCN + FluView files for 'hdfs dfs -put'
       - ./exports:/export
-      - ./mapreduce:/opt/mapreduce
+      - ./bigdata_pipeline/hadoop_mapreduce:/opt/mapreduce
 
     networks:
       - flu_network
@@ -172,7 +172,9 @@ services:
   # PYTORCH (Part 04/06 — GNN training & benchmarking)
   # =========================================================
   pytorch:
-    build: ./docker/pytorch
+    build:
+      context: ./docker
+      dockerfile: pytorch.Dockerfile
     image: climaflu-pytorch:1.0
     container_name: pytorch
     restart: unless-stopped
@@ -180,8 +182,7 @@ services:
 
     volumes:
       - ./exports:/data:ro
-      - ./python:/workspace
-      - ./models/climaflu_gnn:/output
+      - ./src:/workspace
       - ./datasets/weather_raw:/rawdata:ro
       - ./results:/results
 
@@ -209,13 +210,13 @@ services:
       - HADOOP_CONF_DIR=/opt/hadoop-conf
 
     volumes:
-      - ./hadoop-conf:/opt/hadoop-conf
-      - ./scala:/opt/scala
+      - ./docker/hadoop-conf:/opt/hadoop-conf
+      - ./bigdata_pipeline:/opt/pipeline
       - ./datasets:/opt/datasets
       - ./results:/opt/results
       - ./.spark-local:/opt/spark-local   # spark.local.dir for big shuffles: freed space returns to Windows (the Docker VHDX never shrinks)
 
-    working_dir: /opt/scala
+    working_dir: /opt/pipeline
 
     ports:
       - "4040:4040"
@@ -224,6 +225,27 @@ services:
     networks:
       - flu_network
 
+
+  # =========================================================
+  # SPARK HISTORY SERVER (web UI on 18080) - every finished Spark job with its jobs, stages, SQL plans and executors,
+  # read from the event logs in results/spark-events (the live UI on 4040 exists only while a job is running)
+  # =========================================================
+  spark-history:
+    image: apache/spark:3.5.1
+    container_name: flu-spark-history
+    restart: unless-stopped
+    mem_limit: 1g
+    environment:
+      - SPARK_NO_DAEMONIZE=true
+      - SPARK_DAEMON_MEMORY=768m
+      - SPARK_HISTORY_OPTS=-Dspark.history.fs.logDirectory=file:///opt/spark-events -Dspark.history.retainedApplications=20
+    command: ["/opt/spark/sbin/start-history-server.sh"]
+    volumes:
+      - ./results/spark-events:/opt/spark-events:ro
+    ports:
+      - "18080:18080"
+    networks:
+      - flu_network
 
   # =========================================================
   # YARN TIMELINE / APPLICATION HISTORY SERVER (web UI on 8188)
@@ -250,7 +272,9 @@ services:
   # DASHBOARD (Streamlit, http://localhost:8501) — reads result files only, read-only mounts
   # =========================================================
   dashboard:
-    build: ./docker/dashboard
+    build:
+      context: ./docker
+      dockerfile: dashboard.Dockerfile
     image: climaflu-dashboard:1.0
     container_name: flu-dashboard
     restart: unless-stopped
@@ -263,7 +287,7 @@ services:
     working_dir: /app
     command: ["streamlit", "run", "code/app.py", "--server.headless=true", "--server.port=8501", "--browser.gatherUsageStats=false", "--theme.base=light"]
     volumes:
-      - ./dashboard:/app/code:ro
+      - ./bigdata_pipeline/dashboard:/app/code:ro
       - ./results:/app/results:ro
       - ./docs:/app/docs:ro
 

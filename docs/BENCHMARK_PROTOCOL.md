@@ -16,7 +16,7 @@ and how much of Spark's advantage comes from parallelism and how much from I/O?
 3. Group by (element, year) and compute `count(*)` and `sum(value)` (value in tenths, summed as 64-bit integers).
 4. Sort the result rows `element|year|count|sum` and take their SHA-256.
 
-Implementations: `scala/BenchmarkWorkload.scala` (Spark DataFrame API) and `python/benchmark_workload.py` (pandas).
+Implementations: `bigdata_pipeline/spark_tuning/BenchmarkWorkload.scala` (Spark DataFrame API) and `bigdata_pipeline/spark_tuning/benchmark_pandas.py` (pandas).
 **Correctness gate:** for every N, every engine that finishes must produce the same SHA-256. If it doesn't, that run is invalid.
 
 ## Configurations
@@ -69,7 +69,7 @@ They are superseded by this protocol and are kept only as history.
 ## Post-run correction (2026-10-10, after the full run) — Experiment B memory limit
 
 The kernel log (`results/benchmark/kernel_oom_log.txt`, captured with `dmesg`) records *why* each run was killed, and
-`python/analyze_benchmark.py` now matches every `oom_killed` run to its kernel record:
+`src/reporting/analyze_performance.py` now matches every `oom_killed` run to its kernel record:
 
 * **Experiment A (4 GB): every kill is `CONSTRAINT_MEMCG`**, i.e. the container's own 4 GB cap (RSS 4.27–4.28 GB at kill).
   Experiment A is valid as designed.

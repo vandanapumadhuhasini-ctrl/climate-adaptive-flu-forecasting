@@ -40,7 +40,7 @@ per trained model, after training finishes.
 ## 4. Preprocessing without test information
 
 * All standardisation statistics (feature z-scores, target z-score) are fitted on the training rows of each phase only.
-* **Graphs are rebuilt in Python** with the same procedure as `scala/GraphConstruction.scala` (z-scored climate
+* **Graphs are rebuilt in Python** with the same procedure as `bigdata_pipeline/spark_etl/GraphConstruction.scala` (z-scored climate
   vector per state-week, Euclidean distance, Gaussian kernel with σ = mean pairwise distance, top-K neighbours) but with
   the z-score statistics and σ fitted on training years only. Before use, the Python builder is checked against the Spark
   edges using the Spark (all-years) statistics: the edge sets must agree on ≥ 99 % of edges.
@@ -105,7 +105,7 @@ The base paper (Zhao et al., IEEE TCSS 2026, `docs/BASE_PAPER.md`) builds same-p
 (IEEE Access 2026) show that surveillance signals are offset in time. A1 asks **whether climate helps when it is aligned by
 its lead time, and whether it helps more at longer horizons**. v2 results stay as they are; A1 adds new claims only.
 
-**Pipeline (Spark on HDFS):** `scala/LagAwareFeaturesV3.scala` reads `modeling_table` and `weather_state_week` (climate
+**Pipeline (Spark on HDFS):** `bigdata_pipeline/spark_etl/LagAwareFeaturesV3.scala` reads `modeling_table` and `weather_state_week` (climate
 2000–2025, so lags reach before 2010) from HDFS, rebuilds the exact-calendar ILI lags/targets for horizons **h = 1, 2, 3, 4**
 (target = ILI exactly 7·h days later), runs the lag scan and writes the feature tables to HDFS
 (`/flu_project/processed/v3_features`). Check: for h = 1 the Spark rows and values must equal the v2 Python feature table.
@@ -161,7 +161,7 @@ best of them? Added at the professor's request; v2/v3 results are unchanged.
 **Data:** HDFS `processed/v3_features/h1..h4` (h = 1 is identical to the v2 feature table). Same rows and splits:
 selection = train YEAR ≤ 2021, validate 2022; final = refit on YEAR ≤ 2022, test 2023–2025 once.
 
-**Models (Spark MLlib, `scala/MLlibComparison.scala`), each with two feature sets** — `lags` (ILI lag1–4 + trend) and
+**Models (Spark MLlib, `bigdata_pipeline/spark_mllib/MLlibComparison.scala`), each with two feature sets** — `lags` (ILI lag1–4 + trend) and
 `all` (lags + TMAX, TMIN, PRCP, DIURNAL_RANGE of the same week, i.e. the lead L* = 0 chosen in A1):
 
 | Model | Grid (ParamGridBuilder) |

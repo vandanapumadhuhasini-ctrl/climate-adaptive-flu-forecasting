@@ -6,8 +6,8 @@ exports/
 # ---- large / regenerable run artefacts (also published to HDFS /flu_project/results) ----
 results/spark-events/
 results/v3/features/
-mapreduce/build/
-mapreduce/output/
+bigdata_pipeline/hadoop_mapreduce/build/
+bigdata_pipeline/hadoop_mapreduce/output/
 models/**/*.pt
 
 # ---- editor / build tooling ----
