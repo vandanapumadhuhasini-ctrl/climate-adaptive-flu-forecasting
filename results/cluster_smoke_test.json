@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-10-21T15:10:51.758999Z",
+  "generated_at": "2026-10-21T16:54:36.861427Z",
   "spark_version": "3.5.1",
   "master": "local[*]",
-  "app_id": "local-1792595438936",
+  "app_id": "local-1792601664724",
   "hdfs_base": "hdfs://namenode:9000/flu_project/processed",
   "tables": {
-    "weather_cleaned": {"rows": 303631696, "count_ms": 7031},
-    "us_stations": {"rows": 78567, "count_ms": 346},
-    "weather_state_week": {"rows": 68833, "count_ms": 253},
-    "modeling_table": {"rows": 40408, "count_ms": 220},
-    "graph_edges_knn": {"rows": 323264, "count_ms": 244},
-    "baseline_predictions": {"rows": 7699, "count_ms": 244},
-    "ILINet": {"rows": 44808, "count_ms": 199}
+    "weather_cleaned": {"rows": 303631696, "count_ms": 6092},
+    "us_stations": {"rows": 78567, "count_ms": 349},
+    "weather_state_week": {"rows": 68833, "count_ms": 259},
+    "modeling_table": {"rows": 40408, "count_ms": 188},
+    "graph_edges_knn": {"rows": 323264, "count_ms": 205},
+    "baseline_predictions": {"rows": 7699, "count_ms": 206},
+    "ILINet": {"rows": 44808, "count_ms": 183}
   },
-  "total_ms": 8539
+  "total_ms": 7482
 }

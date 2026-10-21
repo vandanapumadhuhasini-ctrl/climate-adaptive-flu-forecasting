@@ -42,7 +42,7 @@ function Job([string]$job, [string[]]$extra = @(), [string]$mem = $DriverMemory)
     if (-not $src) { Write-Error "No Scala job named $job under bigdata_pipeline\"; return }
     $log  = Join-Path $root ("logs\{0}_{1}.log" -f $job, (Get-Date -Format "yyyyMMdd_HHmmss"))
     $opts = (($Conf + $extra) | ForEach-Object { "--conf $_ " }) -join ""
-    $cmd  = "docker exec -i spark /opt/spark/bin/spark-shell --master local[*] --driver-memory $mem " +
+    $cmd  = "docker exec -i spark /opt/spark/bin/spark-shell --name $job --master local[*] --driver-memory $mem " +
             "--conf spark.hadoop.fs.defaultFS=hdfs://namenode:9000 " +
             "--conf spark.eventLog.enabled=true --conf spark.eventLog.dir=file:///opt/results/spark-events " +
             "$opts< `"$($src.FullName)`" > `"$log`" 2>&1"
