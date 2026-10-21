@@ -1,0 +1,23 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/21 16:19:08 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Spark context Web UI available at http://ff2e9568fb93:4040
+Spark context available as 'sc' (master = local[*], app id = local-1792599549615).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.1
+      /_/
+         
+Using Scala version 2.12.18 (OpenJDK 64-Bit Server VM, Java 11.0.22)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> // Entering paste mode (ctrl-D to finish)
+
+
+// Exiting paste mode, now interpreting.
+
+PUBLISH | 960 files, 4224.1 MB -> hdfs://namenode:9000/flu_project/results in 248.3 s; size mismatches: 0; HDFS now holds 984 files, 4225451174 B (x3 replication)
