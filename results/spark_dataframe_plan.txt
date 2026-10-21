@@ -20,91 +20,91 @@ AdaptiveSparkPlan (17)
 
 
 (1) Scan parquet 
-Output [6]: [state_abbrev#269, UNWEIGHTED_ILI#274, TMAX#278, TMIN#279, PRCP#280, DIURNAL_RANGE#281]
+Output [6]: [state_abbrev#294, UNWEIGHTED_ILI#299, TMAX#303, TMIN#304, PRCP#305, DIURNAL_RANGE#306]
 Batched: true
 Location: InMemoryFileIndex [hdfs://namenode:9000/flu_project/processed/modeling_table]
 PushedFilters: [IsNotNull(state_abbrev)]
 ReadSchema: struct<state_abbrev:string,UNWEIGHTED_ILI:double,TMAX:double,TMIN:double,PRCP:double,DIURNAL_RANGE:double>
 
 (2) Filter
-Input [6]: [state_abbrev#269, UNWEIGHTED_ILI#274, TMAX#278, TMIN#279, PRCP#280, DIURNAL_RANGE#281]
-Condition : (atleastnnonnulls(5, UNWEIGHTED_ILI#274, TMAX#278, TMIN#279, PRCP#280, DIURNAL_RANGE#281) AND isnotnull(state_abbrev#269))
+Input [6]: [state_abbrev#294, UNWEIGHTED_ILI#299, TMAX#303, TMIN#304, PRCP#305, DIURNAL_RANGE#306]
+Condition : (atleastnnonnulls(5, UNWEIGHTED_ILI#299, TMAX#303, TMIN#304, PRCP#305, DIURNAL_RANGE#306) AND isnotnull(state_abbrev#294))
 
 (3) Project
-Output [3]: [state_abbrev#269, UNWEIGHTED_ILI#274, TMAX#278]
-Input [6]: [state_abbrev#269, UNWEIGHTED_ILI#274, TMAX#278, TMIN#279, PRCP#280, DIURNAL_RANGE#281]
+Output [3]: [state_abbrev#294, UNWEIGHTED_ILI#299, TMAX#303]
+Input [6]: [state_abbrev#294, UNWEIGHTED_ILI#299, TMAX#303, TMIN#304, PRCP#305, DIURNAL_RANGE#306]
 
 (4) HashAggregate
-Input [3]: [state_abbrev#269, UNWEIGHTED_ILI#274, TMAX#278]
-Keys [1]: [state_abbrev#269]
-Functions [2]: [partial_avg(UNWEIGHTED_ILI#274), partial_corr(TMAX#278, UNWEIGHTED_ILI#274)]
-Aggregate Attributes [8]: [sum#700, count#701L, n#646, xAvg#647, yAvg#648, ck#649, xMk#650, yMk#651]
-Results [9]: [state_abbrev#269, sum#702, count#703L, n#652, xAvg#653, yAvg#654, ck#655, xMk#656, yMk#657]
+Input [3]: [state_abbrev#294, UNWEIGHTED_ILI#299, TMAX#303]
+Keys [1]: [state_abbrev#294]
+Functions [2]: [partial_avg(UNWEIGHTED_ILI#299), partial_corr(TMAX#303, UNWEIGHTED_ILI#299)]
+Aggregate Attributes [8]: [sum#725, count#726L, n#671, xAvg#672, yAvg#673, ck#674, xMk#675, yMk#676]
+Results [9]: [state_abbrev#294, sum#727, count#728L, n#677, xAvg#678, yAvg#679, ck#680, xMk#681, yMk#682]
 
 (5) Exchange
-Input [9]: [state_abbrev#269, sum#702, count#703L, n#652, xAvg#653, yAvg#654, ck#655, xMk#656, yMk#657]
-Arguments: hashpartitioning(state_abbrev#269, 200), ENSURE_REQUIREMENTS, [plan_id=1477]
+Input [9]: [state_abbrev#294, sum#727, count#728L, n#677, xAvg#678, yAvg#679, ck#680, xMk#681, yMk#682]
+Arguments: hashpartitioning(state_abbrev#294, 200), ENSURE_REQUIREMENTS, [plan_id=1519]
 
 (6) HashAggregate
-Input [9]: [state_abbrev#269, sum#702, count#703L, n#652, xAvg#653, yAvg#654, ck#655, xMk#656, yMk#657]
-Keys [1]: [state_abbrev#269]
-Functions [2]: [avg(UNWEIGHTED_ILI#274), corr(TMAX#278, UNWEIGHTED_ILI#274)]
-Aggregate Attributes [2]: [avg(UNWEIGHTED_ILI#274)#630, corr(TMAX#278, UNWEIGHTED_ILI#274)#644]
-Results [3]: [state_abbrev#269, avg(UNWEIGHTED_ILI#274)#630 AS mean_ili#631, corr(TMAX#278, UNWEIGHTED_ILI#274)#644 AS corr_tmax_ili#645]
+Input [9]: [state_abbrev#294, sum#727, count#728L, n#677, xAvg#678, yAvg#679, ck#680, xMk#681, yMk#682]
+Keys [1]: [state_abbrev#294]
+Functions [2]: [avg(UNWEIGHTED_ILI#299), corr(TMAX#303, UNWEIGHTED_ILI#299)]
+Aggregate Attributes [2]: [avg(UNWEIGHTED_ILI#299)#655, corr(TMAX#303, UNWEIGHTED_ILI#299)#669]
+Results [3]: [state_abbrev#294, avg(UNWEIGHTED_ILI#299)#655 AS mean_ili#656, corr(TMAX#303, UNWEIGHTED_ILI#299)#669 AS corr_tmax_ili#670]
 
 (7) BroadcastExchange
-Input [3]: [state_abbrev#269, mean_ili#631, corr_tmax_ili#645]
-Arguments: HashedRelationBroadcastMode(List(input[0, string, true]),false), [plan_id=1482]
+Input [3]: [state_abbrev#294, mean_ili#656, corr_tmax_ili#670]
+Arguments: HashedRelationBroadcastMode(List(input[0, string, true]),false), [plan_id=1524]
 
 (8) Scan parquet 
-Output [1]: [state#674]
+Output [1]: [state#699]
 Batched: true
 Location: InMemoryFileIndex [hdfs://namenode:9000/flu_project/processed/us_stations]
 PushedFilters: [IsNotNull(state)]
 ReadSchema: struct<state:string>
 
 (9) Filter
-Input [1]: [state#674]
-Condition : isnotnull(state#674)
+Input [1]: [state#699]
+Condition : isnotnull(state#699)
 
 (10) HashAggregate
-Input [1]: [state#674]
-Keys [1]: [state#674]
+Input [1]: [state#699]
+Keys [1]: [state#699]
 Functions [1]: [partial_count(1)]
-Aggregate Attributes [1]: [count#704L]
-Results [2]: [state#674, count#705L]
+Aggregate Attributes [1]: [count#729L]
+Results [2]: [state#699, count#730L]
 
 (11) Exchange
-Input [2]: [state#674, count#705L]
-Arguments: hashpartitioning(state#674, 200), ENSURE_REQUIREMENTS, [plan_id=1479]
+Input [2]: [state#699, count#730L]
+Arguments: hashpartitioning(state#699, 200), ENSURE_REQUIREMENTS, [plan_id=1521]
 
 (12) HashAggregate
-Input [2]: [state#674, count#705L]
-Keys [1]: [state#674]
+Input [2]: [state#699, count#730L]
+Keys [1]: [state#699]
 Functions [1]: [count(1)]
-Aggregate Attributes [1]: [count(1)#688L]
-Results [2]: [state#674 AS state_abbrev#693, count(1)#688L AS count#689L]
+Aggregate Attributes [1]: [count(1)#713L]
+Results [2]: [state#699 AS state_abbrev#718, count(1)#713L AS count#714L]
 
 (13) BroadcastHashJoin
-Left keys [1]: [state_abbrev#269]
-Right keys [1]: [state_abbrev#693]
+Left keys [1]: [state_abbrev#294]
+Right keys [1]: [state_abbrev#718]
 Join type: Inner
 Join condition: None
 
 (14) Project
-Output [4]: [state_abbrev#269, mean_ili#631, corr_tmax_ili#645, count#689L]
-Input [5]: [state_abbrev#269, mean_ili#631, corr_tmax_ili#645, state_abbrev#693, count#689L]
+Output [4]: [state_abbrev#294, mean_ili#656, corr_tmax_ili#670, count#714L]
+Input [5]: [state_abbrev#294, mean_ili#656, corr_tmax_ili#670, state_abbrev#718, count#714L]
 
 (15) Exchange
-Input [4]: [state_abbrev#269, mean_ili#631, corr_tmax_ili#645, count#689L]
-Arguments: rangepartitioning(mean_ili#631 DESC NULLS LAST, 200), ENSURE_REQUIREMENTS, [plan_id=1486]
+Input [4]: [state_abbrev#294, mean_ili#656, corr_tmax_ili#670, count#714L]
+Arguments: rangepartitioning(mean_ili#656 DESC NULLS LAST, 200), ENSURE_REQUIREMENTS, [plan_id=1528]
 
 (16) Sort
-Input [4]: [state_abbrev#269, mean_ili#631, corr_tmax_ili#645, count#689L]
-Arguments: [mean_ili#631 DESC NULLS LAST], true, 0
+Input [4]: [state_abbrev#294, mean_ili#656, corr_tmax_ili#670, count#714L]
+Arguments: [mean_ili#656 DESC NULLS LAST], true, 0
 
 (17) AdaptiveSparkPlan
-Output [4]: [state_abbrev#269, mean_ili#631, corr_tmax_ili#645, count#689L]
+Output [4]: [state_abbrev#294, mean_ili#656, corr_tmax_ili#670, count#714L]
 Arguments: isFinalPlan=false
 
 

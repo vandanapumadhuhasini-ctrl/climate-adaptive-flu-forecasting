@@ -3,7 +3,7 @@ package climaflu.mr;
 /**
  * Parses one GHCN-Daily yearly-CSV line: ID,DATE,ELEMENT,DATA_VALUE,M_FLAG,Q_FLAG,S_FLAG,OBS_TIME.
  * Applies the project's filter: US station, element in {TMAX, TMIN, PRCP}, empty quality flag.
- * The same rule is implemented in scala/BenchmarkWorkload.scala, scala/RddDatasetAudit.scala and python/benchmark_workload.py.
+ * The same rule is implemented in scala/BenchmarkWorkload.scala, scala/DataFrameConsistency.scala and python/benchmark_workload.py.
  */
 public final class GhcnRecord {
     public enum Outcome { KEPT, HEADER, MALFORMED, NOT_US, OTHER_ELEMENT, QC_FLAGGED }

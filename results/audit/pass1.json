@@ -44,9 +44,23 @@
     },
     {
       "area": "Consistency",
-      "check": "MR2 output SHA = typed Dataset SHA",
+      "check": "MR2 output SHA = Spark DataFrame join SHA",
       "claimed": "eb02de0659da",
       "measured": "eb02de0659da",
+      "pass": true
+    },
+    {
+      "area": "Consistency",
+      "check": "DataFrame rewrite reproduces existing HDFS tables",
+      "claimed": true,
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "Spark API",
+      "check": "RDD / typed-Dataset API calls in scala/, python/, dashboard/ (DataFrame only)",
+      "claimed": 0,
+      "measured": 0,
       "pass": true
     },
     {
@@ -280,6 +294,60 @@
       "pass": true
     },
     {
+      "area": "MLlib",
+      "check": "24 configurations (3 models x 2 feature sets x 4 horizons)",
+      "claimed": 24,
+      "measured": 24,
+      "pass": true
+    },
+    {
+      "area": "MLlib",
+      "check": "recomputed test RMSE = logged RMSE (all 24)",
+      "claimed": 0,
+      "measured": 0,
+      "pass": true
+    },
+    {
+      "area": "MLlib",
+      "check": "tuned RF + climate, h=1 (0.9240)",
+      "claimed": 0.924,
+      "measured": 0.924,
+      "pass": true
+    },
+    {
+      "area": "MLlib",
+      "check": "best MLlib model per horizon",
+      "claimed": "RF-all, GBT-all, RF-all, RF-all",
+      "measured": {
+        "1": "RandomForest-all",
+        "2": "GBT-all",
+        "3": "RandomForest-all",
+        "4": "RandomForest-all"
+      },
+      "pass": true
+    },
+    {
+      "area": "MLlib",
+      "check": "claim M1 (GNN beats best tuned MLlib) not supported",
+      "claimed": false,
+      "measured": false,
+      "pass": true
+    },
+    {
+      "area": "MLlib",
+      "check": "Linear Regression worst at every horizon",
+      "claimed": true,
+      "measured": true,
+      "pass": true
+    },
+    {
+      "area": "MLlib",
+      "check": "climate improves tuned RF at every horizon",
+      "claimed": true,
+      "measured": true,
+      "pass": true
+    },
+    {
       "area": "Veracity",
       "check": "WEIGHTED_ILI missing (99.85 %)",
       "claimed": 0.9985,
@@ -379,19 +447,19 @@
     },
     {
       "area": "Docs",
-      "check": "README states '21 / 21'",
-      "claimed": "21 / 21",
+      "check": "README states '19 / 19'",
+      "claimed": "19 / 19",
       "measured": true,
       "pass": true
     },
     {
       "area": "Docs",
-      "check": "compliance matrix rows VERIFIED",
-      "claimed": 21,
-      "measured": 21,
+      "check": "compliance matrix rows VERIFIED (all rows)",
+      "claimed": 19,
+      "measured": 19,
       "pass": true
     }
   ],
-  "passed": 49,
-  "total": 49
+  "passed": 58,
+  "total": 58
 }

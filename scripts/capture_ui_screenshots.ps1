@@ -8,7 +8,7 @@ $root = Split-Path -Parent $PSScriptRoot
 $out  = Join-Path $root "docs\screenshots"
 New-Item -ItemType Directory -Force $out | Out-Null
 $edge = "${env:ProgramFiles(x86)}\Microsoft\Edge\Application\msedge.exe"
-$profileDir = Join-Path $env:TEMP "climaflu-edge-headless"
+$profileDir = Join-Path $env:TEMP ("climaflu-edge-" + [guid]::NewGuid().ToString("N").Substring(0, 8))   # fresh profile: a reused one can stay locked and hang Edge
 
 $pages = [ordered]@{
     "hdfs_overview"      = "http://localhost:9870/dfshealth.html#tab-overview"

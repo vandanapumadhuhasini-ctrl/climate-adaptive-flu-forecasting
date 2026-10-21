@@ -89,12 +89,12 @@ def overview():
              f"median latency {ss['latency_arrival_to_committed_s']['median']} s", delta_color="off")
     c.metric("Variety — source formats", "3 + Parquet", "CSV · fixed-width · Parquet", delta_color="off")
     d.metric("Veracity — QC-flagged values removed", f"{c1['QC_FLAGGED']:,}",
-             ("5 engines agree " + badge(cc["element_year"]["all_match"] and cc["state_year_element"]["all_match"])), delta_color="off")
+             ("MapReduce = Spark DataFrame " + badge(cc["element_year"]["all_match"] and cc["state_year_element"]["all_match"])), delta_color="off")
 
     st.subheader("Pipeline")
     st.graphviz_chart("""digraph { rankdir=LR; node [shape=box, style="rounded,filled", fillcolor="#eef3fb", color="#2a78d6", fontname="Helvetica", fontsize=11];
       raw [label="NOAA GHCN-Daily 34.6 GB\\nCDC ILINet, stations"]; hdfs [label="HDFS\\n3 DataNodes, repl 2"];
-      mr [label="Hadoop MapReduce\\non YARN (Java)"]; spark [label="Spark (Scala)\\nRDD · DataFrame · Dataset"];
+      mr [label="Hadoop MapReduce\\non YARN (Java)"]; spark [label="Spark (Scala)\\nDataFrame API"];
       stream [label="Structured Streaming\\nlive climate feed"]; feat [label="State-week features\\n+ weekly climate KNN graph"];
       ml [label="MLlib GBT · PyTorch GNN\\n+ ablations, 10 seeds"]; dash [label="Dashboard\\n(result files only)"];
       raw -> hdfs -> mr; hdfs -> spark -> feat -> ml -> dash; stream -> hdfs; mr -> dash [style=dashed, label="cross-check"]; }""")
@@ -106,7 +106,7 @@ def overview():
             ("Veracity (QC, audits, consistency)", cc["element_year"]["all_match"], "results/cross_engine_consistency.json"),
             ("Hadoop HDFS", cv["hdfs"]["fsck_status"] == "HEALTHY", "fsck + docs/screenshots/hdfs_*.png"),
             ("Hadoop MapReduce on YARN", all(j["succeeded"] for j in mr["jobs"]), "results/mapreduce_jobs.json"),
-            ("Spark RDD / DataFrame / typed Dataset", exists(f"{R}/spark_api_evidence.txt"), "results/spark_api_evidence.txt"),
+            ("Spark DataFrame API only (no RDD / typed Dataset)", exists(f"{R}/spark_api_evidence.txt"), "results/cross_engine_consistency.json"),
             ("Scala and Python", True, "scala/*.scala, python/**/*.py"),
             ("Spark ML", exists(f"{R}/rigour/predictions_spark/GBT-lags"), "scala/BaselineGBTv2.scala"),
             ("Performance tuning", exists(f"{R}/tuning_summary.json"), "results/tuning_summary.json"),
@@ -151,13 +151,13 @@ def batch():
             col.markdown(f"**{j['job']}**  \n`{j['yarn_app_id']}` · {badge(j['succeeded'])} · {j['wall_seconds']} s · "
                          f"{j['counters']['Launched map tasks']} map tasks · {j['counters']['HDFS: Number of bytes read'] / 1e9:.2f} GB read")
         ey, sy = cc["element_year"], cc["state_year_element"]
-        st.markdown("**The same computation in five implementations — SHA-256 of the sorted result**")
+        st.markdown("**The same computation in three engines — SHA-256 of the sorted result**")
         st.dataframe(pd.DataFrame([
             ("element × year", "Hadoop MapReduce (Java, YARN)", ey["sha256"]["hadoop_mapreduce_mr1"]),
-            ("element × year", "Spark RDD (Scala)", ey["sha256"]["spark_rdd"]),
+            ("element × year", "Spark DataFrame (Scala, groupBy/agg)", ey["sha256"]["spark_dataframe"]),
             ("element × year", "Spark DataFrame + pandas", ey["sha256"]["spark_dataframe_and_pandas_benchmark"]),
             ("state × year × element", "Hadoop MapReduce map-side join", sy["sha256"]["hadoop_mapreduce_mr2"]),
-            ("state × year × element", "Spark typed Dataset (joinWith + Aggregator)", sy["sha256"]["spark_typed_dataset"])],
+            ("state × year × element", "Spark DataFrame (broadcast join + groupBy/agg)", sy["sha256"]["spark_dataframe"])],
             columns=["Aggregate", "Implementation", "SHA-256"]), hide_index=True, use_container_width=True)
         st.success(f"element × year: all match = {ey['all_match']} · state × year × element: all match = {sy['all_match']} · "
                    f"{ey['rows_kept']:,} kept records")

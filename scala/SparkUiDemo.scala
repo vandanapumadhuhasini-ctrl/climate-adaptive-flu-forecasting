@@ -11,6 +11,7 @@ val byYear = w.groupBy(col("element"), substring(col(dateCol).cast("string"), 1,
 byYear.explain("formatted")
 byYear.show(12, truncate = false)
 println(s"SPARKUI | rows aggregated = ${byYear.agg(sum("count")).first().getLong(0)}")
-println("SPARKUI | UI ready on http://localhost:4040 for 120 s")
-Thread.sleep(120000)
+val holdSec = spark.conf.get("spark.demo.holdSeconds", "120").toInt   // --conf spark.demo.holdSeconds=600 for a longer demo
+println(s"SPARKUI | UI ready on http://localhost:4040 for $holdSec s")
+Thread.sleep(holdSec * 1000L)
 System.exit(0)

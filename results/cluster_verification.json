@@ -1,81 +1,81 @@
 {
-    "generated_at":  "2026-10-11T03:43:42.1390659Z",
+    "generated_at":  "2026-10-21T13:48:29.2786548Z",
     "containers":  [
                        {
                            "name":  "flu-dashboard",
                            "state":  "running",
-                           "status":  "Up 2 hours"
+                           "status":  "Up 51 minutes"
                        },
                        {
                            "name":  "flu-datanode1",
                            "state":  "running",
-                           "status":  "Up 24 hours (healthy)"
+                           "status":  "Up 51 minutes (healthy)"
                        },
                        {
                            "name":  "flu-datanode2",
                            "state":  "running",
-                           "status":  "Up 24 hours (healthy)"
+                           "status":  "Up 51 minutes (healthy)"
                        },
                        {
                            "name":  "flu-datanode3",
                            "state":  "running",
-                           "status":  "Up 24 hours (healthy)"
+                           "status":  "Up 51 minutes (healthy)"
                        },
                        {
                            "name":  "flu-historyserver",
                            "state":  "running",
-                           "status":  "Up 24 hours (healthy)"
+                           "status":  "Up 51 minutes (healthy)"
                        },
                        {
                            "name":  "flu-namenode",
                            "state":  "running",
-                           "status":  "Up 24 hours (healthy)"
+                           "status":  "Up 51 minutes (healthy)"
                        },
                        {
                            "name":  "flu-nodemanager",
                            "state":  "running",
-                           "status":  "Up 24 hours (healthy)"
+                           "status":  "Up 51 minutes (healthy)"
                        },
                        {
                            "name":  "flu-resourcemanager",
                            "state":  "running",
-                           "status":  "Up 24 hours (healthy)"
+                           "status":  "Up 51 minutes (healthy)"
                        },
                        {
                            "name":  "pytorch",
                            "state":  "running",
-                           "status":  "Up 24 hours"
+                           "status":  "Up 51 minutes"
                        },
                        {
                            "name":  "spark",
                            "state":  "running",
-                           "status":  "Up 23 hours"
+                           "status":  "Up 51 minutes"
                        }
                    ],
     "hdfs":  {
                  "safemode":  "Safe mode is OFF",
                  "live_datanodes":  3,
                  "dead_datanodes":  0,
-                 "dfs_used":  "78017136667 (72.66 GB)",
+                 "dfs_used":  "78086168576 (72.72 GB)",
                  "under_replicated":  0,
                  "corrupt_replicas":  0,
                  "missing_blocks":  0,
                  "fsck_status":  "HEALTHY",
-                 "fsck_total_files":  8349,
-                 "fsck_total_blocks":  "8545",
-                 "fsck_avg_replication":  "2.9441779",
+                 "fsck_total_files":  8437,
+                 "fsck_total_blocks":  "8593",
+                 "fsck_avg_replication":  "2.9444897",
                  "sizes":  {
                                "/flu_project/raw":  {
                                                         "logical_bytes":  34586251521,
                                                         "with_replicas_bytes":  69172503042
                                                     },
                                "/flu_project":  {
-                                                    "logical_bytes":  37264862133,
-                                                    "with_replicas_bytes":  77208138896
+                                                    "logical_bytes":  37286026582,
+                                                    "with_replicas_bytes":  77271632243
                                                 },
                                "/flu_project/processed":  {
-                                                              "logical_bytes":  999015881,
-                                                              "with_replicas_bytes":  2997047643
+                                                              "logical_bytes":  1005539962,
+                                                              "with_replicas_bytes":  3016619886
                                                           }
                            },
                  "raw_logical_GB":  34.59,

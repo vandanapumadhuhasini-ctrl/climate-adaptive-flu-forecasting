@@ -30,7 +30,7 @@ Outputs: `docs/COURSE_COMPLIANCE_MATRIX.md` (21/21 VERIFIED on 2026-10-11), `doc
 | Stage | Command | Output |
 |---|---|---|
 | MapReduce on YARN | `docker exec flu-namenode bash /opt/mapreduce/run_mapreduce.sh` then `.\scripts\summarize_mapreduce.ps1` | results/mapreduce_jobs.json |
-| RDD + typed Dataset | `.\scripts\run_scala.ps1 RddDatasetAudit -DriverMemory 3g -Preload lib/ClimaFluTypes.scala` | results/cross_engine_consistency.json |
+| DataFrame consistency | `.\scripts\run_scala.ps1 DataFrameConsistency -DriverMemory 3g` (after `StationsPreprocess` and `Preprocess` with `-Conf spark.flu.outputSuffix=_dfcheck`) | results/cross_engine_consistency.json |
 | Veracity / Variety / DF plan | `.\scripts\run_scala.ps1 VeracityAudit -DriverMemory 3g` | results/veracity_audit.json, variety_inventory.json |
 | Benchmark | `.\benchmarks\run_benchmark.ps1` + analyze_benchmark.py | results/benchmark_summary.json |
 | Tuning (~8 h) | `.\benchmarks\run_tuning.ps1` + analyze_tuning.py | results/tuning_summary.json |

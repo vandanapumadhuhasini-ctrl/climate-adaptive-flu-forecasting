@@ -57,10 +57,17 @@ check("MapReduce", "kept rows = weather_cleaned rows", 303631696, cnt["KEPT"], c
 cc = js("results/cross_engine_consistency.json")
 mr1_sha = sha_lines([l.rstrip("\n") for l in open(f"{P}/mapreduce/output/mr1_element_year.txt") if l.strip()])
 mr2_sha = sha_lines([l.rstrip("\n") for l in open(f"{P}/mapreduce/output/mr2_state_year_element.txt") if l.strip()])
-check("Consistency", "MR1 output SHA (recomputed from MR text output)", cc["element_year"]["sha256"]["spark_rdd"][:12], mr1_sha[:12],
-      mr1_sha == cc["element_year"]["sha256"]["spark_rdd"])
-check("Consistency", "MR2 output SHA = typed Dataset SHA", cc["state_year_element"]["sha256"]["spark_typed_dataset"][:12], mr2_sha[:12],
-      mr2_sha == cc["state_year_element"]["sha256"]["spark_typed_dataset"])
+check("Consistency", "MR1 output SHA (recomputed from MR text output)", cc["element_year"]["sha256"]["spark_dataframe"][:12], mr1_sha[:12],
+      mr1_sha == cc["element_year"]["sha256"]["spark_dataframe"])
+check("Consistency", "MR2 output SHA = Spark DataFrame join SHA", cc["state_year_element"]["sha256"]["spark_dataframe"][:12], mr2_sha[:12],
+      mr2_sha == cc["state_year_element"]["sha256"]["spark_dataframe"])
+check("Consistency", "DataFrame rewrite reproduces existing HDFS tables", True, cc["dataframe_rewrite_equivalence"]["all_identical"],
+      cc["dataframe_rewrite_equivalence"]["all_identical"] is True)
+API_RE = re.compile(r"\.rdd\b|sparkContext\.textFile|\bsc\.textFile|read\.textFile|reduceByKey|parallelize|joinWith|groupByKey|" r"\bDataset\[|\.as\[|Aggregator\[|mapPartitions|toDebugString")
+api_hits = [f"{p}:{i}" for p in glob.glob(f"{P}/scala/**/*.scala", recursive=True) + glob.glob(f"{P}/python/**/*.py", recursive=True)
+            + glob.glob(f"{P}/dashboard/*.py") for i, line in enumerate(open(p, encoding="utf-8", errors="ignore"), 1)
+            if API_RE.search(line) and not line.lstrip().startswith(("//", "#")) and "API_RE" not in line]
+check("Spark API", "RDD / typed-Dataset API calls in scala/, python/, dashboard/ (DataFrame only)", 0, len(api_hits), not api_hits)
 
 # ---------------------------------------------------------------- benchmark (raw per-run records)
 runs = jl("results/benchmark/runs.jsonl")
@@ -171,6 +178,32 @@ lag = js("results/v3/lag_scan.json")
 check("Forecast v3", "lag scan chose lead 0 everywhere", "all 0", lag["chosen_leads"], all(v == 0 for h in lag["chosen_leads"].values() for v in h.values()))
 check("Forecast v3", "Spark h=1 features identical to v2", True, lag["v2_consistency_h1"]["identical"], lag["v2_consistency_h1"]["identical"])
 
+# ---------------------------------------------------------------- MLlib comparison (A2): own RMSE from the raw predictions
+if os.path.exists(f"{P}/results/mllib/summary.json"):
+    sel = [json.loads(l) for l in open(f"{P}/results/mllib/selection.jsonl") if l.strip()]
+    check("MLlib", "24 configurations (3 models x 2 feature sets x 4 horizons)", 24, len(sel), len(sel) == 24)
+    mism = 0
+    for s in sel:
+        d = load_pred(f"{P}/results/mllib/predictions/{s['model']}_{s['features']}_h{s['horizon']}/*.parquet")
+        mism += not near(rmse(d.pred, d.target), s["test_rmse"], 1e-9)
+    check("MLlib", "recomputed test RMSE = logged RMSE (all 24)", 0, mism, mism == 0)
+    rf1 = load_pred(f"{P}/results/mllib/predictions/RandomForest_all_h1/*.parquet")
+    check("MLlib", "tuned RF + climate, h=1 (0.9240)", 0.9240, round(rmse(rf1.pred, rf1.target), 4), near(rmse(rf1.pred, rf1.target), 0.9240, 5e-5))
+    best_by_h = {}
+    for h in (1, 2, 3, 4):
+        cand = {f"{s['model']}-{s['features']}": s["test_rmse"] for s in sel if s["horizon"] == h}
+        best_by_h[h] = min(cand, key=cand.get)
+    check("MLlib", "best MLlib model per horizon", "RF-all, GBT-all, RF-all, RF-all", best_by_h,
+          best_by_h == {1: "RandomForest-all", 2: "GBT-all", 3: "RandomForest-all", 4: "RandomForest-all"})
+    ml = js("results/mllib/summary.json")
+    check("MLlib", "claim M1 (GNN beats best tuned MLlib) not supported", False, ml["claim_M1"]["holds"], ml["claim_M1"]["holds"] is False)
+    lin_worst = all(min(s["test_rmse"] for s in sel if s["horizon"] == h and s["model"] == "LinearRegression") >
+                    max(s["test_rmse"] for s in sel if s["horizon"] == h and s["model"] != "LinearRegression") for h in (1, 2, 3, 4))
+    check("MLlib", "Linear Regression worst at every horizon", True, lin_worst, lin_worst)
+    rf_clim = all(next(s["test_rmse"] for s in sel if s["horizon"] == h and s["model"] == "RandomForest" and s["features"] == "all") <
+                  next(s["test_rmse"] for s in sel if s["horizon"] == h and s["model"] == "RandomForest" and s["features"] == "lags") for h in (1, 2, 3, 4))
+    check("MLlib", "climate improves tuned RF at every horizon", True, rf_clim, rf_clim)
+
 # ---------------------------------------------------------------- veracity
 va = js("results/veracity_audit.json")
 check("Veracity", "WEIGHTED_ILI missing (99.85 %)", 0.9985, round(va["ilinet_raw"]["weighted_ili_missing_fraction"], 4),
@@ -180,12 +213,13 @@ check("Veracity", "NY+NYC weeks raw / merged (827 / 782)", "827/782",
       va["ilinet_raw"]["new_york_plus_nyc_duplicate_state_weeks_raw"] == 827 and va["ilinet_raw"]["new_york_plus_nyc_duplicate_state_weeks_after_finaljoin_filter"] == 782)
 
 # ---------------------------------------------------------------- numbers written in README
-readme = open(f"{P}/README.md", encoding="utf-8").read()
-for s in ("34.6 GB", "968.9 M", "303.6 M", "90.1 s", "1,619 s", "18.0×", "285 s", "5.97 M", "38.1 k", "15.3 k", "4.7 s", "p = 0.017", "21 / 21"):
-    check("Docs", f"README states '{s}'", s, s in readme, s in readme)
 matrix = open(f"{P}/docs/COURSE_COMPLIANCE_MATRIX.md", encoding="utf-8").read()
+n_rows = sum(1 for l in matrix.splitlines() if l.startswith("| ") and l.rstrip().endswith("VERIFIED** |"))
+readme = open(f"{P}/README.md", encoding="utf-8").read()
+for s in ("34.6 GB", "968.9 M", "303.6 M", "90.1 s", "1,619 s", "18.0×", "285 s", "5.97 M", "38.1 k", "15.3 k", "4.7 s", "p = 0.017", f"{n_rows} / {n_rows}"):
+    check("Docs", f"README states '{s}'", s, s in readme, s in readme)
 n_ver = matrix.count("**VERIFIED**")
-check("Docs", "compliance matrix rows VERIFIED", 21, n_ver, n_ver == 21 and "NOT VERIFIED" not in matrix)
+check("Docs", "compliance matrix rows VERIFIED (all rows)", n_rows, n_ver, n_ver == n_rows and n_rows >= 19 and "NOT VERIFIED" not in matrix)
 
 os.makedirs(f"{P}/results/audit", exist_ok=True)
 with open(f"{P}/results/audit/pass1.json", "w") as f:

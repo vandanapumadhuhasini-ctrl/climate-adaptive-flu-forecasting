@@ -12,10 +12,12 @@ def write(name: String, s: String): Unit = Files.write(Paths.get(s"/opt/results/
 def j(s: String) = "\"" + s.replace("\\", "\\\\").replace("\"", "\\\"") + "\""
 
 // ---------------------------------------------------------------- ILINet raw (first line is a title, then CSV)
-def fluViewCsv(path: String): DataFrame = {
+def fluViewCsv(path: String): DataFrame = {               // DataFrame API only (same approach as Preprocess.scala)
   val lines = spark.read.text(path)
   val title = lines.first().getString(0)
-  spark.read.option("header", "true").csv(lines.filter(col("value") =!= title).as[String](org.apache.spark.sql.Encoders.STRING))
+  val tmp   = s"$base/tmp/veracity/" + path.split("/").last.stripSuffix(".csv")
+  lines.filter(col("value") =!= title).coalesce(1).write.mode("overwrite").text(tmp)
+  spark.read.option("header", "true").csv(tmp)
 }
 val iliRaw = fluViewCsv(s"$base/raw/ILINet.csv")
 val iliRows = iliRaw.count()

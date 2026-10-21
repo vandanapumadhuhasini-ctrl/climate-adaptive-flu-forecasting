@@ -21,6 +21,7 @@ $evidence = @(
     "results/streaming_summary.json", "results/benchmark_summary.json", "results/benchmark/kernel_oom_log.txt",
     "results/tuning_summary.json", "results/rigour/summary.json", "results/rigour/prepare_summary.json",
     "results/v3/summary.json", "results/v3/lag_scan.json", "results/hdfs_publish_manifest.json", "docs/V3_RESULTS.md", "docs/BASE_PAPER.md",
+    "results/mllib/summary.json", "results/mllib/selection.jsonl", "docs/MLLIB_RESULTS.md",
     "docs/BENCHMARK_PROTOCOL.md", "docs/RESEARCH_PROTOCOL.md", "docs/RIGOUR_RESULTS.md", "docs/TUNING_RESULTS.md",
     "docs/HADOOP_SPARK_API_EVIDENCE.md", "docs/screenshots/hdfs_overview_final.png", "docs/screenshots/hdfs_datanodes.png",
     "docs/screenshots/yarn_nodes.png", "docs/screenshots/yarn_timeline.png", "docs/screenshots/yarn_timeline_mr1.png",

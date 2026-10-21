@@ -1,0 +1,39 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/21 13:04:03 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Spark context Web UI available at http://1d530106f37b:4040
+Spark context available as 'sc' (master = local[*], app id = local-1792587844033).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.1
+      /_/
+         
+Using Scala version 2.12.18 (OpenJDK 64-Bit Server VM, Java 11.0.22)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> // Entering paste mode (ctrl-D to finish)
+
+
+// Exiting paste mode, now interpreting.
+
+[Stage 4:>                                                          (0 + 1) / 1]                                                                                Simulated weekly drops, chronological order: (2026,27), (2026,28), (2026,29), (2026,30), (2026,31)
+Staged week_1 <- YEAR=2026 WEEK=27 (55 rows)
+Staged week_2 <- YEAR=2026 WEEK=28 (55 rows)
+Staged week_3 <- YEAR=2026 WEEK=29 (55 rows)
+Staged week_4 <- YEAR=2026 WEEK=30 (55 rows)
+Staged week_5 <- YEAR=2026 WEEK=31 (55 rows)
+hdfsBase: String = hdfs://namenode:9000
+rawDir: String = hdfs://namenode:9000/flu_project/raw
+suffix: String = _dfcheck
+streamingBase: String = hdfs://namenode:9000/flu_project/streaming_source_dfcheck
+import org.apache.spark.sql.DataFrame
+import org.apache.spark.sql.functions._
+readFluViewCsv: (path: String)org.apache.spark.sql.DataFrame
+iliRaw: org.apache.spark.sql.DataFrame = [REGION TYPE: string, REGION: string ... 13 more fields]
+recentWeeks: Array[(Int, Int)] = Array((2026,27), (2026,28), (2026,29), (2026,30), (2026,31))
+
+scala> :quit

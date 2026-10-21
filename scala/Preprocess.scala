@@ -7,17 +7,21 @@
 
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions._
-import spark.implicits._
 
 val hdfsBase      = "hdfs://namenode:9000"
 val rawDir        = s"$hdfsBase/flu_project/raw"
 val processedDir  = s"$hdfsBase/flu_project/processed"
+val suffix        = spark.conf.get("spark.flu.outputSuffix", "")    // e.g. _dfcheck for verification runs
 
+// FluView CSVs start with a free-text title line before the real header. DataFrame API only: drop the title line as
+// text, write the remaining lines to a temporary HDFS folder, and read that back with the normal CSV reader
+// (same parser and schema inference as reading the cleaned lines directly).
 def readFluViewCsv(path: String): DataFrame = {
-  val rawLines  = spark.read.text(path)
-  val firstLine = rawLines.first().getString(0)
-  val dataLines = rawLines.filter(col("value") =!= firstLine)
-  spark.read.option("header", "true").option("inferSchema", "true").csv(dataLines.as[String])
+  val rawLines = spark.read.text(path)
+  val title    = rawLines.first().getString(0)
+  val tmp      = s"$hdfsBase/flu_project/tmp/fluview$suffix/" + path.split("/").last.stripSuffix(".csv")
+  rawLines.filter(col("value") =!= title).coalesce(1).write.mode("overwrite").text(tmp)
+  spark.read.option("header", "true").option("inferSchema", "true").csv(tmp)
 }
 
 def cleanDataset(df: DataFrame): DataFrame = {
@@ -51,7 +55,7 @@ val ili = cleanDataset(iliRaw)
 
 println(s"ILINet rows after cleaning: ${ili.count()}")
 ili.show(5, truncate = false)
-ili.write.mode("overwrite").parquet(s"$processedDir/ILINet")
+ili.write.mode("overwrite").parquet(s"$processedDir/ILINet$suffix")
 
 println("=== Processing ICL_NREVSS_Clinical_Labs.csv ===")
 val clinicalRaw = readFluViewCsv(s"$rawDir/ICL_NREVSS_Clinical_Labs.csv")
@@ -62,7 +66,7 @@ val clinical = cleanDataset(clinicalRaw)
   .withColumn("TOTAL_SPECIMENS", col("`TOTAL SPECIMENS`").cast("double"))
   .withColumn("PERCENT_POSITIVE", col("`PERCENT POSITIVE`").cast("double"))
   .filter(col("REGION").isNotNull)
-clinical.write.mode("overwrite").parquet(s"$processedDir/ICL_NREVSS_Clinical_Labs")
+clinical.write.mode("overwrite").parquet(s"$processedDir/ICL_NREVSS_Clinical_Labs$suffix")
 println(s"Clinical Labs rows after cleaning: ${clinical.count()}")
 
 println("=== Processing ICL_NREVSS_Public_Health_Labs.csv ===")
@@ -71,7 +75,7 @@ val publicHealth = cleanDataset(publicRaw)
   .withColumnRenamed("REGION TYPE", "REGION_TYPE")
   .withColumn("TOTAL_SPECIMENS", col("`TOTAL SPECIMENS`").cast("double"))
   .filter(col("REGION").isNotNull)
-publicHealth.write.mode("overwrite").parquet(s"$processedDir/ICL_NREVSS_Public_Health_Labs")
+publicHealth.write.mode("overwrite").parquet(s"$processedDir/ICL_NREVSS_Public_Health_Labs$suffix")
 println(s"Public Health Labs rows after cleaning: ${publicHealth.count()}")
 
 println("=== Processing ICL_NREVSS_Combined_prior_to_2015_16.csv ===")
@@ -83,7 +87,7 @@ val combined = cleanDataset(combinedRaw)
   .withColumn("TOTAL_SPECIMENS", col("`TOTAL SPECIMENS`").cast("double"))
   .withColumn("PERCENT_POSITIVE", col("`PERCENT POSITIVE`").cast("double"))
   .filter(col("REGION").isNotNull)
-combined.write.mode("overwrite").parquet(s"$processedDir/ICL_NREVSS_Combined_prior_to_2015_16")
+combined.write.mode("overwrite").parquet(s"$processedDir/ICL_NREVSS_Combined_prior_to_2015_16$suffix")
 println(s"Combined (pre-2015-16) rows after cleaning: ${combined.count()}")
 
 println("=== ALL DATASETS PREPROCESSED AND WRITTEN TO HDFS ===")

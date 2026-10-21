@@ -1,7 +1,7 @@
 {
-  "applications": 34,
-  "total_tasks": 86992,
-  "total_input_GB": 443.32,
+  "applications": 43,
+  "total_tasks": 162376,
+  "total_input_GB": 577.74,
   "apps": [
     {
       "app_id": "local-1791573656925",
@@ -444,6 +444,123 @@
       "end_ms": 1791693387717,
       "duration_s": 17.6,
       "job": "AuditPass2"
+    },
+    {
+      "app_id": "local-1791693654055",
+      "jobs": 0,
+      "stages": 0,
+      "tasks": 0,
+      "failed_tasks": 0,
+      "shuffle_write_bytes": 0,
+      "input_bytes": 0,
+      "start_ms": 1791693653231,
+      "end_ms": 1791693862950,
+      "duration_s": 209.7,
+      "job": "PublishResultsToHdfs"
+    },
+    {
+      "app_id": "local-1791693889930",
+      "jobs": 0,
+      "stages": 0,
+      "tasks": 0,
+      "failed_tasks": 0,
+      "shuffle_write_bytes": 0,
+      "input_bytes": 0,
+      "start_ms": 1791693889146,
+      "end_ms": 1791694089232,
+      "duration_s": 200.1,
+      "job": "PublishResultsToHdfs"
+    },
+    {
+      "app_id": "local-1791959631863",
+      "jobs": 12878,
+      "stages": 24964,
+      "tasks": 74500,
+      "failed_tasks": 0,
+      "shuffle_write_bytes": 5222397895,
+      "input_bytes": 64793526451,
+      "start_ms": 1791959629319,
+      "end_ms": 1791961494650,
+      "duration_s": 1865.3,
+      "job": "MLlibComparison"
+    },
+    {
+      "app_id": "local-1791961713541",
+      "jobs": 6,
+      "stages": 6,
+      "tasks": 68,
+      "failed_tasks": 0,
+      "shuffle_write_bytes": 66269,
+      "input_bytes": 10617780,
+      "start_ms": 1791961712030,
+      "end_ms": 1791962604736,
+      "duration_s": 892.7,
+      "job": "SparkUiDemo"
+    },
+    {
+      "app_id": "local-1792587472929",
+      "jobs": 7,
+      "stages": 7,
+      "tasks": 15,
+      "failed_tasks": 0,
+      "shuffle_write_bytes": 6735,
+      "input_bytes": 46104632,
+      "start_ms": 1792587471805,
+      "end_ms": 1792587485031,
+      "duration_s": 13.2,
+      "job": "StationsPreprocess"
+    },
+    {
+      "app_id": "local-1792587497657",
+      "jobs": 38,
+      "stages": 38,
+      "tasks": 40,
+      "failed_tasks": 0,
+      "shuffle_write_bytes": 12987170,
+      "input_bytes": 21937307,
+      "start_ms": 1792587496710,
+      "end_ms": 1792587519947,
+      "duration_s": 23.2,
+      "job": "Preprocess"
+    },
+    {
+      "app_id": "local-1792587533642",
+      "jobs": 70,
+      "stages": 70,
+      "tasks": 645,
+      "failed_tasks": 0,
+      "shuffle_write_bytes": 39444857,
+      "input_bytes": 69198483982,
+      "start_ms": 1792587532797,
+      "end_ms": 1792587762633,
+      "duration_s": 229.8,
+      "job": "DataFrameConsistency"
+    },
+    {
+      "app_id": "local-1792587785691",
+      "jobs": 61,
+      "stages": 61,
+      "tasks": 95,
+      "failed_tasks": 0,
+      "shuffle_write_bytes": 656334,
+      "input_bytes": 323670957,
+      "start_ms": 1792587784921,
+      "end_ms": 1792587809950,
+      "duration_s": 25.0,
+      "job": "VeracityAudit"
+    },
+    {
+      "app_id": "local-1792587844033",
+      "jobs": 21,
+      "stages": 21,
+      "tasks": 21,
+      "failed_tasks": 0,
+      "shuffle_write_bytes": 21073,
+      "input_bytes": 34556932,
+      "start_ms": 1792587843144,
+      "end_ms": 1792587859107,
+      "duration_s": 16.0,
+      "job": "PrepareStreamingDemo"
     }
   ]
 }

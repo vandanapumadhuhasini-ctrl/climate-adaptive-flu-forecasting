@@ -1,17 +1,18 @@
 :paste
 val hdfsBase = "hdfs://namenode:9000"
 val rawDir = s"$hdfsBase/flu_project/raw"
-val streamingBase = s"$hdfsBase/flu_project/streaming_source"
+val suffix = spark.conf.get("spark.flu.outputSuffix", "")   // _dfcheck = verification run, originals untouched
+val streamingBase = s"$hdfsBase/flu_project/streaming_source$suffix"
 
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions._
-import spark.implicits._
-
+// streaming v1 (superseded by StreamingV2.scala); DataFrame API only (same title-line approach as Preprocess.scala)
 def readFluViewCsv(path: String): DataFrame = {
   val rawLines = spark.read.text(path)
-  val firstLine = rawLines.first().getString(0)
-  val dataLines = rawLines.filter(col("value") =!= firstLine)
-  spark.read.option("header", "true").option("inferSchema", "true").csv(dataLines.as[String])
+  val title    = rawLines.first().getString(0)
+  val tmp      = s"$hdfsBase/flu_project/tmp/streaming_v1$suffix/" + path.split("/").last.stripSuffix(".csv")
+  rawLines.filter(col("value") =!= title).coalesce(1).write.mode("overwrite").text(tmp)
+  spark.read.option("header", "true").option("inferSchema", "true").csv(tmp)
 }
 
 val iliRaw = readFluViewCsv(s"$rawDir/ILINet.csv")

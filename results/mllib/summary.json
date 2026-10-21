@@ -1,0 +1,441 @@
+{
+  "per_horizon": {
+    "1": {
+      "LinearRegression-lags": {
+        "rmse": 1.001582025215099,
+        "mae": 0.5243239545363072,
+        "r2": 0.7452492531153181,
+        "val_rmse": 1.0866075563591604,
+        "chosen": {
+          "elasticNetParam": 0.5,
+          "regParam": 0.0
+        },
+        "fit_seconds": 14.715411977,
+        "selection_test_rmse": 1.0015820252150998
+      },
+      "LinearRegression-all": {
+        "rmse": 0.9919331574791601,
+        "mae": 0.5157518435847014,
+        "r2": 0.7501339579163888,
+        "val_rmse": 1.0957107821905614,
+        "chosen": {
+          "regParam": 0.0,
+          "elasticNetParam": 0.0
+        },
+        "fit_seconds": 1.441948269,
+        "selection_test_rmse": 0.9919331574791619
+      },
+      "RandomForest-lags": {
+        "rmse": 0.9354103190527197,
+        "mae": 0.49299822569449847,
+        "r2": 0.7777986284967777,
+        "val_rmse": 1.0742601550186943,
+        "chosen": {
+          "numTrees": 50,
+          "maxDepth": 10
+        },
+        "fit_seconds": 7.589080164,
+        "selection_test_rmse": 0.9354103190527192
+      },
+      "RandomForest-all": {
+        "rmse": 0.9240173538877693,
+        "mae": 0.4851046456036951,
+        "r2": 0.7831783337470051,
+        "val_rmse": 1.0862593724352583,
+        "chosen": {
+          "numTrees": 200,
+          "maxDepth": 10
+        },
+        "fit_seconds": 36.092488659,
+        "selection_test_rmse": 0.9240173538877693
+      },
+      "GBT-lags": {
+        "rmse": 0.9294273885782541,
+        "mae": 0.493223954611131,
+        "r2": 0.780631960195159,
+        "val_rmse": 1.0846423499740587,
+        "chosen": {
+          "maxIter": 100,
+          "maxDepth": 3
+        },
+        "fit_seconds": 24.696340725,
+        "selection_test_rmse": 0.9294273885782549
+      },
+      "GBT-all": {
+        "rmse": 0.9288469616916448,
+        "mae": 0.49653174368221975,
+        "r2": 0.7809058650791244,
+        "val_rmse": 1.093506871068088,
+        "chosen": {
+          "maxDepth": 3,
+          "maxIter": 50
+        },
+        "fit_seconds": 10.501432808,
+        "selection_test_rmse": 0.9288469616916454
+      },
+      "ClimaFlu-GNN (10 seeds)": {
+        "rmse": 0.9236041228614829,
+        "rmse_sd": 0.015900807582066225,
+        "mae": 0.4782898258406248,
+        "r2": 0.7833144345047836
+      }
+    },
+    "2": {
+      "LinearRegression-lags": {
+        "rmse": 1.2522324021428706,
+        "mae": 0.6753851652071687,
+        "r2": 0.6036187936395158,
+        "val_rmse": 1.4098879177636996,
+        "chosen": {
+          "elasticNetParam": 0.0,
+          "regParam": 0.0
+        },
+        "fit_seconds": 0.282827742,
+        "selection_test_rmse": 1.2522324021428706
+      },
+      "LinearRegression-all": {
+        "rmse": 1.2350577963660945,
+        "mae": 0.6624626073550649,
+        "r2": 0.6144171191840176,
+        "val_rmse": 1.42900783967786,
+        "chosen": {
+          "regParam": 0.0,
+          "elasticNetParam": 0.5
+        },
+        "fit_seconds": 0.158893349,
+        "selection_test_rmse": 1.2350577963660974
+      },
+      "RandomForest-lags": {
+        "rmse": 1.1458066818029318,
+        "mae": 0.6206398409286982,
+        "r2": 0.6681316151055329,
+        "val_rmse": 1.327151397786694,
+        "chosen": {
+          "numTrees": 100,
+          "maxDepth": 10
+        },
+        "fit_seconds": 14.013500405,
+        "selection_test_rmse": 1.1458066818029318
+      },
+      "RandomForest-all": {
+        "rmse": 1.130633580872137,
+        "mae": 0.6055618466940679,
+        "r2": 0.676862812074734,
+        "val_rmse": 1.3287099176960309,
+        "chosen": {
+          "maxDepth": 10,
+          "numTrees": 200
+        },
+        "fit_seconds": 35.249726584,
+        "selection_test_rmse": 1.1306335808721364
+      },
+      "GBT-lags": {
+        "rmse": 1.1497727375860922,
+        "mae": 0.6313943292376265,
+        "r2": 0.6658302033795778,
+        "val_rmse": 1.3313918159480742,
+        "chosen": {
+          "maxDepth": 3,
+          "maxIter": 50
+        },
+        "fit_seconds": 10.404729604,
+        "selection_test_rmse": 1.1497727375860927
+      },
+      "GBT-all": {
+        "rmse": 1.1295234082769028,
+        "mae": 0.6152200005333887,
+        "r2": 0.6774970793273671,
+        "val_rmse": 1.335960236877123,
+        "chosen": {
+          "maxDepth": 3,
+          "maxIter": 100
+        },
+        "fit_seconds": 20.935190908,
+        "selection_test_rmse": 1.1295234082769028
+      },
+      "ClimaFlu-GNN (10 seeds)": {
+        "rmse": 1.1450811529525915,
+        "rmse_sd": 0.025646888969572186,
+        "mae": 0.6082485398589191,
+        "r2": 0.6684021199773624
+      }
+    },
+    "3": {
+      "LinearRegression-lags": {
+        "rmse": 1.4009198553497724,
+        "mae": 0.7853006469869368,
+        "r2": 0.5051455234792706,
+        "val_rmse": 1.6741037256242233,
+        "chosen": {
+          "elasticNetParam": 0.0,
+          "regParam": 0.1
+        },
+        "fit_seconds": 0.226533748,
+        "selection_test_rmse": 1.4009198553497724
+      },
+      "LinearRegression-all": {
+        "rmse": 1.3778203507977833,
+        "mae": 0.7684771570779423,
+        "r2": 0.5213301071485805,
+        "val_rmse": 1.700964141813849,
+        "chosen": {
+          "regParam": 0.01,
+          "elasticNetParam": 1.0
+        },
+        "fit_seconds": 0.158125692,
+        "selection_test_rmse": 1.377820350797783
+      },
+      "RandomForest-lags": {
+        "rmse": 1.2798463552560977,
+        "mae": 0.7158325423582346,
+        "r2": 0.586984268407388,
+        "val_rmse": 1.5440053698221843,
+        "chosen": {
+          "numTrees": 100,
+          "maxDepth": 10
+        },
+        "fit_seconds": 13.491517164,
+        "selection_test_rmse": 1.2798463552560964
+      },
+      "RandomForest-all": {
+        "rmse": 1.2665331367190908,
+        "mae": 0.6995533447803478,
+        "r2": 0.5955321227090232,
+        "val_rmse": 1.5325326927147802,
+        "chosen": {
+          "numTrees": 100,
+          "maxDepth": 10
+        },
+        "fit_seconds": 15.473623634,
+        "selection_test_rmse": 1.2665331367190893
+      },
+      "GBT-lags": {
+        "rmse": 1.2869256514038279,
+        "mae": 0.7270217614155985,
+        "r2": 0.5824025510246302,
+        "val_rmse": 1.5448445210970811,
+        "chosen": {
+          "maxIter": 100,
+          "maxDepth": 3
+        },
+        "fit_seconds": 20.501724568,
+        "selection_test_rmse": 1.2869256514038263
+      },
+      "GBT-all": {
+        "rmse": 1.2673695643346785,
+        "mae": 0.7090878591323727,
+        "r2": 0.5949977193003355,
+        "val_rmse": 1.5506695806685764,
+        "chosen": {
+          "maxIter": 100,
+          "maxDepth": 3
+        },
+        "fit_seconds": 20.453498623,
+        "selection_test_rmse": 1.2673695643346783
+      },
+      "ClimaFlu-GNN (10 seeds)": {
+        "rmse": 1.2507144931441623,
+        "rmse_sd": 0.021581390253225523,
+        "mae": 0.6878402050308696,
+        "r2": 0.605466714686104
+      }
+    },
+    "4": {
+      "LinearRegression-lags": {
+        "rmse": 1.5321820984609626,
+        "mae": 0.8869029281839259,
+        "r2": 0.4109119318332124,
+        "val_rmse": 1.8641603474757336,
+        "chosen": {
+          "elasticNetParam": 0.5,
+          "regParam": 0.1
+        },
+        "fit_seconds": 0.190312396,
+        "selection_test_rmse": 1.5321820984609615
+      },
+      "LinearRegression-all": {
+        "rmse": 1.5298160980363718,
+        "mae": 0.8857508614429055,
+        "r2": 0.41272987041772746,
+        "val_rmse": 1.8858260173390542,
+        "chosen": {
+          "elasticNetParam": 1.0,
+          "regParam": 0.1
+        },
+        "fit_seconds": 0.162089573,
+        "selection_test_rmse": 1.5298160980363713
+      },
+      "RandomForest-lags": {
+        "rmse": 1.3784376008278263,
+        "mae": 0.7976059957880466,
+        "r2": 0.5232028168325458,
+        "val_rmse": 1.7050318135333142,
+        "chosen": {
+          "numTrees": 50,
+          "maxDepth": 10
+        },
+        "fit_seconds": 6.77228503,
+        "selection_test_rmse": 1.3784376008278263
+      },
+      "RandomForest-all": {
+        "rmse": 1.3657105467546176,
+        "mae": 0.7784026492204582,
+        "r2": 0.5319666661461158,
+        "val_rmse": 1.689359944888087,
+        "chosen": {
+          "numTrees": 50,
+          "maxDepth": 10
+        },
+        "fit_seconds": 7.823918289,
+        "selection_test_rmse": 1.3657105467546156
+      },
+      "GBT-lags": {
+        "rmse": 1.3842280832732035,
+        "mae": 0.8081287381148382,
+        "r2": 0.519188584162853,
+        "val_rmse": 1.7093337359258607,
+        "chosen": {
+          "maxDepth": 3,
+          "maxIter": 100
+        },
+        "fit_seconds": 20.100697602,
+        "selection_test_rmse": 1.384228083273202
+      },
+      "GBT-all": {
+        "rmse": 1.3822843413109978,
+        "mae": 0.8040134701145343,
+        "r2": 0.5205379530554854,
+        "val_rmse": 1.70928139281347,
+        "chosen": {
+          "maxIter": 50,
+          "maxDepth": 3
+        },
+        "fit_seconds": 10.265356257,
+        "selection_test_rmse": 1.3822843413110009
+      },
+      "ClimaFlu-GNN (10 seeds)": {
+        "rmse": 1.353632614087537,
+        "rmse_sd": 0.036655800900097346,
+        "mae": 0.7711400264782869,
+        "r2": 0.5399049022385884
+      }
+    }
+  },
+  "claim_M1": {
+    "holds": false,
+    "by_horizon": [
+      {
+        "horizon": 1,
+        "best_mllib": "RandomForest-all",
+        "best_mllib_rmse": 0.9240173538877693,
+        "gnn_mean_rmse": 0.9236041228614829,
+        "dm_p": 0.5608636148392981,
+        "boot_ci": [
+          -0.03384248450718502,
+          0.017093459952887087
+        ],
+        "wins": 6,
+        "dm_p_holm": 1.0,
+        "verdict": "no significant difference"
+      },
+      {
+        "horizon": 2,
+        "best_mllib": "GBT-all",
+        "best_mllib_rmse": 1.1295234082769028,
+        "gnn_mean_rmse": 1.1450811529525915,
+        "dm_p": 0.6499410000379557,
+        "boot_ci": [
+          -0.028110383299399685,
+          0.029621544465999586
+        ],
+        "wins": 4,
+        "dm_p_holm": 1.0,
+        "verdict": "no significant difference"
+      },
+      {
+        "horizon": 3,
+        "best_mllib": "RandomForest-all",
+        "best_mllib_rmse": 1.2665331367190908,
+        "gnn_mean_rmse": 1.2507144931441623,
+        "dm_p": 0.05563610893679272,
+        "boot_ci": [
+          -0.0461767248916488,
+          0.0038756742508032366
+        ],
+        "wins": 8,
+        "dm_p_holm": 0.1828562352178166,
+        "verdict": "no significant difference"
+      },
+      {
+        "horizon": 4,
+        "best_mllib": "RandomForest-all",
+        "best_mllib_rmse": 1.3657105467546176,
+        "gnn_mean_rmse": 1.353632614087537,
+        "dm_p": 0.04571405880445415,
+        "boot_ci": [
+          -0.04610223658073011,
+          3.869573837566276e-05
+        ],
+        "wins": 6,
+        "dm_p_holm": 0.1828562352178166,
+        "verdict": "no significant difference"
+      }
+    ]
+  },
+  "importances_h1": {
+    "LinearRegression-lags": {
+      "ILI_lag1": 108.93319936988587,
+      "ILI_lag2": -107.97076451935855,
+      "ILI_lag3": -0.02491763350773765,
+      "ILI_lag4": -0.08433159347612922,
+      "ILI_trend": -107.90420462100529
+    },
+    "RandomForest-lags": {
+      "ILI_lag1": 0.4345711868248919,
+      "ILI_lag2": 0.2690012778432853,
+      "ILI_lag3": 0.12435926070267873,
+      "ILI_lag4": 0.11113373418263996,
+      "ILI_trend": 0.0609345404465039
+    },
+    "GBT-lags": {
+      "ILI_lag1": 0.7388755130913399,
+      "ILI_lag2": 0.07233561595493172,
+      "ILI_lag3": 0.01923918184462668,
+      "ILI_lag4": 0.08753082864697737,
+      "ILI_trend": 0.08201886046212437
+    },
+    "LinearRegression-all": {
+      "ILI_lag1": 0.5000013912919669,
+      "ILI_lag2": 0.44563062067468545,
+      "ILI_lag3": -0.027381055952098683,
+      "ILI_lag4": -0.07889478518367565,
+      "ILI_trend": 0.5125050870314822,
+      "TMAX": -0.004176097856483413,
+      "TMIN": -0.0035161856872860477,
+      "PRCP": -0.01703687790689505,
+      "DIURNAL_RANGE": -0.01532242187245287
+    },
+    "RandomForest-all": {
+      "ILI_lag1": 0.40112269571919834,
+      "ILI_lag2": 0.25300844457891875,
+      "ILI_lag3": 0.11577218212640521,
+      "ILI_lag4": 0.0886619804025209,
+      "ILI_trend": 0.07632807069185639,
+      "TMAX": 0.018407432703162033,
+      "TMIN": 0.01774873027632486,
+      "PRCP": 0.014286770363537777,
+      "DIURNAL_RANGE": 0.014663693138075775
+    },
+    "GBT-all": {
+      "ILI_lag1": 0.7046271114067002,
+      "ILI_lag2": 0.054697051449305985,
+      "ILI_lag3": 0.011554287114621618,
+      "ILI_lag4": 0.06463916917653113,
+      "ILI_trend": 0.06738977166802972,
+      "TMAX": 0.027865789858924146,
+      "TMIN": 0.03448294710092309,
+      "PRCP": 0.02054773034222954,
+      "DIURNAL_RANGE": 0.014196141882734303
+    }
+  }
+}

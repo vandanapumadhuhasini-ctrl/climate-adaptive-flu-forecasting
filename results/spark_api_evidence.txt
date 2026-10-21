@@ -1,115 +1,134 @@
-=== RDD lineage (toDebugString), printed before any action ===
-(268) ShuffledRDD[5] at reduceByKey at <console>:58 []
-  +-(268) MapPartitionsRDD[4] at flatMap at <console>:57 []
-      |   MapPartitionsRDD[3] at filter at <console>:56 []
-      |   MapPartitionsRDD[2] at map at <console>:55 []
-      |   hdfs://namenode:9000/flu_project/raw/weather/*.csv MapPartitionsRDD[1] at textFile at <console>:54 []
-      |   hdfs://namenode:9000/flu_project/raw/weather/*.csv HadoopRDD[0] at textFile at <console>:54 []
-
-=== Typed Dataset physical plan (explain formatted) ===
+=== A. element x year (DataFrame API): physical plan ===
 == Physical Plan ==
-AdaptiveSparkPlan (18)
-+- ObjectHashAggregate (17)
-   +- Exchange (16)
-      +- ObjectHashAggregate (15)
-         +- AppendColumnsWithObject (14)
-            +- MapElements (13)
-               +- DeserializeToObject (12)
-                  +- Project (11)
-                     +- BroadcastHashJoin Inner BuildRight (10)
-                        :- Filter (3)
-                        :  +- Filter (2)
-                        :     +- Scan csv  (1)
-                        +- BroadcastExchange (9)
-                           +- Filter (8)
-                              +- SerializeFromObject (7)
-                                 +- MapPartitions (6)
-                                    +- DeserializeToObject (5)
-                                       +- Scan text  (4)
+AdaptiveSparkPlan (7)
++- HashAggregate (6)
+   +- Exchange (5)
+      +- HashAggregate (4)
+         +- Project (3)
+            +- Filter (2)
+               +- Scan csv  (1)
 
 
 (1) Scan csv 
-Output [5]: [id#0, date#1, element#2, value#3L, qflag#5]
+Output [5]: [id#0, date#1, element#2, value#3, qflag#5]
 Batched: false
 Location: InMemoryFileIndex [hdfs://namenode:9000/flu_project/raw/weather/2000.csv, ... 25 entries]
-ReadSchema: struct<id:string,date:string,element:string,value:bigint,qflag:string>
+PushedFilters: [IsNotNull(id), IsNotNull(date), IsNotNull(value), StringStartsWith(id,US), In(element, [PRCP,TMAX,TMIN]), Or(IsNull(qflag),EqualTo(qflag,))]
+ReadSchema: struct<id:string,date:string,element:string,value:string,qflag:string>
 
 (2) Filter
-Input [5]: [id#0, date#1, element#2, value#3L, qflag#5]
-Condition : $line15.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$Lambda$4799/0x000000084192c040@78761e4e.apply
+Input [5]: [id#0, date#1, element#2, value#3, qflag#5]
+Condition : (((((((isnotnull(id#0) AND isnotnull(date#1)) AND isnotnull(value#3)) AND StartsWith(id#0, US)) AND element#2 IN (TMAX,TMIN,PRCP)) AND (isnull(qflag#5) OR (qflag#5 = ))) AND (length(date#1) >= 4)) AND isnotnull(cast(value#3 as bigint)))
 
-(3) Filter
-Input [5]: [id#0, date#1, element#2, value#3L, qflag#5]
-Condition : isnotnull(id#0)
+(3) Project
+Output [3]: [substring(date#1, 1, 4) AS year#27, element#2, cast(value#3 as bigint) AS v#17L]
+Input [5]: [id#0, date#1, element#2, value#3, qflag#5]
+
+(4) HashAggregate
+Input [3]: [year#27, element#2, v#17L]
+Keys [2]: [element#2, year#27]
+Functions [2]: [partial_count(1), partial_sum(v#17L)]
+Aggregate Attributes [2]: [count#44L, sum#45L]
+Results [4]: [element#2, year#27, count#46L, sum#47L]
+
+(5) Exchange
+Input [4]: [element#2, year#27, count#46L, sum#47L]
+Arguments: hashpartitioning(element#2, year#27, 200), ENSURE_REQUIREMENTS, [plan_id=15]
+
+(6) HashAggregate
+Input [4]: [element#2, year#27, count#46L, sum#47L]
+Keys [2]: [element#2, year#27]
+Functions [2]: [count(1), sum(v#17L)]
+Aggregate Attributes [2]: [count(1)#36L, sum(v#17L)#38L]
+Results [4]: [element#2, year#27, count(1)#36L AS n#37L, sum(v#17L)#38L AS s#39L]
+
+(7) AdaptiveSparkPlan
+Output [4]: [element#2, year#27, n#37L, s#39L]
+Arguments: isFinalPlan=false
+
+
+
+=== B. state x year x element (DataFrame API, broadcast join): physical plan ===
+== Physical Plan ==
+AdaptiveSparkPlan (13)
++- HashAggregate (12)
+   +- Exchange (11)
+      +- HashAggregate (10)
+         +- Project (9)
+            +- BroadcastHashJoin Inner BuildRight (8)
+               :- Project (3)
+               :  +- Filter (2)
+               :     +- Scan csv  (1)
+               +- BroadcastExchange (7)
+                  +- Project (6)
+                     +- Filter (5)
+                        +- Scan text  (4)
+
+
+(1) Scan csv 
+Output [5]: [id#0, date#1, element#2, value#3, qflag#5]
+Batched: false
+Location: InMemoryFileIndex [hdfs://namenode:9000/flu_project/raw/weather/2000.csv, ... 25 entries]
+PushedFilters: [IsNotNull(id), IsNotNull(date), IsNotNull(value), StringStartsWith(id,US), In(element, [PRCP,TMAX,TMIN]), Or(IsNull(qflag),EqualTo(qflag,))]
+ReadSchema: struct<id:string,date:string,element:string,value:string,qflag:string>
+
+(2) Filter
+Input [5]: [id#0, date#1, element#2, value#3, qflag#5]
+Condition : (((((((isnotnull(id#0) AND isnotnull(date#1)) AND isnotnull(value#3)) AND StartsWith(id#0, US)) AND element#2 IN (TMAX,TMIN,PRCP)) AND (isnull(qflag#5) OR (qflag#5 = ))) AND (length(date#1) >= 4)) AND isnotnull(cast(value#3 as bigint)))
+
+(3) Project
+Output [4]: [id#0, substring(date#1, 1, 4) AS year#27, element#2, cast(value#3 as bigint) AS v#17L]
+Input [5]: [id#0, date#1, element#2, value#3, qflag#5]
 
 (4) Scan text 
-Output [1]: [value#39]
+Output [1]: [value#60]
 Batched: false
 Location: InMemoryFileIndex [hdfs://namenode:9000/flu_project/raw/weather/ghcnd-stations.txt]
+PushedFilters: [IsNotNull(value), StringStartsWith(value,US)]
 ReadSchema: struct<value:string>
 
-(5) DeserializeToObject
-Input [1]: [value#39]
-Arguments: value#39.toString, obj#48: java.lang.String
+(5) Filter
+Input [1]: [value#60]
+Condition : (((((isnotnull(value#60) AND (length(value#60) >= 40)) AND StartsWith(value#60, US)) AND (length(trim(substring(value#60, 39, 2), None)) > 0)) AND StartsWith(trim(substring(value#60, 1, 11), None), US)) AND isnotnull(trim(substring(value#60, 1, 11), None)))
 
-(6) MapPartitions
-Input [1]: [obj#48]
-Arguments: org.apache.spark.sql.Dataset$$Lambda$4813/0x0000000841934840@7b77b0ea, obj#49: $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$Station
+(6) Project
+Output [2]: [trim(substring(value#60, 1, 11), None) AS id#63, trim(substring(value#60, 39, 2), None) AS state#64]
+Input [1]: [value#60]
 
-(7) SerializeFromObject
-Input [1]: [obj#49]
-Arguments: [staticinvoke(class org.apache.spark.unsafe.types.UTF8String, StringType, fromString, knownnotnull(assertnotnull(input[0, $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$Station, true])).id, true, false, true) AS id#50, staticinvoke(class org.apache.spark.unsafe.types.UTF8String, StringType, fromString, knownnotnull(assertnotnull(input[0, $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$Station, true])).state, true, false, true) AS state#51]
+(7) BroadcastExchange
+Input [2]: [id#63, state#64]
+Arguments: HashedRelationBroadcastMode(List(input[0, string, true]),false), [plan_id=81]
 
-(8) Filter
-Input [2]: [id#50, state#51]
-Condition : isnotnull(id#50)
-
-(9) BroadcastExchange
-Input [2]: [id#50, state#51]
-Arguments: HashedRelationBroadcastMode(List(input[0, string, false]),false), [plan_id=59]
-
-(10) BroadcastHashJoin
+(8) BroadcastHashJoin
 Left keys [1]: [id#0]
-Right keys [1]: [id#50]
+Right keys [1]: [id#63]
 Join type: Inner
 Join condition: None
 
-(11) Project
-Output [2]: [named_struct(id, id#0, date, date#1, element, element#2, value, value#3L, qflag, qflag#5) AS _1#59, named_struct(id, id#50, state, state#51) AS _2#60]
-Input [7]: [id#0, date#1, element#2, value#3L, qflag#5, id#50, state#51]
+(9) Project
+Output [4]: [year#27, element#2, v#17L, state#64]
+Input [6]: [id#0, year#27, element#2, v#17L, id#63, state#64]
 
-(12) DeserializeToObject
-Input [2]: [_1#59, _2#60]
-Arguments: newInstance(class scala.Tuple2), obj#68: scala.Tuple2
+(10) HashAggregate
+Input [4]: [year#27, element#2, v#17L, state#64]
+Keys [3]: [state#64, year#27, element#2]
+Functions [2]: [partial_count(1), partial_sum(v#17L)]
+Aggregate Attributes [2]: [count#86L, sum#87L]
+Results [5]: [state#64, year#27, element#2, count#88L, sum#89L]
 
-(13) MapElements
-Input [1]: [obj#68]
-Arguments: $line15.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$Lambda$4861/0x0000000841965840@26893843, obj#69: $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$StateObs
+(11) Exchange
+Input [5]: [state#64, year#27, element#2, count#88L, sum#89L]
+Arguments: hashpartitioning(state#64, year#27, element#2, 200), ENSURE_REQUIREMENTS, [plan_id=86]
 
-(14) AppendColumnsWithObject
-Input [1]: [obj#69]
-Arguments: $line15.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$Lambda$4862/0x0000000841966040@3d4da817, [staticinvoke(class org.apache.spark.unsafe.types.UTF8String, StringType, fromString, knownnotnull(assertnotnull(input[0, $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$StateObs, true])).state, true, false, true) AS state#70, staticinvoke(class org.apache.spark.unsafe.types.UTF8String, StringType, fromString, knownnotnull(assertnotnull(input[0, $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$StateObs, true])).year, true, false, true) AS year#71, staticinvoke(class org.apache.spark.unsafe.types.UTF8String, StringType, fromString, knownnotnull(assertnotnull(input[0, $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$StateObs, true])).element, true, false, true) AS element#72, knownnotnull(assertnotnull(input[0, $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$StateObs, true])).value AS value#73L], [staticinvoke(class org.apache.spark.unsafe.types.UTF8String, StringType, fromString, input[0, java.lang.String, true], true, false, true) AS value#80]
+(12) HashAggregate
+Input [5]: [state#64, year#27, element#2, count#88L, sum#89L]
+Keys [3]: [state#64, year#27, element#2]
+Functions [2]: [count(1), sum(v#17L)]
+Aggregate Attributes [2]: [count(1)#77L, sum(v#17L)#79L]
+Results [5]: [state#64, year#27, element#2, count(1)#77L AS n#78L, sum(v#17L)#79L AS s#80L]
 
-(15) ObjectHashAggregate
-Input [5]: [state#70, year#71, element#72, value#73L, value#80]
-Keys [1]: [value#80]
-Functions [1]: [partial_countsumagg($line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$CountSumAgg$@7c5be362, Some(newInstance(class $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$StateObs)), Some(class $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$StateObs), Some(StructType(StructField(state,StringType,true),StructField(year,StringType,true),StructField(element,StringType,true),StructField(value,LongType,false))), knownnotnull(assertnotnull(input[0, $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$CountSum, true])).n, knownnotnull(assertnotnull(input[0, $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$CountSum, true])).s, newInstance(class $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$CountSum), if (isnull(input[0, $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$CountSum, true])) null else named_struct(n, knownnotnull(input[0, $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$CountSum, true]).n, s, knownnotnull(input[0, $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$CountSum, true]).s), StructField(n,LongType,false), StructField(s,LongType,false), true, 0, 0)]
-Aggregate Attributes [1]: [buf#99]
-Results [2]: [value#80, buf#100]
-
-(16) Exchange
-Input [2]: [value#80, buf#100]
-Arguments: hashpartitioning(value#80, 200), ENSURE_REQUIREMENTS, [plan_id=67]
-
-(17) ObjectHashAggregate
-Input [2]: [value#80, buf#100]
-Keys [1]: [value#80]
-Functions [1]: [countsumagg($line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$CountSumAgg$@7c5be362, Some(newInstance(class $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$StateObs)), Some(class $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$StateObs), Some(StructType(StructField(state,StringType,true),StructField(year,StringType,true),StructField(element,StringType,true),StructField(value,LongType,false))), knownnotnull(assertnotnull(input[0, $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$CountSum, true])).n, knownnotnull(assertnotnull(input[0, $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$CountSum, true])).s, newInstance(class $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$CountSum), if (isnull(input[0, $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$CountSum, true])) null else named_struct(n, knownnotnull(input[0, $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$CountSum, true]).n, s, knownnotnull(input[0, $line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$CountSum, true]).s), StructField(n,LongType,false), StructField(s,LongType,false), true, 0, 0)]
-Aggregate Attributes [1]: [CountSumAgg($line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$StateObs)#92]
-Results [2]: [value#80 AS key#94, CountSumAgg($line14.$read$$iw$$iw$$iw$$iw$$iw$$iw$$iw$$iw$StateObs)#92 AS cs#93]
-
-(18) AdaptiveSparkPlan
-Output [2]: [key#94, cs#93]
+(13) AdaptiveSparkPlan
+Output [5]: [state#64, year#27, element#2, n#78L, s#80L]
 Arguments: isFinalPlan=false
 
 

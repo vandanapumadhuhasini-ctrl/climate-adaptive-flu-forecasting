@@ -1,0 +1,100 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/14 07:08:32 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Spark context Web UI available at http://1d530106f37b:4040
+Spark context available as 'sc' (master = local[*], app id = local-1791961713541).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.1
+      /_/
+         
+Using Scala version 2.12.18 (OpenJDK 64-Bit Server VM, Java 11.0.22)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> // Entering paste mode (ctrl-D to finish)
+
+
+// Exiting paste mode, now interpreting.
+
+[Stage 0:>                                                          (0 + 1) / 1]                                                                                root
+ |-- stationId: string (nullable = true)
+ |-- obs_date: date (nullable = true)
+ |-- value_scaled: double (nullable = true)
+ |-- element: string (nullable = true)
+
+== Physical Plan ==
+AdaptiveSparkPlan (8)
++- Sort (7)
+   +- Exchange (6)
+      +- HashAggregate (5)
+         +- Exchange (4)
+            +- HashAggregate (3)
+               +- Project (2)
+                  +- Scan parquet  (1)
+
+
+(1) Scan parquet 
+Output [2]: [obs_date#1, element#3]
+Batched: true
+Location: InMemoryFileIndex [hdfs://namenode:9000/flu_project/processed/weather_cleaned]
+ReadSchema: struct<obs_date:date>
+
+(2) Project
+Output [2]: [element#3, substring(cast(obs_date#1 as string), 1, 4) AS _groupingexpression#19]
+Input [2]: [obs_date#1, element#3]
+
+(3) HashAggregate
+Input [2]: [element#3, _groupingexpression#19]
+Keys [2]: [element#3, _groupingexpression#19]
+Functions [1]: [partial_count(1)]
+Aggregate Attributes [1]: [count#20L]
+Results [3]: [element#3, _groupingexpression#19, count#21L]
+
+(4) Exchange
+Input [3]: [element#3, _groupingexpression#19, count#21L]
+Arguments: hashpartitioning(element#3, _groupingexpression#19, 200), ENSURE_REQUIREMENTS, [plan_id=17]
+
+(5) HashAggregate
+Input [3]: [element#3, _groupingexpression#19, count#21L]
+Keys [2]: [element#3, _groupingexpression#19]
+Functions [1]: [count(1)]
+Aggregate Attributes [1]: [count(1)#13L]
+Results [3]: [element#3, _groupingexpression#19 AS year#8, count(1)#13L AS count#14L]
+
+(6) Exchange
+Input [3]: [element#3, year#8, count#14L]
+Arguments: rangepartitioning(element#3 ASC NULLS FIRST, year#8 ASC NULLS FIRST, 200), ENSURE_REQUIREMENTS, [plan_id=20]
+
+(7) Sort
+Input [3]: [element#3, year#8, count#14L]
+Arguments: [element#3 ASC NULLS FIRST, year#8 ASC NULLS FIRST], true, 0
+
+(8) AdaptiveSparkPlan
+Output [3]: [element#3, year#8, count#14L]
+Arguments: isFinalPlan=false
+
+
+[Stage 1:>                                                        (0 + 24) / 32][Stage 1:===================>                                    (11 + 21) / 32][Stage 1:=====================>                                  (12 + 20) / 32][Stage 1:========================>                               (14 + 18) / 32][Stage 1:==========================>                             (15 + 17) / 32][Stage 1:============================>                           (16 + 16) / 32][Stage 1:=============================>                          (17 + 15) / 32][Stage 1:=================================>                      (19 + 13) / 32][Stage 1:===================================>                    (20 + 12) / 32][Stage 1:====================================>                   (21 + 11) / 32][Stage 1:======================================>                 (22 + 10) / 32][Stage 1:==========================================>              (24 + 8) / 32][Stage 1:============================================>            (25 + 7) / 32][Stage 1:================================================>        (27 + 5) / 32][Stage 1:===================================================>     (29 + 3) / 32]                                                                                +-------+----+-------+
+|element|year|count  |
++-------+----+-------+
+|PRCP   |2000|3228185|
+|PRCP   |2001|3246052|
+|PRCP   |2002|3310729|
+|PRCP   |2003|3373856|
+|PRCP   |2004|3570192|
+|PRCP   |2005|3728744|
+|PRCP   |2006|3979067|
+|PRCP   |2007|4486000|
+|PRCP   |2008|5432084|
+|PRCP   |2009|6036672|
+|PRCP   |2010|6361297|
+|PRCP   |2011|6345738|
++-------+----+-------+
+only showing top 12 rows
+
+[Stage 4:>                                                        (0 + 24) / 32][Stage 4:=====>                                                   (3 + 24) / 32][Stage 4:==========>                                              (6 + 24) / 32][Stage 4:================>                                        (9 + 23) / 32][Stage 4:===================>                                    (11 + 21) / 32][Stage 4:=====================>                                  (12 + 20) / 32][Stage 4:========================>                               (14 + 18) / 32][Stage 4:==========================>                             (15 + 17) / 32][Stage 4:============================>                           (16 + 16) / 32][Stage 4:=============================>                          (17 + 15) / 32][Stage 4:===============================>                        (18 + 14) / 32][Stage 4:=================================>                      (19 + 13) / 32][Stage 4:===================================>                    (20 + 12) / 32][Stage 4:====================================>                   (21 + 11) / 32][Stage 4:======================================>                 (22 + 10) / 32][Stage 4:==========================================>              (24 + 8) / 32][Stage 4:=====================================================>   (30 + 2) / 32]                                                                                SPARKUI | rows aggregated = 303631696
+SPARKUI | UI ready on http://localhost:4040 for 600 s

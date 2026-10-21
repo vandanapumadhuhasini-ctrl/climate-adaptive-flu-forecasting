@@ -1,0 +1,56 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/21 12:58:16 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Spark context Web UI available at http://1d530106f37b:4040
+Spark context available as 'sc' (master = local[*], app id = local-1792587497657).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.1
+      /_/
+         
+Using Scala version 2.12.18 (OpenJDK 64-Bit Server VM, Java 11.0.22)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> // Entering paste mode (ctrl-D to finish)
+
+
+// Exiting paste mode, now interpreting.
+
+=== Processing ILINet.csv ===
+[Stage 0:>                                                          (0 + 1) / 1]                                                                                [Stage 4:>                                                          (0 + 1) / 1][Stage 4:===========================================================(1 + 0) / 1]                                                                                ILINet rows after cleaning: 44808
++-----------+-----------+----+----+------------+--------------+-------+---------+---------+--------+---------+------+--------+-------------+--------------+--------------+
+|REGION_TYPE|REGION     |YEAR|WEEK|WEIGHTED_ILI|UNWEIGHTED_ILI|AGE 0-4|AGE 25-49|AGE 25-64|AGE 5-24|AGE 50-64|AGE 65|ILITOTAL|NUM_PROVIDERS|TOTAL PATIENTS|TOTAL_PATIENTS|
++-----------+-----------+----+----+------------+--------------+-------+---------+---------+--------+---------+------+--------+-------------+--------------+--------------+
+|States     |Montana    |2010|41  |NULL        |0.180963      |NULL   |NULL     |NULL     |NULL    |NULL     |NULL  |5.0     |7            |2763          |2763.0        |
+|States     |Utah       |2010|42  |NULL        |0.440583      |NULL   |NULL     |NULL     |NULL    |NULL     |NULL  |36.0    |20           |8171          |8171.0        |
+|States     |Texas      |2010|44  |NULL        |2.36381       |NULL   |NULL     |NULL     |NULL    |NULL     |NULL  |1218.0  |99           |51527         |51527.0       |
+|States     |Connecticut|2010|45  |NULL        |0.319562      |NULL   |NULL     |NULL     |NULL    |NULL     |NULL  |14.0    |19           |4381          |4381.0        |
+|States     |Montana    |2010|46  |NULL        |0.10993       |NULL   |NULL     |NULL     |NULL    |NULL     |NULL  |3.0     |6            |2729          |2729.0        |
++-----------+-----------+----+----+------------+--------------+-------+---------+---------+--------+---------+------+--------+-------------+--------------+--------------+
+only showing top 5 rows
+
+[Stage 15:>                                                         (0 + 2) / 2]                                                                                === Processing ICL_NREVSS_Clinical_Labs.csv ===
+Clinical Labs rows after cleaning: 30564
+=== Processing ICL_NREVSS_Public_Health_Labs.csv ===
+Public Health Labs rows after cleaning: 605
+=== Processing ICL_NREVSS_Combined_prior_to_2015_16.csv ===
+Combined (pre-2015-16) rows after cleaning: 14094
+=== ALL DATASETS PREPROCESSED AND WRITTEN TO HDFS ===
+import org.apache.spark.sql.DataFrame
+import org.apache.spark.sql.functions._
+hdfsBase: String = hdfs://namenode:9000
+rawDir: String = hdfs://namenode:9000/flu_project/raw
+processedDir: String = hdfs://namenode:9000/flu_project/processed
+suffix: String = _dfcheck
+readFluViewCsv: (path: String)org.apache.spark.sql.DataFrame
+cleanDataset: (df: org.apache.spark.sql.DataFrame)org.apache.spark.sql.DataFrame
+iliRaw: org.apache.spark.sql.DataFrame = [REGION TYPE: string, REGION: string ... 13 more fields]
+ili: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [REGION_TYPE: string, REGION: string ... 14 more fields]
+clinicalRaw: org.apache.spark.sql.DataFrame = [REGION TYPE: string, REGION: string ... 8 more fields]
+clinical: org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] = [REGI...
+
+scala> :quit

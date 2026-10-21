@@ -37,10 +37,8 @@ A row is VERIFIED only when its evidence file exists.
 | Veracity | **DONE**: `results/veracity_audit.json` (re-measured: WEIGHTED_ILI 99.85% missing, NY+NYC 827 raw / 782 merged weeks, 0 dup keys, 0 implausible values) |
 | Hadoop HDFS | Done (3 DataNodes, HEALTHY, 34.59 GB raw). Screenshots + results/cluster_verification.json DONE |
 | Hadoop MapReduce on YARN | **DONE 2026-10-10**: 2 Java jobs (combiner + custom Writable; map-side join via distributed cache), 268 maps each, `results/mapreduce_jobs.json` |
-| Spark RDD | **DONE**: textFile→map→filter→flatMap→reduceByKey, lineage in `results/spark_api_evidence.txt` |
-| Spark DataFrame | Done (all jobs, benchmark workload). Typed + DF plans captured |
-| Dataset API (typed) | **DONE**: case classes, `joinWith` broadcast, typed `Aggregator`; plan shows DeserializeToObject/MapElements/ObjectHashAggregate |
-| Cross-engine consistency | **DONE**: MR1 = RDD = DataFrame = pandas (SHA `a5c81104…`), MR2 = typed Dataset (SHA `eb02de06…`), `results/cross_engine_consistency.json`, `docs/HADOOP_SPARK_API_EVIDENCE.md` |
+| Spark API | **DataFrame API only** (professor's requirement, 2026-10-21). The RDD/typed-Dataset code was rewritten with DataFrames (`StationsPreprocess`, `Preprocess`, `VeracityAudit`, `PrepareStreamingDemo`, `AuditPass2`) and `RddDatasetAudit` + `scala/lib/ClimaFluTypes.scala` were removed. `audit_project.py` and `build_compliance_matrix.py` scan `scala/`, `python/`, `dashboard/` for RDD/Dataset calls (must be 0) |
+| Cross-engine consistency | MR1 = Spark DataFrame = pandas, MR2 = Spark DataFrame broadcast join, and the rewritten jobs' `_dfcheck` tables must equal the existing HDFS tables: `scala/DataFrameConsistency.scala` → `results/cross_engine_consistency.json`, `docs/HADOOP_SPARK_API_EVIDENCE.md` |
 | Scala AND Python | Done (Scala Spark jobs; Python PyG + pandas) |
 | Spark ML | Done (MLlib GBT). Could add a 2nd MLlib model (RF / LR) |
 | Performance tuning | **DONE 2026-10-11**: partitions {8,24,96,384} × {none, MEMORY_AND_DISK} + Spark defaults, 3 repeats, 25 runs; `docs/TUNING_RESULTS.md`, `results/tuning_summary.json` |
@@ -124,7 +122,7 @@ scripts/                01-04 old, 05-09 empty placeholders, drip.sh broken (CRL
 mapreduce/ streaming/ benchmarks/ paper/   EMPTY
 ```
 
-Scala: `Preprocess` (ILINet), `WeatherPreprocess`, `WeatherAggregate`, `FinalJoin`, `GraphConstruction`, `BaselineModel`, `PrepareStreamingDemo`,
+Scala: `Preprocess` (ILINet), `StationsPreprocess` (run before `WeatherPreprocess`), `WeatherPreprocess`, `WeatherAggregate`, `FinalJoin`, `GraphConstruction`, `BaselineModel`, `PrepareStreamingDemo`,
 `StreamingIngest`, `BenchmarkSpark`; diagnostics `CheckIliNulls`, `CheckYearRange`, `CheckDuplicates`, `VerifyNyMerge`.
 Python: `prepare_data.py`, `train_model.py`, `benchmark_pandas.py` (naive), `benchmark_pandas_optimized.py`.
 HDFS `/flu_project/`: `raw`, `processed`, `streaming_source`, `streaming_incoming`, `streaming_checkpoint`, `streaming_output`.
@@ -145,8 +143,8 @@ Always run through the runner (logs to `logs/`, Spark event log to `results/spar
 - **Do not** use `Get-Content -Raw ... | docker exec -i spark ...`: PowerShell prepends a BOM, `:paste` fails (`illegal character '﻿'`)
   and the REPL silently runs line by line. The runner uses `cmd /c "... < file"` instead.
 - End scripts with `System.exit(0)`. Pass `-DriverMemory 3g` while the Hadoop cluster runs (the runner default 4g can be OOM-killed); `persist(DISK_ONLY)` for big frames.
-- Typed Datasets: Spark 3.5 cannot encode case classes defined in the same `:paste` block (NPE in `OuterScopes`).
-  Put them in `scala/lib/*.scala` and preload: `.\scripts\run_scala.ps1 RddDatasetAudit -DriverMemory 3g -Preload lib/ClimaFluTypes.scala`.
+- **DataFrame API only**: no `.rdd`, `sparkContext.textFile`, `.as[T]`, `joinWith`, `Aggregator`. Fixed-width files: `spark.read.text` + `substring`; CSVs with a title line: filter the text, write it to `/flu_project/tmp/...`, read that folder with `spark.read.csv`.
+- Extra Spark settings: `-Conf key=value` (e.g. `-Conf spark.flu.outputSuffix=_dfcheck` writes `processed/<table>_dfcheck` instead of overwriting).
 - Logs written by PowerShell 5 `Tee-Object`/`Out-File` default to UTF-16; `run_scala.ps1` now writes plain bytes via cmd.
 - Write each stage's evidence as JSON to `/opt/results/<stage>.json` (= `results\` on the host). Confirm HDFS outputs with `hdfs dfs -ls` + row count.
 
@@ -172,7 +170,9 @@ docker exec flu-namenode hadoop jar /opt/hadoop-3.2.1/share/hadoop/mapreduce/had
 ```
 **Step 3 evidence regeneration:**
 ```powershell
-.\scripts\run_scala.ps1 RddDatasetAudit -DriverMemory 3g -Preload lib/ClimaFluTypes.scala   # -> results\cross_engine_consistency.json
+.\scripts\run_scala.ps1 StationsPreprocess -DriverMemory 3g -Conf spark.flu.outputSuffix=_dfcheck
+.\scripts\run_scala.ps1 Preprocess -DriverMemory 3g -Conf spark.flu.outputSuffix=_dfcheck
+.\scripts\run_scala.ps1 DataFrameConsistency -DriverMemory 3g                     # -> results\cross_engine_consistency.json
 docker run --rm -v "C:/Project/flu-hadoop-project:/proj" climaflu-pytorch:1.0 python /proj/python/build_api_evidence.py
 .\benchmarks\run_tuning.ps1                                              # resumable, disk watchdog; ~8 h for the full grid
 docker run --rm -v "C:/Project/flu-hadoop-project:/proj" climaflu-pytorch:1.0 python /proj/python/analyze_tuning.py
@@ -226,7 +226,12 @@ Features built in Spark on HDFS (`scala/LagAwareFeaturesV3.scala` → `/flu_proj
 to the v2 Python table (39,365 rows, max |diff| 0). Lag scan (≤ 2021) chose **lead 0 for every feature and horizon**.
 160 neural runs + Spark GBT per horizon (`scala/BaselineGBTv3.scala`). Holm-adjusted claims: **N1 NO** (models identical),
 **N2 NO** (climate gain grows with horizon: h=3 1.251 vs 1.293, 10/10 seeds, raw p 0.028, Holm 0.080), **N3 NO**,
-**N4 YES at h = 3** (GNN 1.251 vs GBT 1.289, Holm p 0.017, 9/10 seeds).
+**N4 YES at h = 3** vs the fixed-setting GBT (GNN 1.251 vs GBT 1.289, Holm p 0.017, 9/10 seeds).
+
+**MLlib comparison (2026-10-14, amendment A2, `docs/MLLIB_RESULTS.md`, `scala/MLlibComparison.scala`):** Linear Regression,
+Random Forest, GBT x {lags, all} x h 1–4, tuned on 2022 (temporal hold-out), predictions in HDFS `processed/mllib_predictions`.
+Tuned RF/GBT with climate match the GNN (M1 NO at every horizon, e.g. h=1 RF-all 0.9240 vs GNN 0.9236; h=3 1.2665 vs 1.2507,
+Holm p 0.18); Linear Regression clearly worst; climate improves RF at all horizons. So N4 holds only against the fixed GBT.
 
 **Everything is in HDFS:** `scala/PublishResultsToHdfs.scala` copies all of `results/` (predictions, metrics, logs, Spark event
 logs; 840 files, 1.45 GB) to `/flu_project/results/` with `results/hdfs_publish_manifest.json` (SHA-256). Re-run it after any
@@ -245,7 +250,7 @@ Same workload (filter + group by element×year), equal 4 GB cap in fresh contain
 **Step 3 results (2026-10-10/11):**
 - MR1 707 s / MR2 760 s on YARN (268 rack-local maps each; 968,905,773 input records = KEPT + dropped, exact accounting);
   303,631,696 kept rows = `weather_cleaned` count; all 303,631,696 join to a state (78,567 stations per mapper).
-- Spark RDD 59.5 s, typed Dataset 212.1 s; SHAs match MapReduce exactly (see section 1).
+- Spark DataFrame aggregate and broadcast join; SHAs match MapReduce exactly (see section 1). (The earlier RDD 59.5 s / typed Dataset 212.1 s run was replaced by the DataFrame-only check.)
 - Tuning (no-persist, AQE off): 8→24→96→384 partitions = 510→363→346→326 s; **Spark defaults with AQE 285 s = fastest**.
   MEMORY_AND_DISK is 2.1–2.7× slower for 3 queries (cache build 423–728 s); per-query saving at P=384 is 24.3 s →
   break-even ≈ 18 queries; at P=8 the cache makes queries slower; P=24 + cache failed (`SparkOutOfMemoryError`, 3 GB heap).
@@ -300,7 +305,7 @@ Step 1 of section 10 (cluster verification) — **DONE 2026-10-10**: evidence in
 18 pytorch packages lost → `docker/pytorch/Dockerfile`. 19 PowerShell pipe BOM broke `:paste` → `scripts/run_scala.ps1`.
 20 YARN 0 active nodes (hyphen in env var name) → `hadoop.env` with `___` encoding; pi job SUCCEEDED.
 21 historyserver mapped on 19888 but listens on 8188 → port fixed.
-22 typed Dataset NPE in `OuterScopes` (case classes in the same `:paste`) → `scala/lib/ClimaFluTypes.scala` preloaded with `-i`.
+22 typed Dataset NPE in `OuterScopes` (case classes in the same `:paste`) → preloaded case classes; obsolete since 2026-10-21 (DataFrame API only).
 23 Spark driver 4g killed by the VM-wide OOM killer → 3g while the cluster runs.
 24 Part 06 Experiment B "6 GB" kills were VM-wide, not the container cap → kernel-log audit added, wording corrected.
 25 (2026-10-10) tuning v1 kept 12 shuffles per config inside the container → Docker VHDX filled E:, WSL crashed →
@@ -311,6 +316,9 @@ Step 1 of section 10 (cluster verification) — **DONE 2026-10-10**: evidence in
 28 Spark `partitionBy(col)` drops that column from the written files → partition on a copy (`day`) when files are reused.
 29 PowerShell 5 mangles `"` inside native arguments (inline `bash -c` scripts) → put the script in a `.sh` file, feed via `cmd /c "... < file"`.
 30 A bind mount nested inside a read-only bind mount cannot be created → dashboard code at `/app/code`, siblings for results/docs.
+31 (2026-10-21) Professor: DataFrame API only → RDD/typed-Dataset code rewritten, re-run with `-Conf spark.flu.outputSuffix=_dfcheck`:
+   us_stations + 4 FluView tables identical (`DataFrameConsistency` part C), MR1/MR2 SHAs unchanged (`a5c81104…`, `eb02de06…`),
+   VeracityAudit 48/48 values unchanged, PrepareStreamingDemo week_1..5 files byte-identical (md5).
 
 ## 9. Known weaknesses (reviewer will find these)
 

@@ -1,54 +1,14 @@
 :paste
 // =========================================================
-// WeatherPreprocess.scala
-// Big Data Analytics (23AID302) — Group 04
-// Part 01, Step 1: parse GHCN station metadata, filter to
-// US stations, extract station ID + STATE for the later
-// weather<->ILINet spatial join.
-//
-// Run with (from project root, PowerShell):
-//   Get-Content .\scala\WeatherPreprocess.scala -Raw | docker exec -i spark /opt/spark/bin/spark-shell --master local[*] --conf spark.hadoop.fs.defaultFS=hdfs://namenode:9000
-//
-// NOTE: spark-shell already provides a bound `spark` value —
-// do NOT redeclare it with SparkSession.builder()...getOrCreate().
+// WeatherPreprocess.scala — Big Data Analytics (23AID302), Group 04
+// Parse the yearly GHCN CSVs (DataFrame API), keep US TMAX/TMIN/PRCP without QC flags, scale values, then build
+// the state-week table. US station metadata comes from processed/us_stations, written by StationsPreprocess.scala
+// (run that first). Run: .\scripts\run_scala.ps1 WeatherPreprocess -DriverMemory 3g -Conf spark.local.dir=/opt/spark-local
 // =========================================================
-
-import spark.implicits._
 
 val hdfsBase     = "hdfs://namenode:9000"
 val rawDir       = s"$hdfsBase/flu_project/raw/weather"
 val processedDir = s"$hdfsBase/flu_project/processed"
-
-case class Station(stationId: String, state: String, lat: Double, lon: Double, name: String)
-
-val stationsRaw = spark.sparkContext.textFile(s"$rawDir/ghcnd-stations.txt")
-
-val parsed = stationsRaw.flatMap { line =>
-  try {
-    val id    = line.substring(0, 11).trim
-    val lat   = line.substring(12, 20).trim.toDouble
-    val lon   = line.substring(21, 30).trim.toDouble
-    val state = line.substring(38, 40).trim
-    val name  = line.substring(41, 71).trim
-    Some(Station(id, state, lat, lon, name))
-  } catch {
-    case _: Exception => None
-  }
-}
-
-val usStationsDF = parsed
-  .filter(s => s.stationId.startsWith("US") && s.state.nonEmpty)
-  .toDF()
-
-println(s"Total station records parsed: ${parsed.count()}")
-println(s"US stations retained: ${usStationsDF.count()}")
-
-usStationsDF.groupBy("state").count().orderBy($"state").show(60)
-usStationsDF.show(5, truncate = false)
-
-usStationsDF.write.mode("overwrite").parquet(s"$processedDir/us_stations")
-println(s"Written to $processedDir/us_stations")
-
 // ---------------------------------------------------------
 // Step 2: parse yearly weather CSVs, filter to TMAX/TMIN/PRCP,
 // drop QC-flagged records, scale values, keep US stations only

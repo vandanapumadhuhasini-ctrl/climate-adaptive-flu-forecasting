@@ -25,6 +25,13 @@ vy, vi, ss = js("results/veracity_audit.json"), js("results/variety_inventory.js
 bs, tu, rg = js("results/benchmark_summary.json"), js("results/tuning_summary.json"), js("results/rigour/summary.json")
 pr = js("results/rigour/prepare_summary.json")
 pub = js("results/hdfs_publish_manifest.json") if ok("results/hdfs_publish_manifest.json") else None
+mll = js("results/mllib/summary.json") if ok("results/mllib/summary.json") else None
+# DataFrame-only check: any RDD / typed-Dataset API call left in the Spark or Python code?
+import re
+API_RE = re.compile(r"\.rdd\b|sparkContext\.textFile|\bsc\.textFile|read\.textFile|reduceByKey|parallelize|joinWith|groupByKey|" r"\bDataset\[|\.as\[|Aggregator\[|mapPartitions|toDebugString")
+api_hits = [f"{p}:{i}" for p in glob.glob(f"{P}/scala/**/*.scala", recursive=True) + glob.glob(f"{P}/python/**/*.py", recursive=True)
+            + glob.glob(f"{P}/python_legacy/*.py") for i, line in enumerate(open(p, encoding="utf-8", errors="ignore"), 1)
+            if API_RE.search(line) and not line.lstrip().startswith(("//", "#")) and "API_RE" not in line]
 n_runs_v2 = sum(1 for l in open(f"{P}/results/rigour/runs.jsonl") if l.strip())
 n_runs_v3 = sum(1 for l in open(f"{P}/results/v3/runs.jsonl") if l.strip()) if ok("results/v3/runs.jsonl") else 0
 mr1, mr2 = mr["jobs"]
@@ -99,35 +106,30 @@ rows = [
      "results/spark_event_log_summary.json; results/spark-events/",
      f"{ev['total_tasks']:,} tasks, {ev['total_input_GB']} GB read across all applications",
      ev["applications"] > 0),
-    ("Spark RDD",
-     "textFile -> map -> filter -> flatMap -> reduceByKey over all raw CSVs (scala/RddDatasetAudit.scala)",
-     f"{cc['spark_app_id']}",
-     "results/spark_api_evidence.txt (toDebugString lineage); results/cross_engine_consistency.json",
-     f"{cc['element_year']['rows_kept']:,} rows in {cc['element_year']['spark_rdd_seconds']} s; SHA equals MapReduce",
-     ok("results/spark_api_evidence.txt") and cc["element_year"]["sha256"]["spark_rdd"] == cc["element_year"]["sha256"]["hadoop_mapreduce_mr1"]),
-    ("Spark DataFrame",
-     "all pipeline jobs; benchmark workload; per-state aggregation + broadcast join plan captured",
-     f"VeracityAudit {app('VeracityAudit')}; BenchmarkWorkload runs",
-     "results/spark_dataframe_plan.txt; results/benchmark_summary.json",
-     f"Catalyst plan with pushed filters + BroadcastHashJoin; 26-year benchmark {spark26['elapsed_median_s']:.1f} s",
-     ok("results/spark_dataframe_plan.txt")),
-    ("Dataset API (typed)",
-     "case classes Obs/Station/StateObs, joinWith(broadcast), typed Aggregator (scala/lib/ClimaFluTypes.scala)",
-     f"{cc['spark_app_id']}",
-     "results/spark_api_evidence.txt (DeserializeToObject / MapElements / ObjectHashAggregate)",
-     f"{cc['state_year_element']['groups']:,} groups, {cc['state_year_element']['rows_joined']:,} rows; SHA equals MapReduce MR2",
-     cc["state_year_element"]["all_match"]),
+    ("Spark DataFrame API (the only Spark API used)",
+     "every Spark job (cleaning, aggregation, joins, graph, features, streaming, MLlib, tuning) uses DataFrames; "
+     "consistency job scala/DataFrameConsistency.scala; RDD/typed-Dataset code was rewritten and removed",
+     f"DataFrameConsistency {app('DataFrameConsistency')}",
+     "results/cross_engine_consistency.json; results/spark_api_evidence.txt; results/spark_dataframe_plan.txt",
+     f"RDD/Dataset API calls in scala/ + python/: {len(api_hits)}; DataFrame SHA = MapReduce SHA (element x year: "
+     f"{cc['element_year']['all_match']}, state join: {cc['state_year_element']['all_match']}); rewritten tables identical: "
+     f"{cc['dataframe_rewrite_equivalence']['all_identical']}",
+     not api_hits and cc["element_year"]["all_match"] and cc["state_year_element"]["all_match"]
+     and cc["dataframe_rewrite_equivalence"]["all_identical"]),
     ("Scala", f"{n_scala} Scala files (ETL, audits, MLlib, streaming, tuning)", "spark-shell via scripts/run_scala.ps1",
      "scala/; results/spark_event_log_summary.json", f"{n_scala} Scala programs; {ev['applications']} Spark applications", n_scala > 0),
     ("Python", f"{n_py} Python files (PyTorch Geometric, pandas benchmark, analysis, dashboard)", "pytorch + dashboard containers",
      "python/; dashboard/; results/rigour/runs.jsonl; results/v3/runs.jsonl",
      f"{n_runs_v2} neural runs (v2) + {n_runs_v3} (v3) + baselines + all analyses", n_py > 0),
     ("Spark ML",
-     "MLlib Pipeline(VectorAssembler, GBTRegressor 50 iters, depth 5) on the HDFS feature table (scala/BaselineGBTv2.scala)",
-     f"BaselineGBTv2 {app('BaselineGBTv2')}",
-     "results/rigour/predictions_spark/; results/rigour/summary.json",
-     f"GBT-lags test RMSE {gbt['rmse_mean']:.4f}, GBT-all {rg['models']['GBT-all']['rmse_mean']:.4f} on {rg['test_rows']:,} rows",
-     ok("results/rigour/predictions_spark/GBT-lags")),
+     "MLlib Pipelines on HDFS feature tables: GBTRegressor baselines (scala/BaselineGBTv2.scala, BaselineGBTv3.scala) and a tuned "
+     "comparison of LinearRegression, RandomForestRegressor, GBTRegressor (ParamGridBuilder grids, RegressionEvaluator, "
+     "temporal 2022 hold-out; scala/MLlibComparison.scala)",
+     f"BaselineGBTv2 {app('BaselineGBTv2')}; MLlibComparison {app('MLlibComparison')}",
+     "results/rigour/predictions_spark/; results/mllib/selection.jsonl; results/mllib/summary.json; docs/MLLIB_RESULTS.md",
+     f"fixed GBT-lags RMSE {gbt['rmse_mean']:.4f} (h=1); tuned MLlib h=1: "
+     + (", ".join(f"{k} {v['rmse']:.4f}" for k, v in mll["per_horizon"]["1"].items() if not k.startswith("ClimaFlu")) if mll else "not run"),
+     ok("results/rigour/predictions_spark/GBT-lags") and mll is not None),
     ("Open datasets", "NOAA NCEI GHCN-Daily (public domain); CDC FluView ILINet and NREVSS (public)", "downloaded raw files in HDFS",
      "results/variety_inventory.json", f"{len(vi['raw_formats'])} public sources, {raw_bytes:,} B raw", True),
     ("Data acquisition / preprocessing",
@@ -135,7 +137,7 @@ rows = [
      "Part 01-03 jobs; prepare_v2.py", "results/cluster_smoke_test.json; results/rigour/prepare_summary.json",
      f"modeling_table {sm['tables']['modeling_table']['rows']:,} rows -> {pr['rows_with_exact_lags_and_target']:,} with exact lags",
      True),
-    ("Batch processing", "MapReduce + Spark batch jobs over the full raw data", "MR1, MR2, RddDatasetAudit, benchmark",
+    ("Batch processing", "MapReduce + Spark DataFrame batch jobs over the full raw data", "MR1, MR2, DataFrameConsistency, benchmark",
      "results/mapreduce_jobs.json; results/benchmark_summary.json",
      f"{c1['Map input records']:,} records by MapReduce and Spark; Spark 26 years {spark26['elapsed_median_s']:.1f} s vs pandas "
      f"{pandas26['elapsed_median_s']:.0f} s ({pandas26['elapsed_median_s'] / spark26['elapsed_median_s']:.1f}x)", True),
@@ -186,7 +188,7 @@ r_rows = [
     ("Spark scales; in-memory pandas does not (equal 4 GB cap)", "docs/BENCHMARK_PROTOCOL.md, results/benchmark_summary.json",
      f"26 years: Spark {spark26['elapsed_median_s']:.1f} s vs pandas-chunked {pandas26['elapsed_median_s']:.0f} s "
      f"({pandas26['elapsed_median_s'] / spark26['elapsed_median_s']:.1f}x); in-memory pandas OOM at 1 year (kernel: container cap)", "supported"),
-    ("Five implementations compute identical results", "results/cross_engine_consistency.json",
+    ("Hadoop MapReduce, Spark DataFrame and pandas compute identical results", "results/cross_engine_consistency.json",
      f"element x year SHA match {cc['element_year']['all_match']}; state x year x element SHA match {cc['state_year_element']['all_match']}", "supported"),
     ("AQE beats hand-tuned partitioning; caching hurts under memory pressure", "results/tuning_summary.json",
      f"AQE {aqe['total_median_s']} s vs best grid {best_tune['total_median_s']} s; persistence speed-up {tu['persistence_speedup_by_partitions']}", "supported"),
@@ -197,6 +199,12 @@ for cname, cv_ in rg["claims"].items():
     r_rows.append((cname, "docs/RESEARCH_PROTOCOL.md, results/rigour/summary.json",
                    "; ".join(f"vs {b}: {v} (DM p={comp[b]['dm_p']}, CI {comp[b]['boot_ci_rmse_diff']}, seeds {comp[b]['seeds_a_better']})"
                              for b, v in cv_["against"].items()), "supported" if cv_["holds"] else "NOT supported"))
+if mll:
+    r_rows.append(("M1 GNN beats the best tuned Spark MLlib model (Holm across horizons)",
+                   "docs/RESEARCH_PROTOCOL.md (A2), results/mllib/summary.json",
+                   "; ".join(f"h={r['horizon']} vs {r['best_mllib']}: {r['verdict']} (Holm p={r['dm_p_holm']:.4f}, "
+                             f"RMSE {r['best_mllib_rmse']:.4f} vs {r['gnn_mean_rmse']:.4f})" for r in mll["claim_M1"]["by_horizon"]),
+                   "supported" if mll["claim_M1"]["holds"] else "NOT supported"))
 r_rows.append(("GNN beats naive baselines", "results/rigour/summary.json",
                f"vs Ridge: {comp['Ridge']['verdict']} (p={comp['Ridge']['dm_p']}); vs Persistence: {comp['Persistence']['verdict']} (p={comp['Persistence']['dm_p']})",
                "supported" if comp["Ridge"]["verdict"] == comp["Persistence"]["verdict"] == "better" else "NOT supported"))

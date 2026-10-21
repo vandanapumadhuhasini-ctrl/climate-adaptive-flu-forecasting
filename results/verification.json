@@ -1,6 +1,6 @@
 {
-    "snapshot_utc":  "2026-10-11T03:43:31.4099637Z",
-    "finished_utc":  "2026-10-11T03:43:57.3561229Z",
+    "snapshot_utc":  "2026-10-21T13:48:20.3842094Z",
+    "finished_utc":  "2026-10-21T13:48:44.7405245Z",
     "hdfs_raw_weather":  {
                              "dirs":  1,
                              "files":  27,
@@ -13,8 +13,8 @@
                            {
                                "path":  "results/cluster_verification.json",
                                "exists":  true,
-                               "bytes":  4719,
-                               "modified_utc":  "2026-10-11T03:43:48.6925652Z"
+                               "bytes":  4741,
+                               "modified_utc":  "2026-10-21T13:48:36.5402766Z"
                            },
                            {
                                "path":  "results/cluster_smoke_test.json",
@@ -31,50 +31,50 @@
                            {
                                "path":  "results/cross_engine_consistency.json",
                                "exists":  true,
-                               "bytes":  1181,
-                               "modified_utc":  "2026-10-10T02:47:51.9523444Z"
+                               "bytes":  2226,
+                               "modified_utc":  "2026-10-21T13:02:42.5737444Z"
                            },
                            {
                                "path":  "results/spark_api_evidence.txt",
                                "exists":  true,
-                               "bytes":  7630,
-                               "modified_utc":  "2026-10-10T02:47:51.9560795Z"
+                               "bytes":  5307,
+                               "modified_utc":  "2026-10-21T13:02:42.6170437Z"
                            },
                            {
                                "path":  "results/spark_dataframe_plan.txt",
                                "exists":  true,
                                "bytes":  4626,
-                               "modified_utc":  "2026-10-11T02:40:52.8940374Z"
+                               "modified_utc":  "2026-10-21T13:03:29.9398460Z"
                            },
                            {
                                "path":  "results/spark_event_log_summary.json",
                                "exists":  true,
-                               "bytes":  10337,
-                               "modified_utc":  "2026-10-11T03:43:30.9578137Z"
+                               "bytes":  14194,
+                               "modified_utc":  "2026-10-21T13:11:44.8554611Z"
                            },
                            {
                                "path":  "results/veracity_audit.json",
                                "exists":  true,
                                "bytes":  1579,
-                               "modified_utc":  "2026-10-11T02:40:51.5643113Z"
+                               "modified_utc":  "2026-10-21T13:03:28.5809311Z"
                            },
                            {
                                "path":  "results/variety_inventory.json",
                                "exists":  true,
-                               "bytes":  1018,
-                               "modified_utc":  "2026-10-11T02:40:51.7463890Z"
+                               "bytes":  1242,
+                               "modified_utc":  "2026-10-21T13:03:28.7182156Z"
                            },
                            {
                                "path":  "results/streaming_summary.json",
                                "exists":  true,
                                "bytes":  886,
-                               "modified_utc":  "2026-10-11T01:54:28.6118825Z"
+                               "modified_utc":  "2026-10-11T04:36:47.7261652Z"
                            },
                            {
                                "path":  "results/benchmark_summary.json",
                                "exists":  true,
                                "bytes":  20954,
-                               "modified_utc":  "2026-10-10T02:49:14.9379379Z"
+                               "modified_utc":  "2026-10-11T04:36:42.9693814Z"
                            },
                            {
                                "path":  "results/benchmark/kernel_oom_log.txt",
@@ -86,13 +86,13 @@
                                "path":  "results/tuning_summary.json",
                                "exists":  true,
                                "bytes":  6359,
-                               "modified_utc":  "2026-10-10T20:12:26.4625092Z"
+                               "modified_utc":  "2026-10-11T04:36:45.5222698Z"
                            },
                            {
                                "path":  "results/rigour/summary.json",
                                "exists":  true,
                                "bytes":  9132,
-                               "modified_utc":  "2026-10-11T01:15:46.9591338Z"
+                               "modified_utc":  "2026-10-11T04:36:56.6553579Z"
                            },
                            {
                                "path":  "results/rigour/prepare_summary.json",
@@ -104,7 +104,7 @@
                                "path":  "results/v3/summary.json",
                                "exists":  true,
                                "bytes":  13675,
-                               "modified_utc":  "2026-10-11T03:34:39.1279356Z"
+                               "modified_utc":  "2026-10-11T04:37:07.3144728Z"
                            },
                            {
                                "path":  "results/v3/lag_scan.json",
@@ -115,20 +115,38 @@
                            {
                                "path":  "results/hdfs_publish_manifest.json",
                                "exists":  true,
-                               "bytes":  139133,
-                               "modified_utc":  "2026-10-11T03:40:12.9200167Z"
+                               "bytes":  140085,
+                               "modified_utc":  "2026-10-11T04:48:09.1521734Z"
                            },
                            {
                                "path":  "docs/V3_RESULTS.md",
                                "exists":  true,
                                "bytes":  4958,
-                               "modified_utc":  "2026-10-11T03:34:39.4812231Z"
+                               "modified_utc":  "2026-10-11T04:37:07.6364628Z"
                            },
                            {
                                "path":  "docs/BASE_PAPER.md",
                                "exists":  true,
-                               "bytes":  9568,
-                               "modified_utc":  "2026-10-11T03:40:42.4981936Z"
+                               "bytes":  10036,
+                               "modified_utc":  "2026-10-14T07:09:10.8523907Z"
+                           },
+                           {
+                               "path":  "results/mllib/summary.json",
+                               "exists":  true,
+                               "bytes":  12802,
+                               "modified_utc":  "2026-10-14T07:06:54.0885965Z"
+                           },
+                           {
+                               "path":  "results/mllib/selection.jsonl",
+                               "exists":  true,
+                               "bytes":  24347,
+                               "modified_utc":  "2026-10-14T07:04:54.6278000Z"
+                           },
+                           {
+                               "path":  "docs/MLLIB_RESULTS.md",
+                               "exists":  true,
+                               "bytes":  5240,
+                               "modified_utc":  "2026-10-14T07:06:54.3816662Z"
                            },
                            {
                                "path":  "docs/BENCHMARK_PROTOCOL.md",
@@ -139,32 +157,32 @@
                            {
                                "path":  "docs/RESEARCH_PROTOCOL.md",
                                "exists":  true,
-                               "bytes":  10897,
-                               "modified_utc":  "2026-10-11T03:10:44.3181221Z"
+                               "bytes":  12662,
+                               "modified_utc":  "2026-10-14T06:32:54.3763321Z"
                            },
                            {
                                "path":  "docs/RIGOUR_RESULTS.md",
                                "exists":  true,
                                "bytes":  3948,
-                               "modified_utc":  "2026-10-11T01:15:46.9641342Z"
+                               "modified_utc":  "2026-10-11T04:36:56.6635086Z"
                            },
                            {
                                "path":  "docs/TUNING_RESULTS.md",
                                "exists":  true,
                                "bytes":  3280,
-                               "modified_utc":  "2026-10-10T20:12:26.4655026Z"
+                               "modified_utc":  "2026-10-11T04:36:45.5318697Z"
                            },
                            {
                                "path":  "docs/HADOOP_SPARK_API_EVIDENCE.md",
                                "exists":  true,
-                               "bytes":  11040,
-                               "modified_utc":  "2026-10-10T02:51:45.3024063Z"
+                               "bytes":  9653,
+                               "modified_utc":  "2026-10-21T13:04:47.3111267Z"
                            },
                            {
                                "path":  "docs/screenshots/hdfs_overview_final.png",
                                "exists":  true,
-                               "bytes":  62190,
-                               "modified_utc":  "2026-10-11T03:43:50.2800994Z"
+                               "bytes":  62344,
+                               "modified_utc":  "2026-10-21T13:48:37.7698472Z"
                            },
                            {
                                "path":  "docs/screenshots/hdfs_datanodes.png",

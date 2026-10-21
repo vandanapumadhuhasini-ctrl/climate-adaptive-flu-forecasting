@@ -152,3 +152,30 @@ result files are then published to HDFS `/flu_project/results/` with a SHA-256 m
 * The lag scan selected lead L* = 0 for every feature and horizon (`results/v3/lag_scan.json`). As fixed in A1, the
   lead-aligned climate is then the same-week climate, so GNN-lagK8 and GNN-K8 receive identical inputs; both are still
   trained as specified, and N1 is evaluated as written.
+
+### A2 — Spark MLlib model comparison (frozen 2026-10-14, before any A2 run)
+
+**Question:** how do the main Spark MLlib regressors compare on this task, and how does ClimaFlu-GNN compare with the
+best of them? Added at the professor's request; v2/v3 results are unchanged.
+
+**Data:** HDFS `processed/v3_features/h1..h4` (h = 1 is identical to the v2 feature table). Same rows and splits:
+selection = train YEAR ≤ 2021, validate 2022; final = refit on YEAR ≤ 2022, test 2023–2025 once.
+
+**Models (Spark MLlib, `scala/MLlibComparison.scala`), each with two feature sets** — `lags` (ILI lag1–4 + trend) and
+`all` (lags + TMAX, TMIN, PRCP, DIURNAL_RANGE of the same week, i.e. the lead L* = 0 chosen in A1):
+
+| Model | Grid (ParamGridBuilder) |
+|---|---|
+| LinearRegression (standardised features) | regParam {0, 0.01, 0.1, 1.0} × elasticNetParam {0, 0.5, 1.0} |
+| RandomForestRegressor (seed 42) | numTrees {50, 100, 200} × maxDepth {5, 10} |
+| GBTRegressor (seed 42) | maxIter {50, 100} × maxDepth {3, 5}, stepSize 0.1 |
+
+The grid point with the lowest 2022 validation RMSE (RegressionEvaluator) is refit and predicts the test set.
+
+**Reported:** test RMSE / MAE / R², chosen parameters, validation RMSE of every grid point, training time, feature
+importances (RF, GBT) and coefficients (LR).
+
+**Claim M1 (pre-registered):** ClimaFlu-GNN (GNN-lagK8, v3 predictions, 10 seeds) is better than the **best** MLlib model
+(lowest test RMSE among the six per horizon) at at least one horizon — section 7 rules, DM p Holm-adjusted across the
+four horizons. Choosing the strongest competitor after seeing its test RMSE makes this comparison conservative for the GNN.
+The ranking among MLlib models is descriptive (single deterministic run each, no claims).

@@ -15,8 +15,11 @@ def sha(lines: Seq[String]) = MessageDigest.getInstance("SHA-256").digest(lines.
 def rmse(df: org.apache.spark.sql.DataFrame) = math.sqrt(df.selectExpr("avg(pow(pred - target, 2))").first().getDouble(0))
 
 // MapReduce outputs straight from HDFS
-val mr1 = spark.read.textFile("hdfs://namenode:9000/flu_project/mapreduce/element_year/part-r-*").collect().map(_.split("\t")).map(a => s"${a(0)}|${a(1)}|${a(2)}")
-val mr2 = spark.read.textFile("hdfs://namenode:9000/flu_project/mapreduce/state_year_element/part-r-*").collect().map(_.split("\t")).map(a => s"${a(0)}|${a(1)}|${a(2)}")
+// DataFrame API only: read the MapReduce text output as a DataFrame and rebuild "key|count|sum" with column functions
+def mrLines(dir: String): Seq[String] = spark.read.text(s"hdfs://namenode:9000/flu_project/mapreduce/$dir/part-r-*")
+  .select(regexp_replace(col("value"), "\t", "|").as("l")).collect().map(_.getString(0)).toSeq
+val mr1 = mrLines("element_year")
+val mr2 = mrLines("state_year_element")
 rec("MR1 SHA from HDFS part files", "a5c81104c454", sha(mr1).take(12), sha(mr1).startsWith("a5c81104c454"))
 rec("MR2 SHA from HDFS part files", "eb02de0659da", sha(mr2).take(12), sha(mr2).startsWith("eb02de0659da"))
 

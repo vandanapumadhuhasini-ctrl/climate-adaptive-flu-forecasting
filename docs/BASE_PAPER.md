@@ -94,10 +94,14 @@ Results: `docs/V3_RESULTS.md` (generated). Features were built in **Spark on HDF
 * **Climate matters more at longer horizons:** the climate/graph benefit is ~0 at 1–2 weeks and grows at 3–4 weeks
   (GNN vs no-climate at h = 3: RMSE 1.251 vs 1.293, 10/10 seeds, bootstrap CI below 0, raw DM p = 0.028), but it does not
   survive the pre-registered Holm correction (p = 0.080). **N2: not supported (suggestive trend).** N3 (graph): not supported.
-* **N4 supported:** at a **3-week horizon** ClimaFlu-GNN beats Spark MLlib GBT (1.251 vs 1.289, Holm-adjusted DM p = 0.017,
-  CI [−0.073, −0.015], 9/10 seeds).
+* **N4 supported:** at a **3-week horizon** ClimaFlu-GNN beats the fixed-setting Spark MLlib GBT (50 trees, depth 5, lags
+  only; 1.251 vs 1.289, Holm-adjusted DM p = 0.017, CI [−0.073, −0.015], 9/10 seeds).
+* **MLlib comparison (amendment A2, `docs/MLLIB_RESULTS.md`):** with hyper-parameters tuned on 2022, MLlib Random Forest and
+  GBT with climate match the GNN at every horizon (claim M1 not supported; e.g. h = 3: RF 1.2665 vs GNN 1.2507, Holm p = 0.18),
+  and climate features improve the tuned Random Forest at all four horizons (descriptive, single runs).
 
 **Resulting contribution statement for the paper:** a verified Hadoop–Spark pipeline over 303.6 M climate records; an
 out-of-sample test of climate-informed influenza forecasting showing that same-week climate is the most informative lead,
-that climate's benefit grows with the horizon (a consistent trend, not significant after Holm correction), and that the climate-graph GNN significantly outperforms Spark
-GBT at a 3-week horizon — with every claim decided by pre-registered rules.
+that climate's benefit grows with the horizon (a consistent trend, not significant after Holm correction), and that a
+climate-graph GNN performs on par with tuned Spark MLlib ensembles (and significantly better than a fixed-setting GBT at a
+3-week horizon) — with every claim decided by pre-registered rules.
