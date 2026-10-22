@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T16:54:47.953395Z",
+  "generated_at": "2026-10-22T01:14:42.044366Z",
   "raw_formats": [
     {"format": "CDC ILINet: CSV with a title line before the header", "files": 1, "bytes": 2648216, "replication": 2},
     {"format": "CDC NREVSS lab surveillance: CSV with a title line before the header", "files": 3, "bytes": 2059103, "replication": 2},
@@ -7,6 +7,6 @@
     {"format": "GHCN-Daily yearly observations: CSV with header (8 columns)", "files": 26, "bytes": 34570149116, "replication": 2}
   ],
   "station_file_lines": 132501, "ilinet_data_rows": 44808,
-  "processed_parquet_tables": ["ICL_NREVSS_Clinical_Labs", "ICL_NREVSS_Clinical_Labs_dfcheck", "ICL_NREVSS_Combined_prior_to_2015_16", "ICL_NREVSS_Combined_prior_to_2015_16_dfcheck", "ICL_NREVSS_Public_Health_Labs", "ICL_NREVSS_Public_Health_Labs_dfcheck", "ILINet", "ILINet_dfcheck", "baseline_model_artifact", "baseline_predictions", "graph_edges_knn", "mllib_predictions", "modeling_table", "modeling_table_dfcheck", "rigour_feature_table", "rigour_gbt_predictions", "us_stations", "us_stations_dfcheck", "v3_features", "v3_gbt_predictions", "weather_cleaned", "weather_state_week", "weather_state_week_dfcheck"],
+  "processed_parquet_tables": ["ICL_NREVSS_Clinical_Labs", "ICL_NREVSS_Combined_prior_to_2015_16", "ICL_NREVSS_Public_Health_Labs", "ILINet", "graph_edges_knn", "mllib_predictions", "modeling_table", "rigour_feature_table", "rigour_gbt_predictions", "us_stations", "v3_features", "v3_gbt_predictions", "weather_cleaned", "weather_state_week"],
   "distinct_raw_format_families": 4
 }

@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-10-22T01:04:53.054634Z",
+  "generated_at": "2026-10-22T01:24:00.156113Z",
   "hdfs_destination": "hdfs://namenode:9000/flu_project/results",
-  "files": 913, "bytes": 3194299358, "size_mismatches_after_copy": 0, "copy_seconds": 273.839,
+  "files": 914, "bytes": 3194266222, "size_mismatches_after_copy": 0, "copy_seconds": 240.062,
   "entries": [
     {"path": "benchmark/kernel_oom_log.txt", "bytes": 7140, "hdfs_bytes": 7140, "sha256": "b7aff40b4f3f8a6d355c064d32c954abc4317d4e01dff4bac4ed3c5240916de4"},
     {"path": "benchmark/runs.jsonl", "bytes": 38984, "hdfs_bytes": 38984, "sha256": "a098b027451fb80459d6195f564172fa750e77459334fce57c2ef32d4a9c7b98"},
     {"path": "benchmark/smoke_runs.jsonl", "bytes": 4883, "hdfs_bytes": 4883, "sha256": "c72b1525f65334789a5db50cafada525a382122f783e655fc80a7e8c50eb8c69"},
     {"path": "benchmark_summary.json", "bytes": 20954, "hdfs_bytes": 20954, "sha256": "ea6f2930c8bda13ae8b2e5e569e6b51203b375d0a6861c55bd7ab2695f0c788b"},
-    {"path": "cluster_smoke_test.json", "bytes": 636, "hdfs_bytes": 636, "sha256": "9ae435486c70771357e9a416a52ee151e2c8f61ecb7f83e590d44062ea4af780"},
+    {"path": "cluster_smoke_test.json", "bytes": 575, "hdfs_bytes": 575, "sha256": "38f69d82210ae725c42b9ad28797ea350d4621656582a1a349ce5edcf49531fa"},
     {"path": "cluster_verification.json", "bytes": 4795, "hdfs_bytes": 4795, "sha256": "a77b90e1b77ef93a1c313b207ab9f0dbc4782707a125480c4053cf175fccdb05"},
     {"path": "cross_engine_consistency.json", "bytes": 2586, "hdfs_bytes": 2586, "sha256": "bd9a270172f09b27a0022eb305b800be250cf9ab77c6975192197ded82f2ff03"},
     {"path": "dashboard/graph_test_K8.parquet", "bytes": 494280, "hdfs_bytes": 494280, "sha256": "6a34abfcd68172ca239f295c191c4d07704324247c656153eccd5e2aad1b0fc6"},
@@ -373,10 +373,11 @@
     {"path": "spark-events/local-1792597966526", "bytes": 5866173, "hdfs_bytes": 5866173, "sha256": "e66dc1b4719cbad944170563b999aaa1724ee0bd0f10cedaa700b011c390979c"},
     {"path": "spark-events/local-1792598570554", "bytes": 8363012, "hdfs_bytes": 8363012, "sha256": "a316a9991db8013f0ca8e33cd36425bab0eb9ff98f5ca0f17ac88856d7bc0286"},
     {"path": "spark-events/local-1792598794852", "bytes": 335370362, "hdfs_bytes": 335370362, "sha256": "4db3ceb3b4cd76d3dd4a744ad371fe8a00b89450e42b95d564935c08ca5aa095"},
-    {"path": "spark-events/local-1792601664724", "bytes": 3360219, "hdfs_bytes": 3360219, "sha256": "9d9b62db8a4b3b81b80813754c2d30a6f178a1f2b7586bd8ba3f02254d1a20a7"},
+    {"path": "spark-events/local-1792630811048", "bytes": 80755, "hdfs_bytes": 80755, "sha256": "59894dc432e516d9c8a504abfd48b67b2206ec6216addf510afcdc0cd9be9f28"},
+    {"path": "spark-events/local-1792631655816", "bytes": 3246348, "hdfs_bytes": 3246348, "sha256": "e7316b21bcb017e21c8649da7a51716bb45dc53c40ad920c89656e09425f98ac"},
     {"path": "spark_api_evidence.txt", "bytes": 5307, "hdfs_bytes": 5307, "sha256": "e067e22e28b7c91a655d1540381d46f2fae3ae9f866dc34588ee28616721c444"},
-    {"path": "spark_dataframe_plan.txt", "bytes": 4626, "hdfs_bytes": 4626, "sha256": "c34aa3f5cdb038f03ed5bc6908bb7bc6b5a5f91e2c0506dffe1b024780fe76e7"},
-    {"path": "spark_event_log_summary.json", "bytes": 2746, "hdfs_bytes": 2746, "sha256": "5fa0f17266f5732ed83d3f47e6cf8b930da2a6223acd311db65a71b504398f71"},
+    {"path": "spark_dataframe_plan.txt", "bytes": 4626, "hdfs_bytes": 4626, "sha256": "6d0de995838c1dccb8c625ed950586519a40af51d6698a3fc6bdc2335894fe17"},
+    {"path": "spark_event_log_summary.json", "bytes": 3060, "hdfs_bytes": 3060, "sha256": "a44b1b729ce0741f18e48db4a06cd950f7da8606f921e634c6f0e9b67ac6d3d6"},
     {"path": "streaming_summary.json", "bytes": 886, "hdfs_bytes": 886, "sha256": "8da47d8a612644b367e1d3657fa9d1190018b5904cd9ecc2060e9a3357a4da94"},
     {"path": "streaming_v2/batches.jsonl", "bytes": 9301, "hdfs_bytes": 9301, "sha256": "e86d5ae90cfc77023373b539ed15ae70ace99e9b0f41f997d6392afe8b29f8d0"},
     {"path": "streaming_v2/drip.jsonl", "bytes": 3480, "hdfs_bytes": 3480, "sha256": "b7845e62da22ccd1c6d3ba1d03480e57c064bb6ce67ae69d71dd217aa49fd468"},
@@ -914,7 +915,7 @@
     {"path": "v3/runs/MLP-lagsOnly_h4_s8.json", "bytes": 1552, "hdfs_bytes": 1552, "sha256": "e60092d2cf3695ea3b151b10a130811677f7a7194b1f83b0d6d5b79683eaa1d3"},
     {"path": "v3/runs/MLP-lagsOnly_h4_s9.json", "bytes": 1651, "hdfs_bytes": 1651, "sha256": "fb7444acdf92e5890b87bc26f3c5951091c9f735ec0a8ff1c589f272e0569a8b"},
     {"path": "v3/summary.json", "bytes": 13675, "hdfs_bytes": 13675, "sha256": "856179159db00387c1445f7ce61eb9e96c03efc0cfe75a423a7f32e4cc6ff45b"},
-    {"path": "variety_inventory.json", "bytes": 1298, "hdfs_bytes": 1298, "sha256": "08750bbda3bfef99c2064f8615713b4fa752aecb73238a984cd70dd3f963dac6"},
-    {"path": "veracity_audit.json", "bytes": 1609, "hdfs_bytes": 1609, "sha256": "79f49d56f111ab3d6a161edb1dcf94ab1a3d8bf0ef45537d89731e6a15fa3028"}
+    {"path": "variety_inventory.json", "bytes": 1025, "hdfs_bytes": 1025, "sha256": "235feb75f4c897cc3489b105784f9c11fb86c9a8788338dc3037f55deb2092e4"},
+    {"path": "veracity_audit.json", "bytes": 1609, "hdfs_bytes": 1609, "sha256": "fc5bd70de57b39c937ef828f8754fe19a47bdbcdf84dd9599dc849682ac352f8"}
   ]
 }

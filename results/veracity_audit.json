@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-21T16:54:47.829904Z",
-  "app_id": "local-1792601664724",
+  "generated_at": "2026-10-22T01:14:41.784283Z",
+  "app_id": "local-1792631655816",
   "ilinet_raw": {"rows": 44808, "rows_by_region_type": {"States": 44808}, "state_rows": 44808,
     "state_missing_X": {"weighted_ili": 44739, "unweighted_ili": 718, "ilitotal": 718, "total_patients": 718},
     "weighted_ili_missing_fraction": 0.9984600964113551, "unweighted_ili_missing_fraction": 0.01602392429923228,

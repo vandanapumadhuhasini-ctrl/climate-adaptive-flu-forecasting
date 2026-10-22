@@ -12,7 +12,7 @@ import java.nio.file.{Files, Paths}
 // ---------------------------------------------------------------- 1. smoke test
 val hdfsBase = "hdfs://namenode:9000/flu_project/processed"
 val tables = Seq("weather_cleaned", "us_stations", "weather_state_week", "modeling_table",
-                 "graph_edges_knn", "baseline_predictions", "ILINet")
+                 "graph_edges_knn", "ILINet")
 
 val t0 = System.currentTimeMillis()
 val counts = tables.map { t =>
@@ -139,4 +139,7 @@ val q = mt.na.drop(nullCols).groupBy("state_abbrev").agg(avg("UNWEIGHTED_ILI").a
 write("spark_dataframe_plan.txt", "=== DataFrame physical plan (explain formatted): per-state mean ILI and TMAX-ILI correlation joined with station counts ===\n" +
   q.queryExecution.explainString(org.apache.spark.sql.execution.FormattedMode) + "\n=== top 5 rows ===\n" + q.limit(5).collect().mkString("\n") + "\n")
 println("VERACITY | wrote veracity_audit.json, variety_inventory.json, spark_dataframe_plan.txt")
+// remove the temporary text copies of the CDC files (all reads above are finished)
+org.apache.hadoop.fs.FileSystem.get(new java.net.URI(s"$base/tmp/veracity"), sc.hadoopConfiguration)
+  .delete(new org.apache.hadoop.fs.Path(s"$base/tmp/veracity"), true)
 System.exit(0)

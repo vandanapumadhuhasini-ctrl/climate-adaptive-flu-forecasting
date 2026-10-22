@@ -1,6 +1,6 @@
 {
-  "applications": 8,
-  "total_tasks": 140554,
+  "applications": 9,
+  "total_tasks": 140544,
   "total_input_GB": 155.89,
   "apps": [
     {
@@ -95,16 +95,29 @@
       "job": "BaselineGBT"
     },
     {
-      "app_id": "local-1792601664724",
-      "jobs": 82,
-      "stages": 82,
-      "tasks": 166,
+      "app_id": "local-1792630811048",
+      "jobs": 0,
+      "stages": 0,
+      "tasks": 0,
       "failed_tasks": 0,
-      "shuffle_write_bytes": 659922,
-      "input_bytes": 324382342,
-      "start_ms": 1792601663829,
-      "end_ms": 1792601689007,
-      "duration_s": 25.2,
+      "shuffle_write_bytes": 0,
+      "input_bytes": 0,
+      "start_ms": 1792630810155,
+      "end_ms": 1792631093209,
+      "duration_s": 283.1,
+      "job": "PublishResultsToHdfs"
+    },
+    {
+      "app_id": "local-1792631655816",
+      "jobs": 79,
+      "stages": 79,
+      "tasks": 156,
+      "failed_tasks": 0,
+      "shuffle_write_bytes": 659450,
+      "input_bytes": 324370558,
+      "start_ms": 1792631654924,
+      "end_ms": 1792631683272,
+      "duration_s": 28.3,
       "job": "DataChecks"
     }
   ]

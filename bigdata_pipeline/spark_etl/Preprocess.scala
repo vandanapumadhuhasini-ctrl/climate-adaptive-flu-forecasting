@@ -112,4 +112,7 @@ combined.write.mode("overwrite").parquet(s"$processedDir/ICL_NREVSS_Combined_pri
 println(s"Combined (pre-2015-16) rows after cleaning: ${combined.count()}")
 
 println("=== ALL DATASETS PREPROCESSED AND WRITTEN TO HDFS ===")
+// remove the temporary text copies of the CDC files (all reads above are finished)
+org.apache.hadoop.fs.FileSystem.get(new java.net.URI(s"$hdfsBase/flu_project/tmp/fluview$suffix"), sc.hadoopConfiguration)
+  .delete(new org.apache.hadoop.fs.Path(s"$hdfsBase/flu_project/tmp/fluview$suffix"), true)
 System.exit(0)

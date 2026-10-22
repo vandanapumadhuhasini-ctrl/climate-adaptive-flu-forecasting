@@ -1,0 +1,31 @@
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/10/22 01:08:23 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Spark context Web UI available at http://ff2e9568fb93:4040
+Spark context available as 'sc' (master = local[*], app id = local-1792631304251).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.5.1
+      /_/
+         
+Using Scala version 2.12.18 (OpenJDK 64-Bit Server VM, Java 11.0.22)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> // Entering paste mode (ctrl-D to finish)
+
+
+// Exiting paste mode, now interpreting.
+
+[Stage 0:>                                                          (0 + 1) / 1]                                                                                [Stage 1:>                                                        (0 + 24) / 32][Stage 1:===>                                                     (2 + 24) / 32][Stage 1:============================>                           (16 + 16) / 32][Stage 1:==========================================>              (24 + 8) / 32][Stage 1:============================================>            (25 + 7) / 32]                                                                                SMOKE | weather_cleaned        | rows=303,631,696 | 8144ms
+SMOKE | us_stations            | rows=78,567 | 346ms
+SMOKE | weather_state_week     | rows=68,833 | 245ms
+SMOKE | modeling_table         | rows=40,408 | 192ms
+SMOKE | graph_edges_knn        | rows=323,264 | 233ms
+SMOKE | ILINet                 | rows=44,808 | 170ms
+SMOKE | wrote /opt/results/cluster_smoke_test.json
+[Stage 106:>                                                      (0 + 24) / 32][Stage 106:===>                                                   (2 + 24) / 32][Stage 106:=====================>                                (13 + 19) / 32][Stage 106:==============================>                       (18 + 14) / 32][Stage 106:=====================================>                (22 + 10) / 32][Stage 106:=========================================>             (24 + 8) / 32][Stage 106:==========================================>            (25 + 7) / 32]                                                                                VERACITY | ILINet state rows=44808 weighted missing=44739 (0.9985) NY+NYC dup weeks raw=827 merged=782 | modeling rows=40408 anyNull=735 dupKeys=0 tmax<tmin=0
+VERACITY | wrote veracity_audit.json, variety_inventory.json, spark_dataframe_plan.txt
