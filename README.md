@@ -201,6 +201,6 @@ including the claims the evidence does not support ([docs/RESEARCH_EVIDENCE_MATR
 Social Systems*, vol. 13, no. 5, pp. 6359–6370, Oct. 2026, doi:10.1109/TCSS.2025.3640950 — gap analysis in
 [docs/BASE_PAPER.md](docs/BASE_PAPER.md).
 
-**Final review:** report [docs/ClimaFlu_Report.docx](docs/ClimaFlu_Report.docx) · presentation [docs/ClimaFlu_Final_Review.pptx](docs/ClimaFlu_Final_Review.pptx).
+**Final review:** report [docs/ClimaFlu_Report.pdf](docs/ClimaFlu_Report.pdf) ([Word](docs/ClimaFlu_Report.docx)) · presentation [docs/ClimaFlu_Final_Review.pptx](docs/ClimaFlu_Final_Review.pptx).
 
 Environment notes and the issue log are in [docs/PROJECT_GUIDE.md](docs/PROJECT_GUIDE.md).
