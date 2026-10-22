@@ -19,7 +19,7 @@ $pages = [ordered]@{
     "yarn_cluster"      = "http://localhost:8088/cluster"
     "yarn_nodes"        = "http://localhost:8088/cluster/nodes"
     "yarn_timeline"     = "http://localhost:8188/applicationhistory"
-    "yarn_timeline_mr1" = "http://localhost:8188/applicationhistory/app/application_1791573873798_0002"
+    "yarn_timeline_mr1" = "http://localhost:8188/applicationhistory/app/application_1792587415514_0001"
     "spark_history"     = "http://localhost:18080/?showIncomplete=false"
 }
 foreach ($name in $pages.Keys) {

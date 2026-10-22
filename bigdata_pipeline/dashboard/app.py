@@ -77,7 +77,7 @@ st.sidebar.caption("ClimaFlu-GNN · 23AID302 Big Data Analytics · Group 04\n\nE
 # ------------------------------------------------------------------------------------------------ pages
 def overview():
     st.title("ClimaFlu-GNN: climate-aware influenza forecasting on Hadoop + Spark")
-    st.caption("Next-week influenza-like-illness (ILI) per US state from NOAA GHCN-Daily climate (2000–2025) and CDC ILINet, "
+    st.caption("Weekly influenza-like-illness (ILI) per US state, 1–4 weeks ahead, from NOAA GHCN-Daily climate (2000–2025) and CDC ILINet, "
                "processed on a Dockerised Hadoop 3.2.1 cluster with Spark 3.5.1.")
     cv, mr = js(f"{R}/cluster_verification.json"), js(f"{R}/mapreduce_jobs.json")
     ss, cc = js(f"{R}/streaming_summary.json"), js(f"{R}/cross_engine_consistency.json")
